@@ -51,8 +51,8 @@ comments: true
 이외에도 다양한 테마가 있는데, 잘 찾아본 후 가장 마음에 드는 테마를 골라주세요. 
 저는 비교적 꾸준히 업데이트되고 있고, 디자인이 깔끔해보이는 [plainwhite][plainwhite] 테마를 사용하였습니다. 원래 다른 테마(persephone)을 사용하려 했는데 중국어로 구성되어 있어 알아보기 힘들었고, 현재의 테마로 교체하였습니다.
 ## 적용하기
-![5](https://user-images.githubusercontent.com/52748335/123653761-6b1a0d80-d868-11eb-920a-3527031903d3.png)
-원하는 테마를 Clone해서, 1단계에서 만들었던 자신의 repository에 가져옵니다. 전 ZIP 파일로 다운로드해 압축을 풀고 다시 제 프로젝트 폴더에 넣는 과정을 거쳤지만, 클론에는 다양한 방법이 있으니 다른 방법도 참고해 보시면 좋을 것 같습니다.
+![5](https://user-images.githubusercontent.com/52748335/123653761-6b1a0d80-d868-11eb-920a-3527031903d3.png)<br/>
+원하는 테마를 Clone해서, 1단계에서 만들었던 자신의 Repository에 가져옵니다. 전 ZIP 파일로 다운로드해 압축을 풀고 다시 제 프로젝트 폴더에 넣는 과정을 거쳤지만, 클론에는 다양한 방법이 있으니 다른 방법도 참고해 보시면 좋을 것 같습니다.
 <br/><br/>
 ![6](https://user-images.githubusercontent.com/52748335/123654467-11fea980-d869-11eb-97c2-ea2f95b7b40b.PNG)<br/>
 터미널에 `bundle exec jekyll serve` 라고 입력하면 저의 경우 에러가 났습니다. 이런 경우 터미널에서 알려주는 대로 `bundle install` 을 입력하고, 다시 `bundle exec jekyll serve` 를 해주면 해결되었습니다. 
