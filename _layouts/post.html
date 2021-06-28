@@ -1,42 +1,39 @@
 ---
 layout: default
 ---
-{%- include header.html -%}
-<main class="post__wrapper">
-  {%- include header_nav.html -%}
-  <div class="post__top_navs clearfix">
-    <nav class="post__archive_path">
-      {%- assign blog_page_path = site.theme_setting.blog_page | default: "index.md" %}
-      {%- assign blog_page = site.pages | where: "path", blog_page_path | first -%}
-      <a href="{{ blog_page.url | relative_url }}" id="archiveBtn">
-        <div class="post__archive_icon">
-          <svg width="40" height="40">
-            <circle class="circle-progress" r="18" cy="20" cx="20"  stroke-linejoin="round" stroke-linecap="round" />
-          </svg>
-          <span class="post__archive_icon"></span>
-        </div>
-        {{ site.theme_setting.lang.blog_title | default: site.title }}
-      </a>
-    </nav>
+{%- assign date_format = site.plainwhite.date_format | default: "%b %-d, %Y" -%}
+<div class="post-container">
+  <a class="post-link" href="{{ page.url | relative_url }}">
+    <h2 class="post-title">{{ page.title | escape }}</h2>
+  </a>
+  <div class="post-meta">
+    <div class="post-date"><i class="icon-calendar"></i>{{ page.date | date: date_format }}</div>
+    {%- if page.categories.size > 0 -%}
+    <ul class="post-categories">
+      {%- for tag in page.categories -%}
+      <li>{{ tag }}</li>
+      {%- endfor -%}
+    </ul>
+    {%- endif -%}
   </div>
-  <article class="post">
-    <header class="post__header">
-      <h1 class="post__title">{{ page.title | escape }}</h1>
-      <div class="post__meta">
-        <time>{{ page.date | date: "%Y-%m-%d %H:%M" }}</time>
-      </div>
-    </header>
-    <div class="post__content content">
-      {{ content | toc | img_prefix }}
-    </div>
-  </article>
-  {%- if site.comment.enabled -%}
-  {% include comments.html -%}
-  {%- else -%}
-  {% include contact.html -%}
+  <div class="post">
+    {{ content }}
+  </div>
+  {%- if site.plainwhite.disqus_shortname -%}
+  <div id="disqus_thread" style="margin-top:25px"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = '{{ page.url | absolute_url }}';
+      this.page.identifier = '{{ page.url | absolute_url }}';
+    };
+    (function () {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://{{ site.plainwhite.disqus_shortname }}.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments
+      powered by Disqus.</a></noscript>
   {%- endif -%}
-</main>
-{%- if site.theme_setting.code or page.code -%}
-  <script>hljs.initHighlightingOnLoad();</script>
-{%- endif -%}
-{%- include footer.html -%}
+</div>

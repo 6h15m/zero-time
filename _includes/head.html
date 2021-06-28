@@ -1,13 +1,10 @@
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="{{ site.author.name }}">
-  {%- include title.html -%}
-  {{ site.head_code }}
-  <meta name="keywords" content="{{ page.keywords }}">
-  <meta name="description" content="{{ page.description }}">
-  {%- include assets.html -%}
-  {%- if site.rss %}
-  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ site.rss }}" />
-  {% endif -%}
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Merriweather:300|Raleway:400,700" rel="stylesheet">
+<link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+<title>{{ page.title | default: site.title }}</title>
+{% seo %}
+{% if site.plainwhite.dark_mode %}
+<script type="text/javascript" src="{{ "/assets/js/darkmode.js" | relative_url }}"></script>
+{% endif %}

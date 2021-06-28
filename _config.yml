@@ -1,76 +1,60 @@
-title: ZERO TIME
-description: The description of your site.
-email: your-email@address.com
+title: 영의 시간
+author: 6h15m
+email: 6h15m.develop@gmail.com
+description: > # this means to ignore newlines until "show_exerpts:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+show_excerpts: true # set to true to show excerpts on the homepage
 
-author: Your name #  Default is your site title.
+# Minima date format
+# refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
+sass:
+  sass_dir: _sass
+plainwhite:
+  name: 제로
+  tagline: Front-end Developer ´◡`
+  date_format: "%b %-d, %Y"
+  sitemap: true # set to true to generate sitemap.xml content
+  search: true # set to true to enable searchbar
+  dark_mode: true # set to true to add dark mode toggle
+  portfolio_image: "assets/portfolio.png" # the path from the base directory of the site to the image to display (no / at the start)
+  html_lang: "ko" # set the lang attribute of the <html> tag for the pages. See here for a list of codes: https://www.w3schools.com/tags/ref_country_codes.asp
+  condensed_mobile:
+    #- home
+    - page
+    - post
+  # generate social links in footer
+  social_links:
+    twitter: 20develop
+    github:  6h15m
+    #linkedIn: in/samarsault
+    #dribbble: jekyll
+    #flickr:   jekyll
+    #instagram: jekyll
+    #pinterest: jekyll
+    #youtube: jekyll
+    facebook: 100007430927430
+    #soundcloud: jekyll
+    #telegram: jekyll
+    #gitlab: jekyll
+    email: 6h15m.devleop@gmail.com
 
-# Your social accounts.
-social:
-  github: github_username
-  twitter: twitter_username
-  facebook: facebook_username
-  instagram: instagram_username
-  linkedin: linkedin_username
-  weibo: weibo_username
+    # Mastodon instances
+    # mastodon:
+    # - username: jekyll
+    #   instance: example.com
+    # - username: jekyll2
+    #   instance: example.com
 
-# Theme Settings
+# If you want to link only specific pages in your header, uncomment
+# this and add the path to the pages in order as they should show up
+#header_pages:
+# - about.md
 
-# Your site's logo. Will be shown on the left top of your page.
-logo: /img/logo.svg
-# If the images of our blog are stored in an external cloud. You can use the jekyll-img-prefix plugin and set your images' base URL here.
-img_prefix: https://your-img-cdn.com
-# The RSS link of your blog.
-rss: "/feed.xml"
+# Build settings
+theme: plainwhite
 
-# The followings are settings for displays of your blog.
-theme_setting:
-  # The slides count in the slides layout. Default is 4.
-  slides_count: 5
-  # The ← back URL on the top of your post page. Default is your site's home page.
-  blog_page: "blog/index.md"
-  # The URL on your name on the bottom of your post and page. Default is your site's home page.
-  about_page: "about.md"
-  #  The URL of the menu icon(which has three black lines). Will be shown on the slides/book/chapter layouts It won't be shown if blank.
-  archive_page: "archive.md"
-  # The nav links on the top right of home/page/post/blog layout. You can set a local page(by setting a layout's path) or and external link ( both title and url are required) here.
-  nav_pages:
-    - "about.md"
-    -
-      title: "External Link Title"
-      url: "https://your-external-link.com"
-  # Every default value in the following settings is false. You can set them globally here or separately in a single post/page/chapter.
-  code: true # Code highlight.
-  math: true # Mathjax
-  mermaid: true # Mermaid
-  #  Locales of this theme.
-  lang:
-    category_all: All # The first tag in the categories bar on the blog layout page. By clicking it all of your posts will be shown. Default is 'All'.
-    blog_title: Blog # The text of ← back url on the top of the post layout.  Default is 'Home'.
-    # The locales of the comment controls.
-    comment:
-      user: "昵称"
-      email: "邮箱"
-      url: "链接"
-      message: "说点什么吧..."
-      reply: "回复"
-
-head_code: |
-  <!-- Extra codes in the head of your site pages. You can add your Google Analysis codes here! -->
-
-# The settings of comments.
-comment:
-  # You should set it to enable comment
-  enabled: true
-  # Your comment provider
-  provider: disqus # static/disqus
-  # If provider == disqus
-  disqus:
-    name: website_name
-  # Or provider == static
-  static:
-    # Your static comment url.
-    postUrl:  https://api.staticman.net/v2/connect/GITHUB-USERNAME/GITHUB-REPOSITORY
-# The settings of local smileys used in static comments. The jekyll-smiley plugin is required.
-smiley:
-  enabled: true
-  dir: img/smileys
+plugins:
+  - jekyll-seo-tag
+#  - jekyll-feed
