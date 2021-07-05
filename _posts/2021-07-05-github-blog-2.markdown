@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "📝 Github로 개발 블로그 개설하기 #2"
-date:   2021-07-02
+date:   2021-07-05
 categories: Blog
 comments: true
 ---
