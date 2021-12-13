@@ -2,21 +2,20 @@ title: 영의 시간
 author: 6h15m
 email: 6h15m.develop@gmail.com
 description: > # this means to ignore newlines until "show_exerpts:"
-  0년차 프론트엔드 개발자 성장기
+  #ALL4MYSELF
 show_excerpts: true # set to true to show excerpts on the homepage
-
 # Minima date format
 # refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
 sass:
   sass_dir: _sass
 plainwhite:
-  name: 제로
-  tagline: Front-end Developer ´◡`
+  name: Zero
+  tagline: 2004년생 개발자 ´◡`
   date_format: "%b %-d, %Y"
   sitemap: true # set to true to generate sitemap.xml content
   search: true # set to true to enable searchbar
   dark_mode: true # set to true to add dark mode toggle
-  portfolio_image: "assets/portfolio.png" # the path from the base directory of the site to the image to display (no / at the start)
+  portfolio_image: "assets/img/profile.png" # the path from the base directory of the site to the image to display (no / at the start)
   html_lang: "ko" # set the lang attribute of the <html> tag for the pages. See here for a list of codes: https://www.w3schools.com/tags/ref_country_codes.asp
   condensed_mobile:
     #- home
@@ -24,15 +23,15 @@ plainwhite:
     - post
   # generate social links in footer
   social_links:
-    twitter: 20develop
-    github:  6h15m
+    twitter: 20olev
+    github: 6h15m
     #linkedIn: in/samarsault
     #dribbble: jekyll
     #flickr:   jekyll
     #instagram: jekyll
     #pinterest: jekyll
     #youtube: jekyll
-    facebook: 100007430927430
+    #facebook: 100007430927430
     #soundcloud: jekyll
     #telegram: jekyll
     #gitlab: jekyll

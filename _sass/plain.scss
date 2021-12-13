@@ -1,8 +1,9 @@
 @import "ext/fonts";
 @import "ext/normalize";
 @import "syntax";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
 
-$linkColor: #0a59b0;
+$linkColor: #5c7cfa;
 $mobileW: 768px;
 $smallMobileW: 480px;
 $bigScreenW: 1600px;
@@ -15,7 +16,7 @@ $leftWidth: 220px;
 }
 
 body {
-  font-family: "Raleway", sans-serif;
+  font-family: "Pretendard", sans-serif;
   font-size: 16px;
   line-height: 1.2em;
   margin: 0;
@@ -139,7 +140,7 @@ main {
   flex-wrap: wrap;
   justify-content: center;
   a {
-    margin-bottom: .5em;
+    margin-bottom: 0.5em;
   }
   li {
     i {
@@ -164,7 +165,7 @@ main {
 
     a {
       display: block;
-      font-family: 'Merriweather';
+      font-family: "Pretendard";
       text-align: center;
       padding: 1rem 0;
       text-decoration: none;
@@ -223,8 +224,9 @@ main {
 
 .post-title {
   line-height: 1.2em;
-  font-size: 28px;
+  font-size: 30px;
   margin-bottom: 10px;
+  margin-top: 40px;
 }
 .posts,
 .post-container {
@@ -243,8 +245,8 @@ main {
   padding-left: 30px;
 }
 .post {
-  font-family: "Merriweather", sans-serif;
-  font-weight: 300;
+  font-family: "Pretendard", sans-serif;
+  font-weight: 500;
   color: #222;
   line-height: 1.9em;
   p {
@@ -264,7 +266,7 @@ main {
   h4,
   h5,
   h6 {
-    font-family: Raleway, sans-serif;
+    font-family: Pretendard, sans-serif;
   }
 }
 .posts-labelgroup {
@@ -286,13 +288,14 @@ main {
   transition: width 0.1s;
 }
 table {
-  th, td {
+  th,
+  td {
     padding: 8px 13px;
     border: 1px solid #dfe2e5;
   }
   th {
     background-color: #eee;
-    font-family: Raleway;
+    font-family: Pretendard;
   }
 }
 
@@ -328,7 +331,7 @@ footer {
     flex-direction: column;
     align-items: center;
     margin: 0 40px;
-    @media screen and (max-width: $smallMobileW){
+    @media screen and (max-width: $smallMobileW) {
       margin: 0 20px;
     }
     border-top: 1px solid #eee;

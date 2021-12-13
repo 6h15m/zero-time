@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "🐍 Github 프로필에 잔디 먹는 뱀 추가하기"
+title: "Github 프로필에 잔디 먹는 뱀 추가하기"
 date: 2021-07-20
 categories: Github README
 comments: true
@@ -146,6 +146,7 @@ SVG 파일은 배경이 없고 색이 조금 더 어두운 편이라 Dark high c
 
 - [How to enable GitHub Actions on your Profile README for a snake-eating contribution graph 🐍][reference]
 
+[github-main]: https://github.com
 [facebook-posting]: https://www.facebook.com/Thomas.CS.Park/posts/10221387355058694
 [demo-site]: https://platane.github.io/snk/
 [github-snk]: https://github.com/Platane/snk
