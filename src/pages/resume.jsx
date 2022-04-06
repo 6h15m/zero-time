@@ -61,7 +61,7 @@ const ResumePage = () => (
         <div />
         <Description>
           <SmallTitle>
-            <a href="https://omnuum.io/" target="_blank">
+            <a href="https://omnuum.io/" target="_blank" rel="noreferrer">
               OMNUUM
             </a>{" "}
             (2022.01-)
@@ -76,7 +76,7 @@ const ResumePage = () => (
         <div />
         <Description>
           <SmallTitle>
-            <a href="https://marpple.shop/kr" target="_blank">
+            <a href="https://marpple.shop/kr" target="_blank" rel="noreferrer">
               MARPPLE
             </a>{" "}
             (2021.10-)
@@ -89,7 +89,11 @@ const ResumePage = () => (
         <div />
         <Description>
           <SmallTitle>
-            <a href="https://www.e-mirim.hs.kr/" target="_blank">
+            <a
+              href="https://www.e-mirim.hs.kr/"
+              target="_blank"
+              rel="noreferrer"
+            >
               미림여자정보과학고등학교
             </a>{" "}
             (2019.03-2022.01)
