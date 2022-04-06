@@ -12,7 +12,7 @@ const SeriesListWrapper = styled.div`
   padding: 30px 20px;
   border: 1px solid ${(props) => props.theme.colors.border};
   @media (max-width: 768px) {
-    padding: 0 10px;
+    margin: 0 10px;
   }
 `;
 

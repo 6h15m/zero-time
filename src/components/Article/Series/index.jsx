@@ -9,6 +9,11 @@ const SeriesWrapper = styled.div`
   margin-bottom: 32px;
   padding: 20px;
   border: 1px solid ${(props) => props.theme.colors.border};
+
+  @media (max-width: 768px) {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
 `;
 
 const SeriesHeader = styled.h2`
