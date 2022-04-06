@@ -4,7 +4,7 @@ const StyledMarkdown = styled.div`
   & {
     font-size: 17.6px;
     color: ${(props) => props.theme.colors.text};
-    line-height: 1.7;
+    line-height: 2;
     overflow: hidden;
   }
 
@@ -78,8 +78,8 @@ const StyledMarkdown = styled.div`
 
   & blockquote {
     padding: 18px 24px;
-    border-left: 4px solid ${(props) => props.theme.colors.blockQuoteBorder};
-    background-color: ${(props) => props.theme.colors.blockQuoteBackground};
+    border-left: 4px solid ${(props) => props.theme.colors.border};
+    background-color: ${(props) => props.theme.colors.background};
 
     & *:last-child {
       margin-bottom: 0;
