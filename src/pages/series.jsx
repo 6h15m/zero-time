@@ -6,15 +6,17 @@ import SEO from "components/SEO";
 import { graphql } from "gatsby";
 
 import Layout from "components/Layout";
-import Title from "components/Title";
 import SeriesList from "components/SeriesList";
-import VerticleSpace from "components/VerticalSpace";
+import VerticalSpace from "components/VerticalSpace";
 import NoContent from "components/NoContent";
 
 import { title, description, siteUrl } from "../../blog-config";
 
-const TagListWrapper = styled.div`
-  margin-top: 20px;
+const Title = styled.div`
+  font-size: 14px;
+  text-align: right;
+  margin-top: 50px;
+  color: ${(props) => props.theme.colors.text};
 
   @media (max-width: 768px) {
     padding: 0 15px;
@@ -40,11 +42,11 @@ const SeriesPage = ({ data }) => {
     <Layout>
       <SEO title={title} description={description} url={siteUrl} />
 
-      <Title size="sm">Series</Title>
+      <Title size="sm">{series.length} Series</Title>
 
       {series.length === 0 && <NoContent name="series" />}
 
-      <VerticleSpace size={32} />
+      <VerticalSpace size={14} />
 
       <SeriesList seriesList={series} />
     </Layout>
@@ -76,6 +78,7 @@ export const pageQuery = graphql`
           title
           tags
           series
+          description
         }
       }
     }

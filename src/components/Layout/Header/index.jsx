@@ -5,14 +5,7 @@ import { Link } from "gatsby";
 
 import { siteUrl } from "../../../../blog-config";
 
-import {
-  FaSun,
-  FaMoon,
-  FaTags,
-  FaRss,
-  FaSearch,
-  FaListUl,
-} from "react-icons/fa";
+import { FiFolder, FiMoon, FiSearch, FiSun } from "react-icons/fi";
 
 const HeaderWrapper = styled.header`
   display: block;
@@ -20,7 +13,7 @@ const HeaderWrapper = styled.header`
   top: ${(props) => (props.isHidden ? -60 : 0)}px;
   left: 0;
   right: 0;
-  padding: 16px;
+  padding: 40px;
   opacity: ${(props) => (props.isHidden ? 0 : 1)};
   transition: top 0.5s, opacity 0.5s;
   z-index: 999;
@@ -38,8 +31,8 @@ const Inner = styled.div`
 `;
 
 const BlogLogo = styled.img`
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
 `;
 
 const Menu = styled.div`
@@ -52,15 +45,15 @@ const Menu = styled.div`
     height: 20px;
     margin-right: 15px;
     cursor: pointer;
+    stroke: ${(props) => props.theme.colors.icon};
   }
 
   & svg path {
-    fill: ${(props) => props.theme.colors.icon};
     transition: fill 0.3s;
   }
 
   & svg:hover path {
-    fill: ${(props) => props.theme.colors.text};
+    stroke: ${(props) => props.theme.colors.text};
   }
 `;
 
@@ -137,18 +130,12 @@ const Header = ({ toggleTheme }) => {
         <Menu>
           <ToggleWrapper>
             <IconRail theme={theme.name}>
-              <FaSun onClick={toggleTheme} />
-              <FaMoon onClick={toggleTheme} />
+              <FiSun onClick={toggleTheme} />
+              <FiMoon onClick={toggleTheme} />
             </IconRail>
           </ToggleWrapper>
-          <Link to="/tags">
-            <FaTags />
-          </Link>
           <Link to="/series">
-            <FaListUl />
-          </Link>
-          <Link to="/search">
-            <FaSearch style={{ marginRight: 0 }} />
+            <FiFolder />
           </Link>
         </Menu>
       </Inner>

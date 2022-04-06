@@ -11,7 +11,7 @@ import VerticalSpace from "components/VerticalSpace";
 import { description, siteUrl, title } from "../../blog-config";
 
 const SearchWrapper = styled.div`
-  margin-top: 20px;
+  margin-top: 40px;
   @media (max-width: 768px) {
     padding: 0 15px;
   }
@@ -41,7 +41,7 @@ const Search = ({ data }) => {
       <SearchWrapper>
         <TextField onChange={(e) => setQuery(e.target.value)} />
       </SearchWrapper>
-      <VerticalSpace size={70} />
+      <VerticalSpace size={40} />
       <PostList postList={filteredPosts} />
     </Layout>
   );

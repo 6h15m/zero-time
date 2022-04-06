@@ -2,6 +2,7 @@ import React from "react";
 import _ from "lodash";
 import styled from "styled-components";
 import { Link } from "gatsby";
+import { FiTag } from "react-icons/fi";
 
 const RelativeWrapper = styled.div`
   position: relative;
@@ -13,21 +14,32 @@ const Wrapper = styled.aside`
   top: 0px;
   width: 200px;
   height: 100px;
-  font-size: 16px;
+  font-size: 12px;
+
+  & svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 15px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    stroke: ${(props) => props.theme.colors.icon};
+  }
+
+  & svg path {
+    transition: fill 0.3s;
+  }
+
+  & svg:hover path {
+    stroke: ${(props) => props.theme.colors.text};
+  }
 
   @media (max-width: 1300px) {
     display: none;
   }
 `;
 
-const Title = styled.div`
-  margin-bottom: 25px;
-  font-weight: bold;
-  color: ${(props) => props.theme.colors.secondaryText};
-`;
-
 const Tag = styled.li`
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   color: ${(props) => props.theme.colors.tertiaryText};
   cursor: pointer;
   transition: color 0.3s;
@@ -46,16 +58,14 @@ const SideTagList = ({ tags, postCount }) => {
   return (
     <RelativeWrapper>
       <Wrapper>
-        <Title>TAG LIST</Title>
+        <FiTag />
         <ul>
           <Tag>
-            <Link to="/tags">All ({postCount})</Link>
+            <Link to="/tags"># All</Link>
           </Tag>
           {_.map(tags, (tag) => (
             <Tag>
-              <Link to={`/tags?q=${tag.fieldValue}`}>
-                {tag.fieldValue} ({tag.totalCount})
-              </Link>
+              <Link to={`/tags?q=${tag.fieldValue}`}># {tag.fieldValue}</Link>
             </Tag>
           ))}
         </ul>

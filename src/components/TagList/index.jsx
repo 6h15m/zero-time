@@ -9,10 +9,10 @@ const TagListWrapper = styled.div`
 
 const TagLink = styled.div`
   display: inline-block;
-  padding: 9.6px 11.2px;
+  padding: 8px 10px;
   margin-right: 8px;
   margin-bottom: 8px;
-  border-radius: 50px;
+  border: 1px solid ${(props) => props.theme.colors.border};
   background-color: ${(props) =>
     props.selected
       ? props.theme.colors.selectedTagBackground
@@ -22,7 +22,7 @@ const TagLink = styled.div`
       ? props.theme.colors.selectedTagText
       : props.theme.colors.tagText};
   text-decoration: none;
-  font-size: 14.4px;
+  font-size: 12px;
   transition: all 0.2s;
 
   &:hover {
@@ -30,6 +30,8 @@ const TagLink = styled.div`
       props.selected
         ? props.theme.colors.hoveredSelectedTagBackground
         : props.theme.colors.hoveredTagBackground};
+
+    color: ${(props) => props.theme.colors.hoveredTagText};
   }
 `;
 
@@ -45,7 +47,7 @@ const TagList = ({ tagList, count, selected }) => {
       <TagListWrapper>
         {tagList.map((tag, i) => (
           <Link key={JSON.stringify({ tag, i })} to={`/tags?q=${tag}`}>
-            <TagLink>{spaceToDash(tag)}</TagLink>
+            <TagLink># {spaceToDash(tag)}</TagLink>
           </Link>
         ))}
       </TagListWrapper>

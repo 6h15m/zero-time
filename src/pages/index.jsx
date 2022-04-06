@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import _ from "lodash";
 import { graphql } from "gatsby";
 
@@ -11,10 +11,35 @@ import Divider from "components/Divider";
 import VerticalSpace from "components/VerticalSpace";
 
 import { title, description, siteUrl } from "../../blog-config";
+import TextField from "../components/TextField";
+import styled from "styled-components";
+
+const SearchWrapper = styled.div`
+  margin-top: 40px;
+  margin-bottom: 40px;
+  @media (max-width: 768px) {
+    padding: 0 15px;
+  }
+`;
 
 const BlogIndex = ({ data }) => {
   const posts = data.allMarkdownRemark.nodes;
   const tags = _.sortBy(data.allMarkdownRemark.group, ["totalCount"]).reverse();
+
+  const [query, setQuery] = useState("");
+
+  const filteredPosts = useCallback(
+    posts.filter((post) => {
+      const { frontmatter, rawMarkdownBody } = post;
+      const { title } = frontmatter;
+      const lowerQuery = query.toLocaleLowerCase();
+
+      if (rawMarkdownBody.toLocaleLowerCase().includes(lowerQuery)) return true;
+
+      return title.toLocaleLowerCase().includes(lowerQuery);
+    }),
+    [query],
+  );
 
   if (posts.length === 0) {
     return (
@@ -31,9 +56,11 @@ const BlogIndex = ({ data }) => {
       <SEO title={title} description={description} url={siteUrl} />
       <VerticalSpace size={48} />
       <Bio />
-      <Divider />
+      <SearchWrapper>
+        <TextField onChange={(e) => setQuery(e.target.value)} />
+      </SearchWrapper>
       <SideTagList tags={tags} postCount={posts.length} />
-      <PostList postList={posts} />
+      <PostList postList={filteredPosts} />
     </Layout>
   );
 };
@@ -63,6 +90,7 @@ export const pageQuery = graphql`
           tags
           description
         }
+        rawMarkdownBody
       }
     }
   }

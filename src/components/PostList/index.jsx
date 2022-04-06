@@ -31,7 +31,7 @@ const Date = styled.p`
 `;
 
 const Excerpt = styled.p`
-  margin-bottom: 32px;
+  margin-bottom: 20px;
   line-height: 1.7;
   font-size: 16px;
   color: ${(props) => props.theme.colors.secondaryText};
@@ -85,7 +85,7 @@ const PostList = ({ postList }) => {
             </PostWrapper>
 
             {postCount - 1 !== i && postList.length - 1 !== i && (
-              <Divider mt="48px" mb="32px" />
+              <Divider mt="20px" mb="20px" />
             )}
           </>
         );

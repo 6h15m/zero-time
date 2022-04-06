@@ -7,7 +7,7 @@ const FooterWrapper = styled.footer`
   margin-top: 32px;
   padding: 40px 0;
   text-align: center;
-  font-size: 11pt;
+  font-size: 9pt;
   font-weight: lighter;
   color: ${(props) => props.theme.colors.secondaryText};
 

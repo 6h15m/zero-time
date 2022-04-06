@@ -30,7 +30,7 @@ const Author = styled.div`
 `;
 
 const Description = styled.div`
-  margin-bottom: 11.2px;
+  margin-bottom: 14px;
   line-height: 1.5;
   font-size: 16px;
   color: ${(props) => props.theme.colors.secondaryText};
@@ -42,8 +42,8 @@ const LinksWrapper = styled.div`
   }
 
   & svg {
-    width: 25.6px;
-    height: 25.6px;
+    width: 24px;
+    height: 24px;
     cursor: pointer;
   }
 
