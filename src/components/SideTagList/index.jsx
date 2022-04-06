@@ -58,7 +58,9 @@ const SideTagList = ({ tags, postCount }) => {
   return (
     <RelativeWrapper>
       <Wrapper>
-        <FiTag />
+        <Link to="/tags">
+          <FiTag />
+        </Link>
         <ul>
           <Tag>
             <Link to="/tags"># All</Link>

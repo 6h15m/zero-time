@@ -1,18 +1,15 @@
 import React, { useCallback, useState } from "react";
 import _ from "lodash";
+import styled from "styled-components";
 import { graphql } from "gatsby";
-
 import Layout from "components/Layout";
 import SEO from "components/SEO";
 import Bio from "components/Bio";
 import PostList from "components/PostList";
 import SideTagList from "components/SideTagList";
-import Divider from "components/Divider";
 import VerticalSpace from "components/VerticalSpace";
-
-import { title, description, siteUrl } from "../../blog-config";
 import TextField from "../components/TextField";
-import styled from "styled-components";
+import { description, siteUrl, title } from "../../blog-config";
 
 const SearchWrapper = styled.div`
   margin-top: 40px;
@@ -84,8 +81,8 @@ export const pageQuery = graphql`
           slug
         }
         frontmatter {
-          date(formatString: "MMMM DD, YYYY")
-          update(formatString: "MMM DD, YYYY")
+          date(formatString: "YYYY.MM.DD")
+          update(formatString: "YYYY.MM.DD")
           title
           tags
           description

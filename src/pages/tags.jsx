@@ -17,7 +17,7 @@ import VerticleSpace from "components/VerticalSpace";
 import { title, description, siteUrl } from "../../blog-config";
 
 const TagListWrapper = styled.div`
-  margin-top: 20px;
+  margin-top: 40px;
 
   @media (max-width: 768px) {
     padding: 0 15px;
@@ -96,10 +96,11 @@ export const pageQuery = graphql`
           slug
         }
         frontmatter {
-          date(formatString: "MMMM DD, YYYY")
-          update(formatString: "MMM DD, YYYY")
+          date(formatString: "YYYY.MM.DD")
+          update(formatString: "YYYY.MM.DD")
           title
           tags
+          description
         }
       }
     }
