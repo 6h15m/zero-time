@@ -1,35 +1,35 @@
-import React from "react"
-import SEO from "components/SEO"
-import { graphql } from "gatsby"
+import React from "react";
+import SEO from "components/SEO";
+import { graphql } from "gatsby";
 
-import Layout from "components/Layout"
-import Article from "components/Article"
+import Layout from "components/Layout";
+import Article from "components/Article";
 
-import { siteUrl } from "../../blog-config"
+import { siteUrl } from "../../blog-config";
 
 const Post = ({ data }) => {
-  const post = data.markdownRemark
-  const { previous, next, seriesList } = data
+  const post = data.markdownRemark;
+  const { previous, next, seriesList } = data;
 
-  const { title, date, update, tags, series } = post.frontmatter
-  const { excerpt } = post
-  const { readingTime, slug } = post.fields
+  const { title, date, update, tags, series } = post.frontmatter;
+  const { excerpt } = post;
+  const { readingTime, slug } = post.fields;
 
-  let filteredSeries = []
+  let filteredSeries = [];
   if (series !== null) {
-    filteredSeries = seriesList.edges.map(seriesPost => {
+    filteredSeries = seriesList.edges.map((seriesPost) => {
       if (seriesPost.node.id === post.id) {
         return {
           ...seriesPost.node,
           currentPost: true,
-        }
+        };
       } else {
         return {
           ...seriesPost.node,
           currentPost: false,
-        }
+        };
       }
-    })
+    });
   }
 
   return (
@@ -50,10 +50,10 @@ const Post = ({ data }) => {
         <Article.Footer previous={previous} next={next} />
       </Article>
     </Layout>
-  )
-}
+  );
+};
 
-export default Post
+export default Post;
 
 export const pageQuery = graphql`
   query BlogPostBySlug(
@@ -118,4 +118,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

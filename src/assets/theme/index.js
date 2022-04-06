@@ -34,7 +34,7 @@ export const light = {
     textFieldActivatedBorder: "#adb5bd",
     tableBackground: "#f1f3f5",
   },
-}
+};
 
 export const dark = {
   name: "dark",
@@ -72,4 +72,4 @@ export const dark = {
     textFieldActivatedBorder: "#868e96",
     tableBackground: "#292e33",
   },
-}
+};

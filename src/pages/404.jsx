@@ -1,10 +1,10 @@
-import React from "react"
-import styled from "styled-components"
+import React from "react";
+import styled from "styled-components";
 
-import Layout from "components/Layout"
-import SEO from "components/SEO"
+import Layout from "components/Layout";
+import SEO from "components/SEO";
 
-import { title, description, siteUrl } from "../../blog-config"
+import { title, description, siteUrl } from "../../blog-config";
 
 const NotFound = styled.div`
   height: 800px;
@@ -12,7 +12,7 @@ const NotFound = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: ${props => props.theme.colors.tertiaryText};
+  color: ${(props) => props.theme.colors.tertiaryText};
 
   & > h2 {
     margin-bottom: 16px;
@@ -28,7 +28,7 @@ const NotFound = styled.div`
   @media (max-width: 768px) {
     height: 300px;
   }
-`
+`;
 
 const NotFoundPage = () => (
   <Layout>
@@ -38,6 +38,6 @@ const NotFoundPage = () => (
       <h3>Page Not Found X(</h3>
     </NotFound>
   </Layout>
-)
+);
 
-export default NotFoundPage
+export default NotFoundPage;

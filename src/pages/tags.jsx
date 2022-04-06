@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react"
-import _ from "lodash"
-import styled from "styled-components"
-import SEO from "components/SEO"
-import filter from "lodash/filter"
+import React, { useState, useEffect } from "react";
+import _ from "lodash";
+import styled from "styled-components";
+import SEO from "components/SEO";
+import filter from "lodash/filter";
 
-import { graphql, navigate } from "gatsby"
+import { graphql, navigate } from "gatsby";
 
-import queryString from "query-string"
+import queryString from "query-string";
 
-import Layout from "components/Layout"
-import Title from "components/Title"
-import TagList from "components/TagList"
-import PostList from "components/PostList"
-import VerticleSpace from "components/VerticalSpace"
+import Layout from "components/Layout";
+import Title from "components/Title";
+import TagList from "components/TagList";
+import PostList from "components/PostList";
+import VerticleSpace from "components/VerticalSpace";
 
-import { title, description, siteUrl } from "../../blog-config"
+import { title, description, siteUrl } from "../../blog-config";
 
 const TagListWrapper = styled.div`
   margin-top: 20px;
@@ -22,35 +22,35 @@ const TagListWrapper = styled.div`
   @media (max-width: 768px) {
     padding: 0 15px;
   }
-`
+`;
 
 const TagsPage = ({ data }) => {
-  const tags = _.sortBy(data.allMarkdownRemark.group, ["totalCount"]).reverse()
-  const posts = data.allMarkdownRemark.nodes
+  const tags = _.sortBy(data.allMarkdownRemark.group, ["totalCount"]).reverse();
+  const posts = data.allMarkdownRemark.nodes;
 
-  const [selected, setSelected] = useState()
-  const [filteredPosts, setFilteredPosts] = useState([])
+  const [selected, setSelected] = useState();
+  const [filteredPosts, setFilteredPosts] = useState([]);
 
-  let query = null
+  let query = null;
   if (typeof document !== "undefined") {
-    query = document.location.search
+    query = document.location.search;
   }
 
   useEffect(() => {
     if (!selected) {
-      setFilteredPosts(posts)
-      return
+      setFilteredPosts(posts);
+      return;
     }
 
     setFilteredPosts(
-      filter(posts, post => post.frontmatter.tags.indexOf(selected) !== -1)
-    )
-  }, [selected])
+      filter(posts, (post) => post.frontmatter.tags.indexOf(selected) !== -1),
+    );
+  }, [selected]);
 
   useEffect(() => {
-    const q = queryString.parse(query)["q"]
-    setSelected(q)
-  }, [query])
+    const q = queryString.parse(query)["q"];
+    setSelected(q);
+  }, [query]);
 
   return (
     <Layout>
@@ -72,12 +72,12 @@ const TagsPage = ({ data }) => {
           count
           tagList={tags}
           selected={selected}
-          onClick={tag => {
-            console.log(tag, selected)
+          onClick={(tag) => {
+            console.log(tag, selected);
             if (tag === selected) {
-              navigate("/tags")
-              alert("zz")
-            } else setSelected(tag)
+              navigate("/tags");
+              alert("zz");
+            } else setSelected(tag);
           }}
         />
       </TagListWrapper>
@@ -86,10 +86,10 @@ const TagsPage = ({ data }) => {
 
       <PostList postList={filteredPosts} />
     </Layout>
-  )
-}
+  );
+};
 
-export default TagsPage
+export default TagsPage;
 
 export const pageQuery = graphql`
   query {
@@ -117,4 +117,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

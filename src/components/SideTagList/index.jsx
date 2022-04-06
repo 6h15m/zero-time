@@ -1,11 +1,11 @@
-import React from "react"
-import _ from "lodash"
-import styled from "styled-components"
-import { Link } from "gatsby"
+import React from "react";
+import _ from "lodash";
+import styled from "styled-components";
+import { Link } from "gatsby";
 
 const RelativeWrapper = styled.div`
   position: relative;
-`
+`;
 
 const Wrapper = styled.aside`
   position: absolute;
@@ -18,29 +18,29 @@ const Wrapper = styled.aside`
   @media (max-width: 1300px) {
     display: none;
   }
-`
+`;
 
 const Title = styled.div`
   margin-bottom: 25px;
   font-weight: bold;
-  color: ${props => props.theme.colors.secondaryText};
-`
+  color: ${(props) => props.theme.colors.secondaryText};
+`;
 
 const Tag = styled.li`
   margin-bottom: 16px;
-  color: ${props => props.theme.colors.tertiaryText};
+  color: ${(props) => props.theme.colors.tertiaryText};
   cursor: pointer;
   transition: color 0.3s;
 
   &:hover {
-    color: ${props => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text};
   }
 
   & > a {
     color: inherit;
     text-decoration: none;
   }
-`
+`;
 
 const SideTagList = ({ tags, postCount }) => {
   return (
@@ -51,7 +51,7 @@ const SideTagList = ({ tags, postCount }) => {
           <Tag>
             <Link to="/tags">all ({postCount})</Link>
           </Tag>
-          {_.map(tags, tag => (
+          {_.map(tags, (tag) => (
             <Tag>
               <Link to={`/tags?q=${tag.fieldValue}`}>
                 {tag.fieldValue} ({tag.totalCount})
@@ -61,7 +61,7 @@ const SideTagList = ({ tags, postCount }) => {
         </ul>
       </Wrapper>
     </RelativeWrapper>
-  )
-}
+  );
+};
 
-export default SideTagList
+export default SideTagList;

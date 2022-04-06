@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react"
-import styled from "styled-components"
-import _ from "lodash"
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import _ from "lodash";
 
-import { Link } from "gatsby"
+import { Link } from "gatsby";
 
-import Title from "components/Title"
-import Divider from "components/Divider"
-import TagList from "components/TagList"
+import Title from "components/Title";
+import Divider from "components/Divider";
+import TagList from "components/TagList";
 
 const PostListWrapper = styled.div`
   @media (max-width: 768px) {
     padding: 0 10px;
   }
-`
+`;
 
 const PostWrapper = styled.div`
   position: relative;
@@ -22,57 +22,57 @@ const PostWrapper = styled.div`
   @media (max-width: 768px) {
     padding: 0 5px;
   }
-`
+`;
 
 const Date = styled.p`
   margin-bottom: 16px;
   font-size: 14.4px;
-  color: ${props => props.theme.colors.tertiaryText};
-`
+  color: ${(props) => props.theme.colors.tertiaryText};
+`;
 
 const Excerpt = styled.p`
   margin-bottom: 32px;
   line-height: 1.7;
   font-size: 16px;
-  color: ${props => props.theme.colors.secondaryText};
+  color: ${(props) => props.theme.colors.secondaryText};
   word-break: break-all;
-`
+`;
 
 const checkIsScrollAtBottom = () => {
   return (
     document.documentElement.scrollHeight -
       document.documentElement.scrollTop <=
     document.documentElement.clientHeight + 100
-  )
-}
+  );
+};
 
 const PostList = ({ postList }) => {
-  const [postCount, setPostCount] = useState(10)
+  const [postCount, setPostCount] = useState(10);
 
   const handleMoreLoad = _.throttle(() => {
     if (checkIsScrollAtBottom() && postCount < postList.length) {
-      setTimeout(() => setPostCount(postCount + 10), 300)
+      setTimeout(() => setPostCount(postCount + 10), 300);
     }
-  }, 250)
+  }, 250);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleMoreLoad)
+    window.addEventListener("scroll", handleMoreLoad);
 
     return () => {
-      window.removeEventListener("scroll", handleMoreLoad)
-    }
-  }, [postCount, postList])
+      window.removeEventListener("scroll", handleMoreLoad);
+    };
+  }, [postCount, postList]);
 
   useEffect(() => {
-    setPostCount(10)
-  }, [postList])
+    setPostCount(10);
+  }, [postList]);
 
   return (
     <PostListWrapper>
       {postList.slice(0, postCount).map((post, i) => {
-        const { title, date, tags } = post.frontmatter
-        const { excerpt } = post
-        const { slug } = post.fields
+        const { title, date, tags } = post.frontmatter;
+        const { excerpt } = post;
+        const { slug } = post.fields;
 
         return (
           <>
@@ -89,10 +89,10 @@ const PostList = ({ postList }) => {
               <Divider mt="48px" mb="32px" />
             )}
           </>
-        )
+        );
       })}
     </PostListWrapper>
-  )
-}
+  );
+};
 
-export default PostList
+export default PostList;

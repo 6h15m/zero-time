@@ -1,15 +1,15 @@
-import { useRef } from "react"
+import { useRef } from "react";
 
 const useOffsetTop = () => {
-  const ref = useRef()
+  const ref = useRef();
 
-  let offsetTop = 0
+  let offsetTop = 0;
   if (ref.current)
     offsetTop =
       ref.current.getBoundingClientRect().top +
-      document.documentElement.scrollTop
+      document.documentElement.scrollTop;
 
-  return [ref, offsetTop]
-}
+  return [ref, offsetTop];
+};
 
-export default useOffsetTop
+export default useOffsetTop;
