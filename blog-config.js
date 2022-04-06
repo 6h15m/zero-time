@@ -1,6 +1,6 @@
 module.exports = {
   title: "영의 시간",
-  description: "Sky is the limit ´◡`",
+  description: "Web Front-end Developer ´◡`",
   author: "Zero",
   siteUrl: "https://6h15m.github.io/",
   links: {
