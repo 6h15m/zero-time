@@ -1,4 +1,3 @@
 # 영의 시간
 
-## Used theme
-[plainwhite-jekyll](https://github.com/samarsault/plainwhite-jekyll)
+Inspired by [gatsby starter hoodie](https://github.com/devHudi/gatsby-starter-hoodie)
