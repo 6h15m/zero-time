@@ -1,17 +1,17 @@
 module.exports = {
-  title: "hoodie",
-  description: "Hello :) I'm Hudi who developed gatsby-starter-hoodie theme.",
-  author: "Hudi",
-  siteUrl: "https://devhudi.github.io/gatsby-starter-hoodie/",
+  title: "영의 시간",
+  description: "Sky is the limit ´◡`",
+  author: "Zero",
+  siteUrl: "https://6h15m.github.io/",
   links: {
-    github: "https://github.com/devHudi",
-    linkedIn: "https://linkedin.com",
-    facebook: "https://www.facebook.com",
-    instagram: "https://www.instagram.com",
-    email: "mailto:devhudi@gmail.com",
+    github: "https://github.com/6h15m",
+    linkedIn:
+      "https://www.linkedin.com/in/%EC%98%88%EC%84%9C-%EC%9D%B4-9b0a3a213/",
+    facebook: "https://www.facebook.com/profile.php?id=100007430927430",
+    email: "6h15m.develop@gmail.com",
   },
   utterances: {
-    repo: "devHudi/gatsby-starter-hoodie",
+    repo: "6h15m/6h15m.github.io",
     type: "pathname",
   },
-}
+};
