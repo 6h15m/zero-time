@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled, { useTheme } from "styled-components";
-
 import { Link } from "gatsby";
-
 import { siteUrl } from "../../../../blog-config";
-
-import { FiFolder, FiMoon, FiSearch, FiSun } from "react-icons/fi";
+import { FiFolder, FiMoon, FiSun } from "react-icons/fi";
 
 const HeaderWrapper = styled.header`
   display: block;

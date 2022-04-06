@@ -56,7 +56,7 @@ const BlogIndex = ({ data }) => {
       <SearchWrapper>
         <TextField onChange={(e) => setQuery(e.target.value)} />
       </SearchWrapper>
-      <SideTagList tags={tags} postCount={posts.length} />
+      <SideTagList tags={tags} />
       <PostList postList={filteredPosts} />
     </Layout>
   );

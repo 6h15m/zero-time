@@ -54,7 +54,7 @@ const Tag = styled.li`
   }
 `;
 
-const SideTagList = ({ tags, postCount }) => {
+const SideTagList = ({ tags }) => {
   return (
     <RelativeWrapper>
       <Wrapper>

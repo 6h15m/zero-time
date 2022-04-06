@@ -1,13 +1,9 @@
 import React from "react";
 import { graphql } from "gatsby";
-
 import styled from "styled-components";
-
 import Layout from "components/Layout";
 import SEO from "components/SEO";
 import PostList from "components/PostList";
-import Divider from "components/Divider";
-
 import { description, siteUrl } from "../../blog-config";
 
 const Header = styled.div`

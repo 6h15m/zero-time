@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import _ from "lodash";
-
 import { Link } from "gatsby";
-
 import Title from "components/Title";
-import Divider from "components/Divider";
 
 const SeriesListWrapper = styled.div`
   margin-bottom: 60px;
@@ -75,7 +72,7 @@ const SeriesList = ({ seriesList }) => {
 
   return (
     <SeriesListWrapper>
-      {seriesList.slice(0, seriesCount).map((series, i) => {
+      {seriesList.slice(0, seriesCount).map((series) => {
         return (
           <>
             <SeriesWrapper>
