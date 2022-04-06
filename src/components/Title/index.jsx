@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.h1`
-  margin-bottom: 24px;
+  margin-bottom: 12px;
   font-size: ${(props) => props.size};
   font-weight: 700;
   line-height: 1.3;

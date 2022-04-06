@@ -53,7 +53,6 @@ export const pageQuery = graphql`
         totalCount
       }
       nodes {
-        excerpt(pruneLength: 200, truncate: true)
         fields {
           slug
         }
@@ -62,6 +61,7 @@ export const pageQuery = graphql`
           update(formatString: "MMM DD, YYYY")
           title
           tags
+          description
         }
       }
     }

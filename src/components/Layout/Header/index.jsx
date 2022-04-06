@@ -3,7 +3,7 @@ import styled, { useTheme } from "styled-components";
 
 import { Link } from "gatsby";
 
-import { title } from "../../../../blog-config";
+import { siteUrl } from "../../../../blog-config";
 
 import {
   FaSun,
@@ -21,39 +21,25 @@ const HeaderWrapper = styled.header`
   left: 0;
   right: 0;
   padding: 16px;
-  background-color: ${(props) => props.theme.colors.headerBackground};
-  box-shadow: 0 0 8px ${(props) => props.theme.colors.headerShadow};
-  backdrop-filter: blur(5px);
   opacity: ${(props) => (props.isHidden ? 0 : 1)};
   transition: top 0.5s, opacity 0.5s;
   z-index: 999;
 
   @media (max-width: 768px) {
-    padding: 16px 0;
+    padding: 16px 16px;
   }
 `;
 
 const Inner = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 0 64px;
-
-  @media (max-width: 768px) {
-    margin: 0 15px;
-  }
+  max-width: 680px;
+  margin: 0 auto;
 `;
 
-const BlogTitle = styled.span`
-  letter-spacing: -1px;
-  font-family: "Source Code Pro", sans-serif;
-  font-weight: 700;
-  font-size: 24px;
-  color: ${(props) => props.theme.colors.text};
-
-  & > a {
-    text-decoration: none;
-    color: inherit;
-  }
+const BlogLogo = styled.img`
+  width: 32px;
+  height: 32px;
 `;
 
 const Menu = styled.div`
@@ -108,6 +94,11 @@ const IconRail = styled.div`
   }
 `;
 
+const profileImageRoot =
+  typeof window !== "undefined" && window.location.host === "localhost:8000"
+    ? "http://localhost:8000"
+    : siteUrl;
+
 const Header = ({ toggleTheme }) => {
   const theme = useTheme();
   const [scrollY, setScrollY] = useState();
@@ -140,9 +131,9 @@ const Header = ({ toggleTheme }) => {
   return (
     <HeaderWrapper isHidden={hidden}>
       <Inner>
-        <BlogTitle>
-          <Link to="/">{title}</Link>
-        </BlogTitle>
+        <Link to="/">
+          <BlogLogo src={`${profileImageRoot}/favicon.png`} alt="logo" />
+        </Link>
         <Menu>
           <ToggleWrapper>
             <IconRail theme={theme.name}>

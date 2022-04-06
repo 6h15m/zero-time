@@ -11,7 +11,7 @@ import {
   FaEnvelope,
 } from "react-icons/fa";
 
-import { siteUrl, description, author, links } from "../../../blog-config";
+import { description, author, links } from "../../../blog-config";
 
 const BioWrapper = styled.div`
   display: flex;
@@ -20,22 +20,6 @@ const BioWrapper = styled.div`
   @media (max-width: 768px) {
     padding: 0 15px;
   }
-`;
-
-const profileImageRoot =
-  typeof window !== "undefined" && window.location.host === "localhost:8000"
-    ? "http://localhost:8000"
-    : siteUrl;
-
-const Profile = styled.div`
-  flex: 0 0 auto;
-  margin-right: 16px;
-  width: 128px;
-  height: 128px;
-  border-radius: 999px;
-  background-image: url(${profileImageRoot}/profile.png);
-  background-size: cover;
-  background-position: center;
 `;
 
 const Author = styled.div`
@@ -87,7 +71,6 @@ const Bio = () => {
 
   return (
     <BioWrapper id="bio">
-      <Profile />
       <div>
         <Author>{author}</Author>
         <Description>{description}</Description>

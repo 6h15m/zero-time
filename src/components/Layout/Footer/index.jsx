@@ -6,7 +6,6 @@ import { title } from "../../../../blog-config";
 const FooterWrapper = styled.footer`
   margin-top: 32px;
   padding: 40px 0;
-  border-top: 1px solid ${(props) => props.theme.colors.divider};
   text-align: center;
   font-size: 11pt;
   font-weight: lighter;
@@ -20,11 +19,11 @@ const FooterWrapper = styled.footer`
 const Footer = () => {
   return (
     <FooterWrapper>
-      © {title}, Built with Gatsby and{" "}
+      © {title}, Inspired by{" "}
       <a href="https://github.com/devHudi/gatsby-starter-hoodie" target="blank">
         gatsby-starter-hoodie
-      </a>{" "}
-      theme.
+      </a>
+      .
     </FooterWrapper>
   );
 };

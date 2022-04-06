@@ -1,10 +1,10 @@
 ---
 title: "Github로 개발 블로그 개설하기 #1"
-description: "✨ 개발은 못하지만 개발 블로그는 만들고 싶어!"
+description: "✨ Jekyll과 Github 도메인으로 나만의 블로그를 만들어보자!"
 date: 2021-06-28
 update: 2021-06-28
 tags:
-  - jekyll
+  - Jekyll
 series: "Github로 개발 블로그 개설하기"
 ---
 

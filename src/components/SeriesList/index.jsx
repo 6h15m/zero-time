@@ -77,7 +77,7 @@ const SeriesList = ({ seriesList }) => {
         return (
           <>
             <SeriesWrapper>
-              <Title size="bg">
+              <Title size="md">
                 <Link to={`/series/${_.replace(series.name, /\s/g, "-")}`}>
                   {series.name}
                 </Link>

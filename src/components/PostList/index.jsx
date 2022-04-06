@@ -70,18 +70,17 @@ const PostList = ({ postList }) => {
   return (
     <PostListWrapper>
       {postList.slice(0, postCount).map((post, i) => {
-        const { title, date, tags } = post.frontmatter;
-        const { excerpt } = post;
+        const { title, date, tags, description } = post.frontmatter;
         const { slug } = post.fields;
 
         return (
           <>
             <PostWrapper>
-              <Title size="bg">
+              <Title size="md">
                 <Link to={slug}>{title}</Link>
               </Title>
               <Date>{date}</Date>
-              <Excerpt>{excerpt}</Excerpt>
+              <Excerpt>{description}</Excerpt>
               <TagList tagList={tags} />
             </PostWrapper>
 

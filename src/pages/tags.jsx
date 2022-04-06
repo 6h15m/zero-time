@@ -57,26 +57,13 @@ const TagsPage = ({ data }) => {
       <SEO title={title} description={description} url={siteUrl} />
 
       <TagListWrapper>
-        {selected ? (
-          <Title size="sm">
-            There are {filteredPosts.length} post
-            {filteredPosts.length > 1 && "s"} that match #{selected}.
-          </Title>
-        ) : (
-          <Title size="sm">
-            There are {tags.length} tag{tags.length > 1 && "s"}.
-          </Title>
-        )}
-
         <TagList
           count
           tagList={tags}
           selected={selected}
           onClick={(tag) => {
-            console.log(tag, selected);
             if (tag === selected) {
               navigate("/tags");
-              alert("zz");
             } else setSelected(tag);
           }}
         />

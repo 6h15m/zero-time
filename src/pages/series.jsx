@@ -40,11 +40,7 @@ const SeriesPage = ({ data }) => {
     <Layout>
       <SEO title={title} description={description} url={siteUrl} />
 
-      <TagListWrapper>
-        {series.length > 0 && (
-          <Title size="sm">There are {series.length} series.</Title>
-        )}
-      </TagListWrapper>
+      <Title size="sm">Series</Title>
 
       {series.length === 0 && <NoContent name="series" />}
 
