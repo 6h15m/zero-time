@@ -8,6 +8,10 @@ const StyledMarkdown = styled.div`
     overflow: hidden;
   }
 
+  & del {
+    opacity: 40%;
+  }
+
   & *:first-child {
     margin-top: 0;
   }
