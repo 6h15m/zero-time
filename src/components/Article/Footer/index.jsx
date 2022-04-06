@@ -59,14 +59,15 @@ const ArticleButtonWrapper = styled.div`
   padding: 20.8px 16px;
   max-width: 250px;
   flex-basis: 250px;
-  font-size: 17.6px;
-  border-radius: 5px;
+  font-size: 16px;
+  border: solid 1px ${(props) => props.theme.colors.border};
   background-color: ${(props) => props.theme.colors.nextPostButtonBackground};
   color: ${(props) => props.theme.colors.text};
   cursor: pointer;
   transition: background-color 0.3s;
 
   &:hover {
+    color: ${(props) => props.theme.colors.hoveredText};
     background-color: ${(props) =>
       props.theme.colors.hoveredNextPostButtonBackground};
   }
