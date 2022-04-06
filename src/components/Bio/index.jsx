@@ -2,14 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 import {
-  FaGithub,
-  FaKaggle,
-  FaFacebook,
-  FaLinkedin,
-  FaInstagram,
-  FaLink,
-  FaEnvelope,
-} from "react-icons/fa";
+  FiGithub,
+  FiFacebook,
+  FiLinkedin,
+  FiInstagram,
+  FiLink,
+  FiMail,
+  FiUser,
+} from "react-icons/fi";
 
 import { description, author, links } from "../../../blog-config";
 
@@ -45,15 +45,12 @@ const LinksWrapper = styled.div`
     width: 24px;
     height: 24px;
     cursor: pointer;
+    stroke-width: 1px;
+    stroke: ${(props) => props.theme.colors.icon};
   }
 
   & svg path {
-    fill: ${(props) => props.theme.colors.icon};
     transition: fill 0.3s;
-  }
-
-  & a:hover svg path {
-    fill: ${(props) => props.theme.colors.text};
   }
 `;
 
@@ -67,7 +64,7 @@ const Link = ({ link, children }) => {
 };
 
 const Bio = () => {
-  const { github, kaggle, instagram, facebook, linkedIn, email, etc } = links;
+  const { github, instagram, facebook, linkedIn, email, etc } = links;
 
   return (
     <BioWrapper id="bio">
@@ -76,25 +73,25 @@ const Bio = () => {
         <Description>{description}</Description>
         <LinksWrapper>
           <Link link={github}>
-            <FaGithub />
-          </Link>
-          <Link link={kaggle}>
-            <FaKaggle />
+            <FiGithub />
           </Link>
           <Link link={instagram}>
-            <FaInstagram />
+            <FiInstagram />
           </Link>
           <Link link={facebook}>
-            <FaFacebook />
+            <FiFacebook />
           </Link>
           <Link link={linkedIn}>
-            <FaLinkedin />
+            <FiLinkedin />
           </Link>
           <Link link={email}>
-            <FaEnvelope />
+            <FiMail />
           </Link>
           <Link link={etc}>
-            <FaLink />
+            <FiLink />
+          </Link>
+          <Link link="./resume">
+            <FiUser />
           </Link>
         </LinksWrapper>
       </div>

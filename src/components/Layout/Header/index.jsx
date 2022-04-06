@@ -42,6 +42,7 @@ const Menu = styled.div`
     height: 20px;
     margin-right: 15px;
     cursor: pointer;
+    stroke-width: 1px;
     stroke: ${(props) => props.theme.colors.icon};
   }
 

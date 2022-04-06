@@ -22,6 +22,7 @@ const Wrapper = styled.aside`
     margin-right: 15px;
     margin-bottom: 20px;
     cursor: pointer;
+    stroke-width: 1px;
     stroke: ${(props) => props.theme.colors.icon};
   }
 
