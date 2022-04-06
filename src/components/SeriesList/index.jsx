@@ -6,8 +6,6 @@ import Title from "components/Title";
 
 const SeriesListWrapper = styled.div`
   margin-bottom: 60px;
-  padding: 30px 20px;
-  border: 1px solid ${(props) => props.theme.colors.border};
   @media (max-width: 768px) {
     margin: 0 10px;
   }
@@ -17,10 +15,9 @@ const SeriesWrapper = styled.div`
   position: relative;
   top: 0;
   transition: all 0.5s;
-
-  @media (max-width: 768px) {
-    padding: 0 5px;
-  }
+  padding: 30px 20px;
+  margin-bottom: 20px;
+  border: 1px solid ${(props) => props.theme.colors.border};
 `;
 
 const SeriesInform = styled.div`
