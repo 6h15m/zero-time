@@ -15,6 +15,9 @@ const Icon = styled.span`
   color: ${(props) => props.theme.colors.textFieldBorder};
   text-shadow: 0 0 5px ${(props) => props.theme.colors.textFieldBorder};
   transition: all 0.2s;
+  svg {
+    stroke-width: 1px;
+  }
 `;
 
 const Input = styled.input.attrs({ type: "text" })`
