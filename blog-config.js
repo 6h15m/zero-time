@@ -2,7 +2,7 @@ module.exports = {
   title: "영의 시간",
   description: "Web Front-end Developer ´◡`",
   author: "Zero",
-  siteUrl: "https://6h15m.github.io/",
+  siteUrl: "https://6h15m.github.io",
   links: {
     github: "https://github.com/6h15m",
     linkedIn:
