@@ -90,10 +90,6 @@ const SeriesList = ({ seriesList }) => {
                 <Date>Last updated on {series.lastUpdated}</Date>
               </SeriesInform>
             </SeriesWrapper>
-
-            {seriesCount - 1 !== i && seriesList.length - 1 !== i && (
-              <Divider mt="48px" mb="32px" />
-            )}
           </>
         );
       })}

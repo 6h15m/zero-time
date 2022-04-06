@@ -76,8 +76,6 @@ const Series = ({ pathContext, data }) => {
             Last updated on {posts[posts.length - 1].frontmatter.date}
           </Date>
         </SeriesInform>
-
-        <Divider />
       </Header>
 
       <PostList postList={posts} />
