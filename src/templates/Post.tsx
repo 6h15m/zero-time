@@ -1,9 +1,9 @@
 import React from "react";
-import SEO from "components/SEO";
+import SEO from "../components/SEO";
 import { graphql } from "gatsby";
 
-import Layout from "components/Layout";
-import Article from "components/Article";
+import Layout from "../components/Layout";
+import Article from "../components/Article";
 
 import { siteUrl } from "../../blog-config";
 

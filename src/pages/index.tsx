@@ -2,12 +2,12 @@ import React, { useCallback, useState } from "react";
 import _ from "lodash";
 import styled from "styled-components";
 import { graphql } from "gatsby";
-import Layout from "components/Layout";
-import SEO from "components/SEO";
-import Bio from "components/Bio";
-import PostList from "components/PostList";
-import SideTagList from "components/SideTagList";
-import VerticalSpace from "components/VerticalSpace";
+import Layout from "../components/Layout";
+import SEO from "../components/SEO";
+import Bio from "../components/Bio";
+import PostList from "../components/PostList";
+import SideTagList from "../components/SideTagList";
+import VerticalSpace from "../components/VerticalSpace";
 import TextField from "../components/TextField";
 import { description, siteUrl, title } from "../../blog-config";
 

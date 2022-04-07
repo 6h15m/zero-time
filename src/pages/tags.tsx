@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import styled from "styled-components";
-import SEO from "components/SEO";
+import SEO from "../components/SEO";
 import filter from "lodash/filter";
 import { graphql, navigate } from "gatsby";
 import queryString from "query-string";
-import Layout from "components/Layout";
-import TagList from "components/TagList";
-import PostList from "components/PostList";
-import VerticalSpace from "components/VerticalSpace";
+import Layout from "../components/Layout";
+import TagList from "../components/TagList";
+import PostList from "../components/PostList";
+import VerticalSpace from "../components/VerticalSpace";
 import { description, siteUrl, title } from "../../blog-config";
 
 const TagListWrapper = styled.div`

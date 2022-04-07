@@ -5,7 +5,7 @@ import _ from "lodash";
 import { Link } from "gatsby";
 
 import Title from "components/Title";
-import Divider from "components/Divider";
+import Divider from "../Divider";
 import TagList from "components/TagList";
 
 const PostListWrapper = styled.div`

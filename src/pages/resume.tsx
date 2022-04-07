@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import Layout from "components/Layout";
-import SEO from "components/SEO";
-import Title from "components/Title";
-import Divider from "components/Divider";
+import Layout from "../components/Layout";
+import SEO from "../components/SEO";
+import Title from "../components/Title";
+import Divider from "../components/Divider";
 import { description, siteUrl, title } from "../../blog-config";
 import VerticalSpace from "../components/VerticalSpace";
 

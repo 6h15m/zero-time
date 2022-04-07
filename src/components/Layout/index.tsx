@@ -4,9 +4,9 @@ import { ThemeProvider } from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { setLight, setDark } from "reducers/theme";
 
-import { light, dark } from "assets/theme";
+import { light, dark } from "../../assets/theme";
 
-import GlobalStyles from "components/GlobalStyles";
+import GlobalStyles from "../GlobalStyles";
 
 import Header from "./Header";
 import Body from "./Body";
@@ -18,8 +18,9 @@ const Layout = ({ children }) => {
 
   let isSystemDarkMode = null;
   if (typeof window !== "undefined") {
-    isSystemDarkMode = window.matchMedia("(prefers-color-scheme: dark)")
-      .matches;
+    isSystemDarkMode = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
   }
 
   let localTheme = null;
