@@ -1,7 +1,7 @@
 import { useRef } from "react";
 
 const useOffsetTop = () => {
-  const ref = useRef();
+  const ref = useRef<HTMLElement>();
 
   let offsetTop = 0;
   if (ref.current)
