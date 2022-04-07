@@ -6,6 +6,7 @@
   "version": "0.2.0",
   "author": "6h15m",
   "dependencies": {
+    "@fxts/core": "^0.5.0",
     "gatsby": "^4.11.2",
     "gatsby-plugin-catch-links": "^4.11.0",
     "gatsby-plugin-image": "^2.11.1",
@@ -39,12 +40,15 @@
     "react-utterances": "^0.6.4",
     "redux": "^4.1.2",
     "styled-components": "^5.3.5",
-    "styled-reset": "^4.3.4"
+    "styled-reset": "^4.3.4",
+    "utterances-react-component": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.23",
     "@types/react": "^17.0.43",
     "@types/react-dom": "^17.0.14",
+    "@types/react-scroll": "^1.8.3",
+    "@types/styled-components": "^5.1.24",
     "eslint-config-react-app": "^7.0.0",
     "gh-pages": "^3.2.3",
     "prettier": "^2.6.2",

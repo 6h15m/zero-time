@@ -1,4 +1,19 @@
-module.exports = {
+import { UtterancesProps } from "utterances-react-component";
+
+type BlogConfig = {
+  title: string;
+  description: string;
+  author: string;
+  siteUrl: string;
+  links: {
+    github: string;
+    linkedIn: string;
+    email: string;
+  };
+  utterances: UtterancesProps;
+};
+
+const blogConfig: BlogConfig = {
   title: "영의 시간",
   description: "Web Front-end Developer ´◡`",
   author: "Zero",
@@ -11,6 +26,9 @@ module.exports = {
   },
   utterances: {
     repo: "6h15m/6h15m.github.io",
-    type: "pathname",
+    issueTerm: "pathname",
+    theme: "github-light",
   },
 };
+
+export default blogConfig;

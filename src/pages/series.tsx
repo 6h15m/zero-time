@@ -1,16 +1,50 @@
 import React from "react";
-import { flow, map, groupBy, sortBy, filter, reverse } from "lodash/fp";
+import {
+  pipe,
+  map,
+  groupBy,
+  entries,
+  sortBy,
+  filter,
+  reverse,
+  toArray,
+} from "@fxts/core";
 import styled from "styled-components";
-import SEO from "../components/SEO";
-
 import { graphql } from "gatsby";
-
+import BlogConfig from "../../blog-config";
+import SEO from "../components/SEO";
 import Layout from "../components/Layout";
 import SeriesList from "../components/SeriesList";
 import VerticalSpace from "../components/VerticalSpace";
 import NoContent from "../components/NoContent";
 
-import { title, description, siteUrl } from "../../blog-config";
+type Frontmatter = {
+  date: string;
+  update: string;
+  title: string;
+  tags: Array<string>;
+  series: string;
+  description: string | null;
+};
+
+type MarkDownRemarkGroupConnection = {
+  id: string;
+  fields: {
+    slug: string;
+  };
+  frontmatter: Frontmatter;
+  rawMarkdownBody: string;
+};
+
+type PageQueryResult = {
+  allMarkdownRemark: {
+    nodes: Array<MarkDownRemarkGroupConnection>;
+  };
+};
+
+type Props = {
+  data: PageQueryResult;
+};
 
 const Title = styled.div`
   font-size: 14px;
@@ -23,12 +57,14 @@ const Title = styled.div`
   }
 `;
 
-const SeriesPage = ({ data }) => {
+const SeriesPage = ({ data }: Props) => {
   const posts = data.allMarkdownRemark.nodes;
-  const series = flow(
+  const series = pipe(
+    posts,
     map((post) => ({ ...post.frontmatter, slug: post.fields.slug })),
-    groupBy("series"),
-    map((series) => ({
+    groupBy((post) => post.series),
+    entries,
+    map(([, series]) => ({
       name: series[0].series,
       posts: series,
       lastUpdated: series[0].date,
@@ -36,13 +72,18 @@ const SeriesPage = ({ data }) => {
     sortBy((series) => new Date(series.lastUpdated)),
     filter((series) => series.name),
     reverse,
-  )(posts);
+    toArray,
+  );
 
   return (
     <Layout>
-      <SEO title={title} description={description} url={siteUrl} />
+      <SEO
+        title={BlogConfig.title}
+        description={BlogConfig.description}
+        url={BlogConfig.siteUrl}
+      />
 
-      <Title size="sm">{series.length} Series</Title>
+      <Title>{series.length} Series</Title>
 
       {series.length === 0 && <NoContent name="series" />}
 
@@ -63,12 +104,7 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      group(field: frontmatter___tags) {
-        fieldValue
-        totalCount
-      }
       nodes {
-        excerpt(pruneLength: 200, truncate: true)
         fields {
           slug
         }

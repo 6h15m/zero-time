@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import BlogConfig from "../../blog-config";
 import Layout from "../components/Layout";
 import SEO from "../components/SEO";
 import Title from "../components/Title";
 import Divider from "../components/Divider";
-import { description, siteUrl, title } from "../../blog-config";
 import VerticalSpace from "../components/VerticalSpace";
 
 const Resume = styled.div`
@@ -46,7 +46,11 @@ const Description = styled.p`
 
 const ResumePage = () => (
   <Layout>
-    <SEO title={title} description={description} url={siteUrl} />
+    <SEO
+      title={BlogConfig.title}
+      description={BlogConfig.description}
+      url={BlogConfig.siteUrl}
+    />
     <Resume>
       <div>
         <Title size="md">
@@ -75,7 +79,7 @@ const ResumePage = () => (
           도입을 위한 리팩토링 작업을 진행 중입니다.
         </Description>
       </div>
-      <VerticalSpace size="60" />
+      <VerticalSpace size={60} />
       <div>
         <div />
         <Description>
@@ -88,7 +92,7 @@ const ResumePage = () => (
           마플코퍼레이션에서 Web Front-end 엔지니어로 근무 중입니다.
         </Description>
       </div>
-      <VerticalSpace size="60" />
+      <VerticalSpace size={60} />
       <div>
         <div />
         <Description>
