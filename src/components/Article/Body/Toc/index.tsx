@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { map, pipe, toArray } from "@fxts/core";
 import styled, { css } from "styled-components";
 import { animateScroll } from "react-scroll";
-import useScroll from "../../../../hooks/useScroll";
-import getElementOffset from "../../../../utils/getElementOffset";
-import RevealOnScroll from "../../../../components/RevealOnScroll";
+import { useScroll } from "../../../../hooks";
+import { getElementOffset } from "../../../../utils";
+import { RevealOnScroll } from "../../../RevealOnScroll";
 
 const STICK_OFFSET = 100;
 
@@ -86,7 +86,7 @@ type Props = {
   articleOffset: number;
 };
 
-const Toc = ({ items, articleOffset }: Props) => {
+export const Toc = ({ items, articleOffset }: Props) => {
   const { y } = useScroll();
 
   const [revealAt, setRevealAt] = useState(4000);
@@ -148,5 +148,3 @@ const Toc = ({ items, articleOffset }: Props) => {
     </RevealOnScroll>
   );
 };
-
-export default Toc;

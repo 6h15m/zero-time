@@ -2,7 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "gatsby";
 
-const TagListWrapper = styled.div`
+type TagListWrapperProps = {
+  //@TODO: 어떻게 구성되어있는지 파악 불가 - 추후 수정
+  onClick?: any;
+};
+
+const TagListWrapper = styled.div<TagListWrapperProps>`
   margin-bottom: 16px;
   word-break: break-all;
 `;
@@ -50,9 +55,9 @@ type Tag = {
 
 type Props = {
   tagList: Array<Tag>;
-  count?: number;
+  count?: boolean;
   selected?: string;
-  onClick?: () => void;
+  onClick?: (tag: string) => void;
 };
 
 export const TagList = ({ tagList, count, selected, onClick }: Props) => {

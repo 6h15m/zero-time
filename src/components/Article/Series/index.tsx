@@ -84,6 +84,7 @@ const ViewMore = styled.div`
 `;
 
 type Series = {
+  id: string;
   currentPost: boolean;
   fields: {
     slug: string;

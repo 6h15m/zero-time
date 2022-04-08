@@ -1,15 +1,13 @@
 import React from "react";
 import { graphql } from "gatsby";
 import styled from "styled-components";
-import Layout from "../components/Layout";
-import SEO from "../components/SEO";
-import PostList from "../components/PostList";
-import { description, siteUrl } from "../../blog-config";
+import { Layout, PostList, SEO } from "../components";
+import BlogConfig from "../../blog-config";
 
 const Header = styled.div`
   margin-bottom: 40px;
   @media (max-width: 768px) {
-    padding: 0px 15px;
+    padding: 0 15px;
   }
 `;
 
@@ -18,7 +16,7 @@ const Title = styled.h1`
   line-height: 1.2;
   font-size: 44.8px;
   font-weight: bold;
-  color: ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.primary};
   word-break: break-all;
 `;
 
@@ -29,8 +27,8 @@ const Subtitle = styled.h3`
   margin-bottom: 8px;
   font-size: 20px;
   font-weight: bold;
-  background-color: ${(props) => props.theme.colors.text};
-  color: ${(props) => props.theme.colors.bodyBackground};
+  background-color: ${(props) => props.theme.colors.background};
+  color: ${(props) => props.theme.colors.primary};
   letter-spacing: -1px;
 `;
 
@@ -38,7 +36,7 @@ const SeriesInform = styled.div`
   display: flex;
   align-items: center;
   font-size: 16px;
-  color: ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.primary};
 
   & > span {
     margin: 0 3px;
@@ -46,11 +44,39 @@ const SeriesInform = styled.div`
 `;
 
 const Date = styled.span`
-  color: ${(props) => props.theme.colors.tertiaryText};
+  color: ${(props) => props.theme.colors.tertiary};
   font-weight: lighter;
 `;
 
-const Series = ({ pathContext, data }) => {
+type Tag = {
+  fieldValue: string;
+  totalCount: number;
+};
+
+type Post = {
+  frontmatter: {
+    title: string;
+    date: string;
+    tags: Array<Tag>;
+    description: string | null;
+  };
+  fields: {
+    slug: string;
+  };
+};
+
+type Props = {
+  pathContext: {
+    series: string;
+  };
+  data: {
+    posts: {
+      nodes: Array<Post>;
+    };
+  };
+};
+
+const Series = ({ pathContext, data }: Props) => {
   const seriesName = pathContext.series;
   const posts = data.posts.nodes;
 
@@ -58,8 +84,8 @@ const Series = ({ pathContext, data }) => {
     <Layout>
       <SEO
         title={`SERIES: ${seriesName}`}
-        description={description}
-        url={siteUrl}
+        description={BlogConfig.description}
+        url={BlogConfig.siteUrl}
       />
 
       <Header>

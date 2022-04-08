@@ -4,7 +4,7 @@ import _ from "lodash";
 import { Link } from "gatsby";
 import { Title } from "../Title";
 import { Divider } from "../Divider";
-import TagList from "../TagList";
+import { TagList } from "../TagList";
 
 const PostListWrapper = styled.div`
   @media (max-width: 768px) {
@@ -54,7 +54,7 @@ type Post = {
     title: string;
     date: string;
     tags: Array<Tag>;
-    description: string;
+    description: string | null;
   };
   fields: {
     slug: string;

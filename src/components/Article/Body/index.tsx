@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import useOffsetTop from "../../../hooks/useOffsetTop";
-import Toc from "./Toc";
+import { useOffsetTop } from "../../../hooks";
+import { Toc } from "./Toc";
 import { StyledMarkdown } from "./StyledMarkdown";
 
 const Wrapper = styled.div`

@@ -4,7 +4,7 @@ import BlogConfig from "../../../blog-config";
 
 type Props = {
   title: string;
-  description: string;
+  description: string | null;
   url: string;
 };
 

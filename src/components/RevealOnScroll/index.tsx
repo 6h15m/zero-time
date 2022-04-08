@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import styled, { css } from "styled-components";
-
-import useScroll from "../../hooks/useScroll";
+import { useScroll } from "../../hooks";
 
 type StyledWrapperProps = {
   visible: boolean;

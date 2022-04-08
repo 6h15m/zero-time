@@ -1,11 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import BlogConfig from "../../blog-config";
-import Layout from "../components/Layout";
-import SEO from "../components/SEO";
-import Title from "../components/Title";
-import Divider from "../components/Divider";
-import VerticalSpace from "../components/VerticalSpace";
+import { Layout, SEO, Title, Divider, VerticalSpace } from "../components";
 
 const Resume = styled.div`
   margin-top: 100px;

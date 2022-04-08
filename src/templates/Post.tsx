@@ -1,20 +1,83 @@
 import React from "react";
-import SEO from "../components/SEO";
 import { graphql } from "gatsby";
+import BlogConfig from "../../blog-config";
+import { Layout, Article, SEO } from "../components";
 
-import Layout from "../components/Layout";
-import Article from "../components/Article";
+type Tag = {
+  fieldValue: string;
+  totalCount: number;
+};
 
-import { siteUrl } from "../../blog-config";
+type Article = {
+  fields: {
+    slug: string;
+  };
+  frontmatter: {
+    title: string;
+  };
+};
 
-const Post = ({ data }) => {
+type Frontmatter = {
+  date: string;
+  update: string;
+  title: string;
+  tags: Array<Tag>;
+  series: string;
+  description: string | null;
+};
+
+type SeriesPost = {
+  node: {
+    id: string;
+    fields: {
+      slug: string;
+    };
+    frontmatter: {
+      title: string;
+    };
+  };
+};
+
+type Series = {
+  id: string;
+  frontmatter: { title: string };
+  fields: { slug: string };
+  currentPost: boolean;
+};
+
+type ReadingTime = {
+  minutes: number;
+};
+
+type PageQueryResult = {
+  markdownRemark: {
+    html: string;
+    id: string;
+    frontmatter: Frontmatter;
+    fields: {
+      readingTime: ReadingTime;
+      slug: string;
+    };
+  };
+  previous: Article;
+  next: Article;
+  seriesList: {
+    edges: Array<SeriesPost>;
+  };
+};
+
+type Props = {
+  data: PageQueryResult;
+};
+
+const Post = ({ data }: Props) => {
   const post = data.markdownRemark;
   const { previous, next, seriesList } = data;
 
-  const { title, date, update, tags, series, description } = post.frontmatter;
+  const { title, date, tags, series, description } = post.frontmatter;
   const { readingTime, slug } = post.fields;
 
-  let filteredSeries = [];
+  let filteredSeries: Array<Series> = [];
   if (series !== null) {
     filteredSeries = seriesList.edges.map((seriesPost) => {
       if (seriesPost.node.id === post.id) {
@@ -33,12 +96,15 @@ const Post = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title={title} description={description} url={`${siteUrl}${slug}`} />
-      <Article>
+      <SEO
+        title={title}
+        description={description}
+        url={`${BlogConfig.siteUrl}${slug}`}
+      />
+      <Article.Wrapper>
         <Article.Header
           title={title}
           date={date}
-          update={update}
           tags={tags}
           minToRead={Math.round(readingTime.minutes)}
         />
@@ -47,7 +113,7 @@ const Post = ({ data }) => {
         )}
         <Article.Body html={post.html} />
         <Article.Footer previous={previous} next={next} />
-      </Article>
+      </Article.Wrapper>
     </Layout>
   );
 };

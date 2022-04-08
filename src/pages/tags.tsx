@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { filter, pipe, reverse, sortBy, toArray } from "@fxts/core";
-import styled from "styled-components";
-import SEO from "../components/SEO";
 import { graphql, navigate } from "gatsby";
+import { filter, pipe, reverse, sortBy, toArray } from "@fxts/core";
 import queryString from "query-string";
+import styled from "styled-components";
 import BlogConfig from "../../blog-config";
-import Layout from "../components/Layout";
-import TagList from "../components/TagList";
-import PostList from "../components/PostList";
-import VerticalSpace from "../components/VerticalSpace";
+import { SEO, Layout, TagList, PostList, VerticalSpace } from "../components";
+
+type Tag = {
+  fieldValue: string;
+  totalCount: number;
+};
 
 type Frontmatter = {
   date: string;
   update: string;
   title: string;
-  tags: Array<string>;
+  tags: Array<Tag>;
   description: string | null;
 };
 
@@ -54,6 +55,7 @@ const TagsPage = ({ data }: Props) => {
     data.allMarkdownRemark.group,
     sortBy((group) => group.totalCount),
     reverse,
+    toArray,
   );
   const posts = data.allMarkdownRemark.nodes;
 
@@ -76,7 +78,10 @@ const TagsPage = ({ data }: Props) => {
     setFilteredPosts(
       pipe(
         posts,
-        filter((post) => post.frontmatter.tags.indexOf(selected) !== -1),
+        filter(
+          (post) =>
+            post.frontmatter.tags.indexOf(selected as unknown as Tag) !== -1,
+        ),
         toArray,
       ),
     );

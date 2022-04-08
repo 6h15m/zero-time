@@ -12,11 +12,13 @@ import {
 import styled from "styled-components";
 import { graphql } from "gatsby";
 import BlogConfig from "../../blog-config";
-import SEO from "../components/SEO";
-import Layout from "../components/Layout";
-import SeriesList from "../components/SeriesList";
-import VerticalSpace from "../components/VerticalSpace";
-import NoContent from "../components/NoContent";
+import {
+  SEO,
+  Layout,
+  SeriesList,
+  VerticalSpace,
+  NoContent,
+} from "../components";
 
 type Frontmatter = {
   date: string;

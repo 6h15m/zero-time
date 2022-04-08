@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import BlogConfig from "../../../../blog-config";
 import { Divider } from "../../Divider";
-import TagList from "../../../components/TagList";
+import { TagList } from "../../TagList";
 
 const Wrapper = styled.div`
   margin-top: 32px;
@@ -43,7 +43,7 @@ type Props = {
   title: string;
   date: string;
   tags: Array<Tag>;
-  minToRead: string;
+  minToRead: number;
 };
 
 export const Header = ({ title, date, tags, minToRead }: Props) => {

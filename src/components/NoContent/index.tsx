@@ -19,5 +19,3 @@ type Props = {
 export const NoContent = ({ name }: Props) => (
   <Wrapper>There is no {name}.</Wrapper>
 );
-
-export default NoContent;

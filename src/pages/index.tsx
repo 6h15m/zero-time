@@ -3,19 +3,26 @@ import _ from "lodash";
 import styled from "styled-components";
 import { graphql } from "gatsby";
 import BlogConfig from "../../blog-config";
-import Layout from "../components/Layout";
-import SEO from "../components/SEO";
-import Bio from "../components/Bio";
-import PostList from "../components/PostList";
-import SideTagList from "../components/SideTagList";
-import VerticalSpace from "../components/VerticalSpace";
-import TextField from "../components/TextField";
+import {
+  Layout,
+  SEO,
+  Bio,
+  PostList,
+  SideTagList,
+  VerticalSpace,
+  TextField,
+} from "../components";
+
+type Tag = {
+  fieldValue: string;
+  totalCount: number;
+};
 
 type Frontmatter = {
   date: string;
   update: string;
   title: string;
-  tags: Array<string>;
+  tags: Array<Tag>;
   description: string | null;
 };
 
@@ -78,6 +85,12 @@ const BlogIndex = ({ data }: Props) => {
     );
   }
 
+  const postList = filteredPosts().map(({ id, fields, frontmatter }) => ({
+    id,
+    fields,
+    frontmatter,
+  }));
+
   return (
     <Layout>
       <SEO
@@ -95,7 +108,7 @@ const BlogIndex = ({ data }: Props) => {
         />
       </SearchWrapper>
       <SideTagList tags={tags} />
-      <PostList postList={filteredPosts()} />
+      <PostList postList={postList} />
     </Layout>
   );
 };
