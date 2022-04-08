@@ -1,17 +1,7 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
-
-import {
-  FiGithub,
-  FiFacebook,
-  FiLinkedin,
-  FiInstagram,
-  FiLink,
-  FiMail,
-  FiUser,
-} from "react-icons/fi";
-
-import { description, author, links } from "../../../blog-config";
+import { FiGithub, FiLinkedin, FiMail, FiUser } from "react-icons/fi";
+import BlogConfig from "../../../blog-config";
 
 const BioWrapper = styled.div`
   display: flex;
@@ -26,14 +16,14 @@ const Author = styled.div`
   margin-bottom: 4.8px;
   font-size: 24px;
   font-weight: 700;
-  color: ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.primary};
 `;
 
 const Description = styled.div`
   margin-bottom: 14px;
   line-height: 1.5;
   font-size: 16px;
-  color: ${(props) => props.theme.colors.secondaryText};
+  color: ${(props) => props.theme.colors.secondary};
 `;
 
 const LinksWrapper = styled.div`
@@ -46,7 +36,7 @@ const LinksWrapper = styled.div`
     height: 24px;
     cursor: pointer;
     stroke-width: 1px;
-    stroke: ${(props) => props.theme.colors.icon};
+    stroke: ${(props) => props.theme.colors.primary};
   }
 
   & svg path {
@@ -54,7 +44,12 @@ const LinksWrapper = styled.div`
   }
 `;
 
-const Link = ({ link, children }) => {
+type LinkProps = {
+  link: string;
+  children: ReactNode;
+};
+
+const Link = ({ link, children }: LinkProps) => {
   if (!link) return null;
   return (
     <a href={link} target="_blank" rel="noreferrer">
@@ -63,23 +58,17 @@ const Link = ({ link, children }) => {
   );
 };
 
-const Bio = () => {
-  const { github, instagram, facebook, linkedIn, email, etc } = links;
+export const Bio = () => {
+  const { github, linkedIn, email } = BlogConfig.links;
 
   return (
     <BioWrapper id="bio">
       <div>
-        <Author>{author}</Author>
-        <Description>{description}</Description>
+        <Author>{BlogConfig.author}</Author>
+        <Description>{BlogConfig.description}</Description>
         <LinksWrapper>
           <Link link={github}>
             <FiGithub />
-          </Link>
-          <Link link={instagram}>
-            <FiInstagram />
-          </Link>
-          <Link link={facebook}>
-            <FiFacebook />
           </Link>
           <Link link={linkedIn}>
             <FiLinkedin />
@@ -87,16 +76,11 @@ const Bio = () => {
           <Link link={email}>
             <FiMail />
           </Link>
-          <Link link={etc}>
-            <FiLink />
-          </Link>
-          <Link link="./resume">
+          <a href="./resume">
             <FiUser />
-          </Link>
+          </a>
         </LinksWrapper>
       </div>
     </BioWrapper>
   );
 };
-
-export default Bio;

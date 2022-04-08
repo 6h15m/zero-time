@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-const StyledMarkdown = styled.div`
+export const StyledMarkdown = styled.div`
   & {
     font-size: 17.6px;
-    color: ${(props) => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.primary};
     line-height: 2;
     overflow: hidden;
   }
@@ -82,7 +82,7 @@ const StyledMarkdown = styled.div`
 
   & blockquote {
     padding: 18px 24px;
-    border-left: 4px solid ${(props) => props.theme.colors.border};
+    border-left: 4px solid ${(props) => props.theme.colors.primary};
     background-color: ${(props) => props.theme.colors.background};
 
     & *:last-child {
@@ -99,13 +99,13 @@ const StyledMarkdown = styled.div`
   }
 
   & th {
-    border-bottom: 2px solid ${(props) => props.theme.colors.border};
+    border-bottom: 2px solid ${(props) => props.theme.colors.primary};
     font-weight: 700;
   }
 
   & td {
-    border-top: 1px solid ${(props) => props.theme.colors.border};
-    border-bottom: 1px solid ${(props) => props.theme.colors.border};
+    border-top: 1px solid ${(props) => props.theme.colors.primary};
+    border-bottom: 1px solid ${(props) => props.theme.colors.primary};
   }
 
   & td,
@@ -118,7 +118,7 @@ const StyledMarkdown = styled.div`
   }
 
   & tr:nth-child(even) {
-    background-color: ${(props) => props.theme.colors.tableBackground};
+    background-color: ${(props) => props.theme.colors.background};
   }
 
   & tr:last-child td {
@@ -134,14 +134,13 @@ const StyledMarkdown = styled.div`
   & table code.language-text {
     padding: 1.6px 4.8px;
     font-size: 14.4px;
-    background-color: ${(props) => props.theme.colors.inlineCodeBackground};
+    background-color: ${(props) => props.theme.colors.secondary};
     font-weight: bold;
-    color: ${(props) => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.primary};
   }
 
   & tr:nth-child(even) code.language-text {
-    background-color: ${(props) =>
-      props.theme.colors.inlineCodeBackgroundDarker};
+    background-color: ${(props) => props.theme.colors.secondary};
   }
 
   & ul,
@@ -207,18 +206,16 @@ const StyledMarkdown = styled.div`
 
   & hr {
     border: none;
-    border-bottom: 1px solid ${(props) => props.theme.colors.border};
+    border-bottom: 1px solid ${(props) => props.theme.colors.primary};
   }
 
   & a {
     padding: 1.6px 0;
-    color: ${(props) => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.primary};
   }
 
   & a:hover {
-    background-color: ${(props) => props.theme.colors.text};
-    color: ${(props) => props.theme.colors.hoveredLinkText};
+    background-color: ${(props) => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.background};
   }
 `;
-
-export default StyledMarkdown;

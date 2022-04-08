@@ -2,13 +2,12 @@ import React, { useState, useMemo } from "react";
 import _ from "lodash";
 import styled from "styled-components";
 import { Link } from "gatsby";
-
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const SeriesWrapper = styled.div`
   margin-bottom: 32px;
   padding: 20px;
-  border: 1px solid ${(props) => props.theme.colors.border};
+  border: 1px solid ${(props) => props.theme.colors.primary};
 
   @media (max-width: 768px) {
     margin-left: 16px;
@@ -20,11 +19,11 @@ const SeriesHeader = styled.h2`
   margin-bottom: 16px;
   font-size: 16px;
   font-weight: bold;
-  color: ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.primary};
 
   & > span {
     font-weight: normal;
-    color: ${(props) => props.theme.colors.tertiaryText};
+    color: ${(props) => props.theme.colors.tertiary};
   }
 
   & > a {
@@ -39,13 +38,17 @@ const SeriesHeader = styled.h2`
 
 const PostWrapper = styled.ul``;
 
-const Post = styled.li`
+type PostProps = {
+  currentPost: boolean;
+};
+
+const Post = styled.li<PostProps>`
   position: relative;
   font-size: 12.8px;
   color: ${(props) =>
     props.currentPost
-      ? props.theme.colors.text
-      : props.theme.colors.tertiaryText};
+      ? props.theme.colors.primary
+      : props.theme.colors.tertiary};
 
   &:not(:last-child) {
     margin-bottom: 9.6px;
@@ -58,7 +61,7 @@ const Post = styled.li`
   }
 
   & > a:hover {
-    color: ${(props) => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.primary};
   }
 
   & > svg {
@@ -71,16 +74,31 @@ const ViewMore = styled.div`
   margin-top: 15px;
   font-size: 14.4px;
   text-align: center;
-  color: ${(props) => props.theme.colors.tertiaryText};
+  color: ${(props) => props.theme.colors.tertiary};
   cursor: pointer;
   transition: color 0.3s;
 
   &:hover {
-    color: ${(props) => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.primary};
   }
 `;
 
-const Series = ({ header, series }) => {
+type Series = {
+  currentPost: boolean;
+  fields: {
+    slug: string;
+  };
+  frontmatter: {
+    title: string;
+  };
+};
+
+type Props = {
+  header: string;
+  series: Array<Series>;
+};
+
+export const Series = ({ header, series }: Props) => {
   const [fold, setFold] = useState(true);
 
   const filteredPosts = useMemo(() => {

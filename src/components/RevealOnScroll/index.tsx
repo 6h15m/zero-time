@@ -1,9 +1,13 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import styled, { css } from "styled-components";
 
-import useScroll from "hooks/useScroll";
+import useScroll from "../../hooks/useScroll";
 
-const StyledWrapper = styled.div`
+type StyledWrapperProps = {
+  visible: boolean;
+};
+
+const StyledWrapper = styled.div<StyledWrapperProps>`
   position: relative;
   opacity: 0;
   transition: 0.35s all ease;
@@ -14,7 +18,13 @@ const StyledWrapper = styled.div`
     `}
 `;
 
-const RevealOnScroll = ({ revealAt, reverse, children }) => {
+type Props = {
+  revealAt: number;
+  reverse: boolean;
+  children: ReactNode;
+};
+
+export const RevealOnScroll = ({ revealAt, reverse, children }: Props) => {
   const { y } = useScroll();
 
   let reveal = null;
@@ -23,5 +33,3 @@ const RevealOnScroll = ({ revealAt, reverse, children }) => {
 
   return <StyledWrapper visible={reveal}>{children}</StyledWrapper>;
 };
-
-export default RevealOnScroll;

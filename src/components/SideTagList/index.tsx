@@ -23,7 +23,7 @@ const Wrapper = styled.aside`
     margin-bottom: 20px;
     cursor: pointer;
     stroke-width: 1px;
-    stroke: ${(props) => props.theme.colors.icon};
+    stroke: ${(props) => props.theme.colors.primary};
   }
 
   & svg path {
@@ -31,7 +31,7 @@ const Wrapper = styled.aside`
   }
 
   & svg:hover path {
-    stroke: ${(props) => props.theme.colors.text};
+    stroke: ${(props) => props.theme.colors.primary};
   }
 
   @media (max-width: 1300px) {
@@ -41,12 +41,12 @@ const Wrapper = styled.aside`
 
 const Tag = styled.li`
   margin-bottom: 10px;
-  color: ${(props) => props.theme.colors.tertiaryText};
+  color: ${(props) => props.theme.colors.tertiary};
   cursor: pointer;
   transition: color 0.3s;
 
   &:hover {
-    color: ${(props) => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.primary};
   }
 
   & > a {
@@ -55,7 +55,15 @@ const Tag = styled.li`
   }
 `;
 
-const SideTagList = ({ tags }) => {
+type Tag = {
+  fieldValue: string;
+};
+
+type Props = {
+  tags: Array<Tag>;
+};
+
+export const SideTagList = ({ tags }: Props) => {
   return (
     <RelativeWrapper>
       <Wrapper>
@@ -76,5 +84,3 @@ const SideTagList = ({ tags }) => {
     </RelativeWrapper>
   );
 };
-
-export default SideTagList;

@@ -1,29 +1,30 @@
-import React, { useEffect } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { ThemeProvider } from "styled-components";
-
 import { useSelector, useDispatch } from "react-redux";
-import { setLight, setDark } from "reducers/theme";
-
+import { setLight, setDark } from "../../reducers/theme";
 import { light, dark } from "../../assets/theme";
-
-import GlobalStyles from "../GlobalStyles";
-
+import { GlobalStyles } from "../GlobalStyles";
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
 
-const Layout = ({ children }) => {
+type Props = {
+  children: ReactNode;
+};
+
+export const Layout = ({ children }: Props) => {
   const dispatch = useDispatch();
+  // @ts-ignore @TODO: typescript 구조에 맞게 리팩토링
   const { theme } = useSelector((state) => state.theme);
 
-  let isSystemDarkMode = null;
+  let isSystemDarkMode: boolean | null = null;
   if (typeof window !== "undefined") {
     isSystemDarkMode = window.matchMedia(
       "(prefers-color-scheme: dark)",
     ).matches;
   }
 
-  let localTheme = null;
+  let localTheme: string | null = null;
   if (typeof localStorage !== "undefined") {
     localTheme = localStorage.getItem("theme");
   }
@@ -49,5 +50,3 @@ const Layout = ({ children }) => {
     </ThemeProvider>
   );
 };
-
-export default Layout;

@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
-export default styled.div`
+type Props = {
+  size: number;
+};
+
+export const VerticalSpace = styled.div<Props>`
   height: ${(props) => props.size}px;
 `;

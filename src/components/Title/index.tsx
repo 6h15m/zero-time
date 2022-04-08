@@ -1,12 +1,16 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
 
-const Wrapper = styled.h1`
+type WrapperProps = {
+  size: string;
+};
+
+const Wrapper = styled.h1<WrapperProps>`
   margin-bottom: 12px;
   font-size: ${(props) => props.size};
   font-weight: 700;
   line-height: 1.3;
-  color: ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.primary};
   word-break: break-all;
 
   & > a {
@@ -16,11 +20,16 @@ const Wrapper = styled.h1`
   }
 
   & > a:hover {
-    color: ${(props) => props.theme.colors.secondaryText};
+    color: ${(props) => props.theme.colors.secondary};
   }
 `;
 
-const Title = ({ size, children }) => {
+type Props = {
+  size: "sm" | "md" | "bg";
+  children: ReactNode;
+};
+
+export const Title = ({ size, children }: Props) => {
   const sizes = {
     sm: "19.2px",
     md: "25.6px",
@@ -29,5 +38,3 @@ const Title = ({ size, children }) => {
 
   return <Wrapper size={sizes[size]}> {children} </Wrapper>;
 };
-
-export default Title;

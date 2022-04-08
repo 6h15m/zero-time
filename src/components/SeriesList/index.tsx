@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import _ from "lodash";
 import { Link } from "gatsby";
-import Title from "components/Title";
+import { Title } from "../Title";
 
 const SeriesListWrapper = styled.div`
   margin-bottom: 60px;
@@ -17,13 +17,13 @@ const SeriesWrapper = styled.div`
   transition: all 0.5s;
   padding: 30px 20px;
   margin-bottom: 20px;
-  border: 1px solid ${(props) => props.theme.colors.border};
+  border: 1px solid ${(props) => props.theme.colors.primary};
 `;
 
 const SeriesInform = styled.div`
   display: flex;
   align-items: center;
-  color: ${(props) => props.theme.colors.tertiaryText};
+  color: ${(props) => props.theme.colors.tertiary};
 
   & > span {
     margin: 0 5px;
@@ -46,7 +46,19 @@ const checkIsScrollAtBottom = () => {
   );
 };
 
-const SeriesList = ({ seriesList }) => {
+type Post = {};
+
+type Series = {
+  name: string;
+  posts: Array<Post>;
+  lastUpdated: string;
+};
+
+type Props = {
+  seriesList: Array<Series>;
+};
+
+export const SeriesList = ({ seriesList }: Props) => {
   const [seriesCount, setSeriesCount] = useState(10);
 
   const handleMoreLoad = _.throttle(() => {
@@ -90,5 +102,3 @@ const SeriesList = ({ seriesList }) => {
     </SeriesListWrapper>
   );
 };
-
-export default SeriesList;

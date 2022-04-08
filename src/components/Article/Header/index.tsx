@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-
-import { author } from "../../../../blog-config";
-
-import Divider from "components/Divider";
-import TagList from "components/TagList";
+import BlogConfig from "../../../../blog-config";
+import { Divider } from "../../Divider";
+import TagList from "../../../components/TagList";
 
 const Wrapper = styled.div`
   margin-top: 32px;
@@ -18,7 +16,7 @@ const ArticleTitle = styled.h1`
   line-height: 1.2;
   font-size: 44.8px;
   font-weight: 700;
-  color: ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.primary};
 `;
 
 const Information = styled.div`
@@ -28,20 +26,32 @@ const Information = styled.div`
 
 const Author = styled.span`
   font-weight: 700;
-  color: ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.primary};
 `;
 
 const Date = styled.span`
   font-weight: 300;
-  color: ${(props) => props.theme.colors.secondaryText};
+  color: ${(props) => props.theme.colors.secondary};
 `;
 
-const Header = ({ title, date, tags, minToRead }) => {
+type Tag = {
+  fieldValue: string;
+  totalCount: number;
+};
+
+type Props = {
+  title: string;
+  date: string;
+  tags: Array<Tag>;
+  minToRead: string;
+};
+
+export const Header = ({ title, date, tags, minToRead }: Props) => {
   return (
     <Wrapper>
       <ArticleTitle> {title} </ArticleTitle>
       <Information>
-        <Author> {author} </Author>
+        <Author> {BlogConfig.author} </Author>
         <Date>· {date} </Date>
         <Date>· {minToRead} min read </Date>
       </Information>
@@ -50,5 +60,3 @@ const Header = ({ title, date, tags, minToRead }) => {
     </Wrapper>
   );
 };
-
-export default Header;

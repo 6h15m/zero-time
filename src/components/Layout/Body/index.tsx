@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
 
 const BodyWrapper = styled.div`
@@ -7,7 +7,11 @@ const BodyWrapper = styled.div`
   max-width: 680px;
 `;
 
-const Body = ({ children }) => {
+type Props = {
+  children: ReactNode;
+};
+
+const Body = ({ children }: Props) => {
   return <BodyWrapper>{children}</BodyWrapper>;
 };
 

@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
-import { title } from "../../../../blog-config";
+import BlogConfig from "../../../../blog-config";
 
 const FooterWrapper = styled.footer`
   margin-top: 32px;
@@ -9,17 +8,17 @@ const FooterWrapper = styled.footer`
   text-align: center;
   font-size: 9pt;
   font-weight: lighter;
-  color: ${(props) => props.theme.colors.secondaryText};
+  color: ${(props) => props.theme.colors.secondary};
 
   & > a {
-    color: ${(props) => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.primary};
   }
 `;
 
 const Footer = () => {
   return (
     <FooterWrapper>
-      © {title}, Inspired by{" "}
+      © {BlogConfig.title}, Inspired by{" "}
       <a href="https://github.com/devHudi/gatsby-starter-hoodie" target="blank">
         gatsby-starter-hoodie
       </a>

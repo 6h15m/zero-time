@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import _ from "lodash";
-
 import { Link } from "gatsby";
-
-import Title from "components/Title";
-import Divider from "../Divider";
-import TagList from "components/TagList";
+import { Title } from "../Title";
+import { Divider } from "../Divider";
+import TagList from "../TagList";
 
 const PostListWrapper = styled.div`
   @media (max-width: 768px) {
@@ -46,7 +44,28 @@ const checkIsScrollAtBottom = () => {
   );
 };
 
-const PostList = ({ postList }) => {
+type Tag = {
+  fieldValue: string;
+  totalCount: number;
+};
+
+type Post = {
+  frontmatter: {
+    title: string;
+    date: string;
+    tags: Array<Tag>;
+    description: string;
+  };
+  fields: {
+    slug: string;
+  };
+};
+
+type Props = {
+  postList: Array<Post>;
+};
+
+export const PostList = ({ postList }: Props) => {
   const [postCount, setPostCount] = useState(10);
 
   const handleMoreLoad = _.throttle(() => {
@@ -93,5 +112,3 @@ const PostList = ({ postList }) => {
     </PostListWrapper>
   );
 };
-
-export default PostList;

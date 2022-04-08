@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { map, pipe, toArray } from "@fxts/core";
 import styled, { css } from "styled-components";
-
 import { animateScroll } from "react-scroll";
-
-import useScroll from "hooks/useScroll";
-
-import getElementOffset from "utils/getElmentOffset";
-
-import RevealOnScroll from "components/RevealOnScroll";
+import useScroll from "../../../../hooks/useScroll";
+import getElementOffset from "../../../../utils/getElementOffset";
+import RevealOnScroll from "../../../../components/RevealOnScroll";
 
 const STICK_OFFSET = 100;
 
-const TocWrapper = styled.div`
+type TocWrapperProps = {
+  stick: boolean;
+};
+
+const TocWrapper = styled.div<TocWrapperProps>`
   position: absolute;
   opacity: 1;
   left: 100%;
@@ -49,11 +50,16 @@ const TocWrapper = styled.div`
   }
 `;
 
-const ParagraphTitle = styled.div`
+type ParagraphTitleProps = {
+  subtitle: boolean;
+  active: boolean;
+};
+
+const ParagraphTitle = styled.div<ParagraphTitleProps>`
   margin-bottom: 8px;
   padding-left: ${(props) => (props.subtitle ? 19.2 : 0)}px;
   font-size: 14px;
-  color: ${(props) => props.theme.colors.mutedText};
+  color: ${(props) => props.theme.colors.tertiary};
   line-height: 1.3;
   transition: all 0.2s;
 
@@ -61,37 +67,52 @@ const ParagraphTitle = styled.div`
     props.active &&
     css`
       transform: translate(-11.2px, 0);
-      color: ${(props) => props.theme.colors.secondaryText};
+      color: ${(props) => props.theme.colors.secondary};
     `}
 
   &:hover {
-    color: ${(props) => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.primary};
     cursor: pointer;
   }
 `;
 
-const Toc = ({ items, articleOffset }) => {
+type Item = {
+  tagName: string;
+  innerText: string;
+};
+
+type Props = {
+  items: Array<Item>;
+  articleOffset: number;
+};
+
+const Toc = ({ items, articleOffset }: Props) => {
   const { y } = useScroll();
 
   const [revealAt, setRevealAt] = useState(4000);
-  const [headers, setHeaders] = useState([]);
+  const [headers, setHeaders] = useState<Array<number>>([]);
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const bioElm = document.getElementById("bio");
+    const bioElm: HTMLElement | null = document.getElementById("bio");
 
-    setRevealAt(
-      getElementOffset(bioElm).top -
-        bioElm.getBoundingClientRect().height -
-        400,
-    );
+    bioElm &&
+      setRevealAt(
+        getElementOffset(bioElm).top -
+          bioElm.getBoundingClientRect().height -
+          400,
+      );
   }, []);
 
   useEffect(() => {
     setHeaders(
-      [
-        ...document.querySelectorAll("#article-body > h2, #article-body > h3"),
-      ].map((element) => getElementOffset(element).top),
+      pipe(
+        document.querySelectorAll(
+          "#article-body > h2, #article-body > h3",
+        ) as unknown as Array<HTMLElement>, // @TODO: 해결책 찾기
+        map((element) => getElementOffset(element).top),
+        toArray,
+      ),
     );
   }, []);
 
@@ -104,7 +125,7 @@ const Toc = ({ items, articleOffset }) => {
     });
   }, [y]);
 
-  const handleClickTitle = (index) => {
+  const handleClickTitle = (index: number) => {
     animateScroll.scrollTo(headers[index] - 100);
   };
 

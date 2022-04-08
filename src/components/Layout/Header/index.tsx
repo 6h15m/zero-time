@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import { Link } from "gatsby";
-import { siteUrl } from "../../../../blog-config";
+import BlogConfig from "../../../../blog-config";
 import { FiFolder, FiMoon, FiSun } from "react-icons/fi";
 
-const HeaderWrapper = styled.header`
+type HeaderWrapperProps = {
+  isHidden: boolean;
+};
+
+const HeaderWrapper = styled.header<HeaderWrapperProps>`
   display: block;
   position: fixed;
   top: ${(props) => (props.isHidden ? -60 : 0)}px;
@@ -43,7 +47,7 @@ const Menu = styled.div`
     margin-right: 15px;
     cursor: pointer;
     stroke-width: 1px;
-    stroke: ${(props) => props.theme.colors.icon};
+    stroke: ${(props) => props.theme.colors.primary};
   }
 
   & svg path {
@@ -51,7 +55,7 @@ const Menu = styled.div`
   }
 
   & svg:hover path {
-    stroke: ${(props) => props.theme.colors.text};
+    stroke: ${(props) => props.theme.colors.primary};
   }
 `;
 
@@ -88,11 +92,15 @@ const IconRail = styled.div`
 const profileImageRoot =
   typeof window !== "undefined" && window.location.host === "localhost:8000"
     ? "http://localhost:8000"
-    : siteUrl;
+    : BlogConfig.siteUrl;
 
-const Header = ({ toggleTheme }) => {
+type Props = {
+  toggleTheme: () => void;
+};
+
+const Header = ({ toggleTheme }: Props) => {
   const theme = useTheme();
-  const [scrollY, setScrollY] = useState();
+  const [scrollY, setScrollY] = useState<number>(0);
   const [hidden, setHidden] = useState(false);
 
   const detectScrollDirection = () => {
@@ -127,7 +135,7 @@ const Header = ({ toggleTheme }) => {
         </Link>
         <Menu>
           <ToggleWrapper>
-            <IconRail theme={theme.name}>
+            <IconRail theme={theme}>
               <FiSun onClick={toggleTheme} />
               <FiMoon onClick={toggleTheme} />
             </IconRail>

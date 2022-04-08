@@ -7,20 +7,24 @@ const TagListWrapper = styled.div`
   word-break: break-all;
 `;
 
-const TagLink = styled.div`
+type TagLinkProps = {
+  selected?: boolean;
+};
+
+const TagLink = styled.div<TagLinkProps>`
   display: inline-block;
   padding: 8px 10px;
   margin-right: 8px;
   margin-bottom: 8px;
-  border: 1px solid ${(props) => props.theme.colors.border};
+  border: 1px solid ${(props) => props.theme.colors.primary};
   background-color: ${(props) =>
     props.selected
-      ? props.theme.colors.selectedTagBackground
-      : props.theme.colors.tagBackground};
+      ? props.theme.colors.primary
+      : props.theme.colors.background};
   color: ${(props) =>
     props.selected
-      ? props.theme.colors.selectedTagText
-      : props.theme.colors.tagText};
+      ? props.theme.colors.background
+      : props.theme.colors.primary};
   text-decoration: none;
   font-size: 12px;
   transition: all 0.2s;
@@ -28,26 +32,41 @@ const TagLink = styled.div`
   &:hover {
     background-color: ${(props) =>
       props.selected
-        ? props.theme.colors.hoveredSelectedTagBackground
-        : props.theme.colors.hoveredTagBackground};
+        ? props.theme.colors.primary
+        : props.theme.colors.background};
 
-    color: ${(props) => props.theme.colors.hoveredTagText};
+    color: ${(props) => props.theme.colors.secondary};
   }
 `;
 
-const spaceToDash = (text) => {
+const spaceToDash = (text: string) => {
   return text.replace(/\s+/g, "-");
 };
 
-const TagList = ({ tagList, count, selected }) => {
+type Tag = {
+  fieldValue: string;
+  totalCount: number;
+};
+
+type Props = {
+  tagList: Array<Tag>;
+  count?: number;
+  selected?: string;
+  onClick?: () => void;
+};
+
+export const TagList = ({ tagList, count, selected, onClick }: Props) => {
   if (!tagList) return null;
 
   if (!count) {
     return (
       <TagListWrapper>
         {tagList.map((tag, i) => (
-          <Link key={JSON.stringify({ tag, i })} to={`/tags?q=${tag}`}>
-            <TagLink># {spaceToDash(tag)}</TagLink>
+          <Link
+            key={JSON.stringify({ tag, i })}
+            to={`/tags?q=${tag.fieldValue}`}
+          >
+            <TagLink># {spaceToDash(tag.fieldValue)}</TagLink>
           </Link>
         ))}
       </TagListWrapper>
@@ -55,7 +74,7 @@ const TagList = ({ tagList, count, selected }) => {
   }
 
   return (
-    <TagListWrapper>
+    <TagListWrapper onClick={onClick}>
       {tagList.map((tag, i) => (
         <Link
           key={JSON.stringify({ tag, i })}
@@ -71,5 +90,3 @@ const TagList = ({ tagList, count, selected }) => {
     </TagListWrapper>
   );
 };
-
-export default TagList;

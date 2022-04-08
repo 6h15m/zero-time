@@ -1,22 +1,32 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { siteUrl } from "../../../blog-config";
+import BlogConfig from "../../../blog-config";
 
-const SEO = ({ title, description, url }) => {
+type Props = {
+  title: string;
+  description: string;
+  url: string;
+};
+
+export const SEO = ({ title, description, url }: Props) => {
   return (
     <Helmet>
       <title>{title}</title>
       <meta property="og:url" content={url} />
       <meta property="og:title" content={title} />
-      <meta property="og:image" content={`${siteUrl}/og-image.png`} />
+      <meta
+        property="og:image"
+        content={`${BlogConfig.siteUrl}/og-image.png`}
+      />
       {description && <meta name="description" content={description} />}
       <meta name="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content={url} />
       <meta property="twitter:title" content={title} />
-      <meta property="twitter:image" content={`${siteUrl}/og-image.png`} />
+      <meta
+        property="twitter:image"
+        content={`${BlogConfig.siteUrl}/og-image.png`}
+      />
       {description && <meta name="twitter:description" content={description} />}
     </Helmet>
   );
 };
-
-export default SEO;
