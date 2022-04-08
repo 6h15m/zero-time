@@ -1,5 +1,7 @@
-const blogConfig = require("./blog-config");
-const { title, description, author, siteUrl } = blogConfig;
+import path from "path";
+import BlogConfig from "./blog-config";
+
+const { title, description, author, siteUrl } = BlogConfig;
 
 module.exports = {
   pathPrefix: "/gatsby-starter-hoodie",
@@ -47,7 +49,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `markdown-pages`,
-        path: `${__dirname}/contents/posts`,
+        path: path.resolve(`contents/posts`),
       },
     },
     {
