@@ -95,6 +95,7 @@ export const StyledMarkdown = styled.div`
   }
 
   & table {
+    border: 1px solid ${(props) => props.theme.colors.primary};
     border-collapse: collapse;
   }
 
