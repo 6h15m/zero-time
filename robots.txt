@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://6h15m.github.io/sitemap/sitemap-index.xml
-Host: https://6h15m.github.io
