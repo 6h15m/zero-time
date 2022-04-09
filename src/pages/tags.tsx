@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import _ from "lodash";
 import { graphql, navigate } from "gatsby";
-import { filter, pipe, reverse, sortBy, toArray } from "@fxts/core";
+import { filter, pipe, toArray } from "@fxts/core";
 import queryString from "query-string";
 import styled from "styled-components";
 import BlogConfig from "../../blog-config";
-import { SEO, Layout, TagList, PostList, VerticalSpace } from "../components";
+import { Layout, PostList, SEO, TagList, VerticalSpace } from "../components";
 
 type Tag = {
   fieldValue: string;
@@ -30,10 +31,13 @@ type MarkDownRemarkGroupConnection = {
 
 type PageQueryResult = {
   allMarkdownRemark: {
-    group: Array<{
-      fieldValue: string;
-      totalCount: number;
-    }>;
+    group: Array<
+      | {
+          fieldValue: string;
+          totalCount: number;
+        }
+      | string
+    >;
     nodes: Array<MarkDownRemarkGroupConnection>;
   };
 };
@@ -50,13 +54,12 @@ const TagListWrapper = styled.div`
   }
 `;
 
+const DashToSpace = (text: string) => {
+  return text.replace(`-`, " ");
+};
+
 const TagsPage = ({ data }: Props) => {
-  const tags = pipe(
-    data.allMarkdownRemark.group,
-    sortBy((group) => group.totalCount),
-    reverse,
-    toArray,
-  );
+  const tags = _.sortBy(data.allMarkdownRemark.group, ["totalCount"]).reverse();
   const posts = data.allMarkdownRemark.nodes;
 
   const [selected, setSelected] = useState<string>("");
@@ -66,7 +69,7 @@ const TagsPage = ({ data }: Props) => {
 
   let query: string = "";
   if (typeof document !== "undefined") {
-    query = document.location.search;
+    query = DashToSpace(document.location.search);
   }
 
   useEffect(() => {
@@ -105,7 +108,8 @@ const TagsPage = ({ data }: Props) => {
           count
           tagList={tags}
           selected={selected}
-          onClick={(tag: string) => {
+          // @ts-ignore @TODO: 구조 파악 후 재구성
+          onClick={(tag) => {
             if (tag === selected) {
               navigate("/tags");
             } else setSelected(tag);

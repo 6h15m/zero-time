@@ -25,7 +25,7 @@ const Input = styled.input.attrs({ type: "text" })`
   border: 1px solid ${(props) => props.theme.colors.primary};
   background-color: transparent;
   font-size: 16px;
-  color: ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.primary};
   box-sizing: border-box;
   outline: none;
   transition: all 0.2s;

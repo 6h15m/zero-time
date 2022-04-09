@@ -76,7 +76,7 @@ export const Bio = () => {
           <Link link={email}>
             <FiMail />
           </Link>
-          <a href="./resume">
+          <a href="/resume">
             <FiUser />
           </a>
         </LinksWrapper>

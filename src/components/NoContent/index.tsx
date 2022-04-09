@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   height: 150px;
   font-size: 24px;
   font-weight: bold;
-  color: ${(props) => props.theme.colors.tertiaryText};
+  color: ${(props) => props.theme.colors.tertiary};
 `;
 
 type Props = {

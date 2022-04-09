@@ -4,13 +4,13 @@ import styled from "styled-components";
 import { graphql } from "gatsby";
 import BlogConfig from "../../blog-config";
 import {
-  Layout,
-  SEO,
   Bio,
+  Layout,
   PostList,
+  SEO,
   SideTagList,
-  VerticalSpace,
   TextField,
+  VerticalSpace,
 } from "../components";
 
 type Tag = {
@@ -37,10 +37,13 @@ type MarkDownRemarkGroupConnection = {
 
 type PageQueryResult = {
   allMarkdownRemark: {
-    group: Array<{
-      fieldValue: string;
-      totalCount: number;
-    }>;
+    group: Array<
+      | {
+          fieldValue: string;
+          totalCount: number;
+        }
+      | string
+    >;
     nodes: Array<MarkDownRemarkGroupConnection>;
   };
 };
@@ -63,8 +66,9 @@ const BlogIndex = ({ data }: Props) => {
 
   const [query, setQuery] = useState<string>("");
 
-  const filteredPosts = useCallback(() => {
-    return posts.filter((post) => {
+  const filteredPosts = useCallback(
+    // @ts-ignore: @TODO: 원리 파악 후 수정
+    posts.filter((post) => {
       const { frontmatter, rawMarkdownBody } = post;
       const { title } = frontmatter;
       const lowerQuery = query.toLocaleLowerCase();
@@ -72,8 +76,9 @@ const BlogIndex = ({ data }: Props) => {
       if (rawMarkdownBody.toLocaleLowerCase().includes(lowerQuery)) return true;
 
       return title.toLocaleLowerCase().includes(lowerQuery);
-    });
-  }, [query]);
+    }),
+    [query],
+  );
 
   if (posts.length === 0) {
     return (
@@ -84,12 +89,6 @@ const BlogIndex = ({ data }: Props) => {
       </p>
     );
   }
-
-  const postList = filteredPosts().map(({ id, fields, frontmatter }) => ({
-    id,
-    fields,
-    frontmatter,
-  }));
 
   return (
     <Layout>
@@ -108,7 +107,8 @@ const BlogIndex = ({ data }: Props) => {
         />
       </SearchWrapper>
       <SideTagList tags={tags} />
-      <PostList postList={postList} />
+      {/*@TODO: as any 제거*/}
+      <PostList postList={filteredPosts as any} />
     </Layout>
   );
 };

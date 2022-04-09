@@ -25,14 +25,14 @@ const PostWrapper = styled.div`
 const Date = styled.p`
   margin-bottom: 16px;
   font-size: 14.4px;
-  color: ${(props) => props.theme.colors.tertiaryText};
+  color: ${(props) => props.theme.colors.tertiary};
 `;
 
 const Excerpt = styled.p`
   margin-bottom: 20px;
   line-height: 1.7;
   font-size: 16px;
-  color: ${(props) => props.theme.colors.secondaryText};
+  color: ${(props) => props.theme.colors.secondary};
   word-break: break-all;
 `;
 

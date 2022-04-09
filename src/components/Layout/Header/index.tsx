@@ -73,7 +73,7 @@ const IconRail = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 40px;
-  top: ${(props) => (props.theme === "light" ? "-19px" : "0px")};
+  top: ${(props) => (props.theme.name === "light" ? "-19px" : "0px")};
   transition: top 0.4s;
 
   & > svg {
@@ -81,11 +81,11 @@ const IconRail = styled.div`
   }
 
   & > svg:first-child {
-    opacity: ${(props) => (props.theme === "light" ? 0 : 1)};
+    opacity: ${(props) => (props.theme.name === "light" ? 0 : 1)};
   }
 
   & > svg:last-child {
-    opacity: ${(props) => (props.theme === "dark" ? 0 : 1)};
+    opacity: ${(props) => (props.theme.name === "dark" ? 0 : 1)};
   }
 `;
 

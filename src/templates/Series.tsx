@@ -59,6 +59,7 @@ type Post = {
     date: string;
     tags: Array<Tag>;
     description: string | null;
+    series: string;
   };
   fields: {
     slug: string;
@@ -66,9 +67,6 @@ type Post = {
 };
 
 type Props = {
-  pathContext: {
-    series: string;
-  };
   data: {
     posts: {
       nodes: Array<Post>;
@@ -76,9 +74,9 @@ type Props = {
   };
 };
 
-const Series = ({ pathContext, data }: Props) => {
-  const seriesName = pathContext.series;
+const Series = ({ data }: Props) => {
   const posts = data.posts.nodes;
+  const seriesName = data.posts.nodes[0].frontmatter.series;
 
   return (
     <Layout>
@@ -124,6 +122,7 @@ export const pageQuery = graphql`
           update(formatString: "MMM DD, YYYY")
           title
           tags
+          series
         }
       }
     }

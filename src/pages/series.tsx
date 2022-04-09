@@ -52,7 +52,7 @@ const Title = styled.div`
   font-size: 14px;
   text-align: right;
   margin-top: 50px;
-  color: ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.primary};
 
   @media (max-width: 768px) {
     padding: 0 15px;

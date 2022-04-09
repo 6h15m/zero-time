@@ -3,6 +3,7 @@ import _ from "lodash";
 import styled from "styled-components";
 import { Link } from "gatsby";
 import { FiTag } from "react-icons/fi";
+import { spaceToDash } from "../../utils";
 
 const RelativeWrapper = styled.div`
   position: relative;
@@ -55,9 +56,12 @@ const Tag = styled.li`
   }
 `;
 
-type Tag = {
-  fieldValue: string;
-};
+type Tag =
+  | {
+      fieldValue: string;
+      totalCount: number;
+    }
+  | string;
 
 type Props = {
   tags: Array<Tag>;
@@ -74,11 +78,14 @@ export const SideTagList = ({ tags }: Props) => {
           <Tag>
             <Link to="/tags"># All</Link>
           </Tag>
-          {_.map(tags, (tag) => (
-            <Tag>
-              <Link to={`/tags?q=${tag.fieldValue}`}># {tag.fieldValue}</Link>
-            </Tag>
-          ))}
+          {_.map(tags, (tag) => {
+            const tagName = typeof tag === "object" ? tag.fieldValue : tag;
+            return (
+              <Tag>
+                <Link to={`/tags?q=${spaceToDash(tagName)}`}># {tagName}</Link>
+              </Tag>
+            );
+          })}
         </ul>
       </Wrapper>
     </RelativeWrapper>
