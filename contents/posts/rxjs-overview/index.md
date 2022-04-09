@@ -17,7 +17,7 @@ series: "RxJS 공식 문서 번역"
 v6 이후로 업데이트되지 않아 deprecated 된 자료들이 꽤 많았습니다.
 
 [저희의 Learn RxJS](https://chasethestar.gitbook.io/ko.learn-rxjs) 가 정확한 학습 자료로 거듭나려면
-**공식 문서를 먼저 학습해야겠다**는 판단이 생기게 되었고, [OVERVIEW](https://rxjs.dev/guide/overview)에 해당하는 영역부터 번역~~(의역)~~해나가 보려고 합니다.
+**공식 문서를 먼저 학습해야겠다**는 판단이 생기게 되었고, [OVERVIEW](https://rxjs.dev/guide/overview)에 해당하는 영역부터 번역~~의역~~해나가 보려고 합니다.
 
 ## RxJS 소개
 
