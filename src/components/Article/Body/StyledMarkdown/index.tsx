@@ -132,6 +132,7 @@ export const StyledMarkdown = styled.div`
 
   & p > code.language-text,
   & li > code.language-text,
+  & a > code.language-text,
   & table code.language-text {
     padding: 1.6px 4.8px;
     font-size: 14.4px;
@@ -139,6 +140,11 @@ export const StyledMarkdown = styled.div`
     font-weight: 500;
     color: ${(props) => props.theme.colors.primary};
     border: none;
+  }
+
+  & a > code.language-text:hover {
+    background-color: ${(props) => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.quaternary};
   }
 
   & ul,
