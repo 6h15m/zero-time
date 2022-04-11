@@ -4,8 +4,8 @@ description: "🇰🇷 Operator, 너는 진짜 누구냐-"
 date: 2022-04-13
 update: 2022-04-13
 tags:
-- RxJS
-- Reactive Programming
+  - RxJS
+  - Reactive Programming
 series: "RxJS 공식 문서 번역"
 ---
 
@@ -24,90 +24,114 @@ RxJS는 _연산자_ 덕분에 유용합니다. 옵저버블 기반인데도 말�
 
 연산자는 **함수**입니다. RxJS에는 두 종류의 연산자들이 존재하는데요,
 
-**파이프형 연산자**는 `observableInstance.pipe(operator())` 구문을 사용해 옵저버블에 연결할 수 있는 연산자들입니다. 
-[`filter(...)`](https://rxjs.dev/api/operators/filter) 나 [`mergeMap(...)`](https://rxjs.dev/api/operators/mergeMap) 같은 것들이 포함되죠. 
-When called, they do not _change_ the existing Observable instance. 
-Instead, they return a _new_ Observable, whose subscription logic is based on the first Observable.
+**파이프형 연산자**는 `observableInstance.pipe(operator())` 구문을 사용해 옵저버블에 연결할 수 있는 연산자들입니다.
+[`filter(...)`](https://rxjs.dev/api/operators/filter) 나 [`mergeMap(...)`](https://rxjs.dev/api/operators/mergeMap) 같은 것들이 포함되죠.
+이 연산자들을 호출해도 기존의 옵저버블 인스턴스는 _변경되지 않습니다_.
+대신, 첫 번째 옵저버블을 기반으로 _새로운_ 옵저버블을 리턴합니다.
 
-<span class="informal">A Pipeable Operator is a function that takes an Observable as its input and returns another Observable. It is a pure operation: the previous Observable stays unmodified.</span>
+> 파이프형 연산자는 옵저버블을 입력 값처럼 사용하고 다른 옵저버블을 리턴하는 함수입니다. 이 연산자는 순수함수로, 이전 옵저버블은 수정되지 않은 채로 유지됩니다.
 
-A Pipeable Operator is essentially a pure function which takes one Observable as input and generates another Observable as output. Subscribing to the output Observable will also subscribe to the input Observable.
+파이프형 연산자는 기본적으로 하나의 옵저버블을 입력 값으로 사용하며, 다른 옵저버블을 출력 값으로 생성하는 순수함수입니다.
+출력 옵저버블을 구독하면 입력 옵저버블도 구독됩니다.
 
-**Creation Operators** are the other kind of operator, which can be called as standalone functions to create a new Observable. For example: `of(1, 2, 3)` creates an observable that will emit 1, 2, and 3, one right after another. Creation operators will be discussed in more detail in a later section.
+**생성 연산자**는 새로운 옵저버블을 생성하기 위한 독립형 함수입니다.
+예를 들어, `of(1, 2, 3)`은 1, 2, 3을 차례대로 방출하는 옵저버블을 생성합니다.
+생성 연산자에 대해서는 뒷부분에서 더 자세히 다뤄보겠습니다.
 
-For example, the operator called [`map`](/api/operators/map) is analogous to the Array method of the same name. Just as `[1, 2, 3].map(x => x * x)` will yield `[1, 4, 9]`, the Observable created like this:
+[`map`](https://rxjs.dev/api/operators/map) 이라고 하는 연산자를 함께 보겠습니다.
+이 연산자는 동일한 이름의 Array 메소드와 유사하죠.
+`[1, 2, 3].map(x => x * x)`이 `[1, 4, 9]`를 생성하듯이, 옵저버블은 다음과 같이 생성됩니다.
 
 ```ts
-import { of, map } from 'rxjs';
+import { of, map } from "rxjs";
 of(1, 2, 3)
   .pipe(map((x) => x * x))
-  .subscribe((v) => console.log(`value: ${v}`));
-// Logs:
-// value: 1
-// value: 4
-// value: 9
+  .subscribe((v) => console.log(`값: ${v}`));
+// 로그:
+// 값: 1
+// 값: 4
+// 값: 9
 ```
 
-will emit `1`, `4`, `9`. Another useful operator is [`first`](/api/operators/first):
+`1`, `4`, `9`를 방출하죠. 다른 유용한 연산자인 [`first`](https://rxjs.dev/api/operators/first)도 소개해 드리겠습니다.
 
 ```ts
-import { of, first } from 'rxjs';
+import { of, first } from "rxjs";
 of(1, 2, 3)
   .pipe(first())
-  .subscribe((v) => console.log(`value: ${v}`));
-// Logs:
-// value: 1
+  .subscribe((v) => console.log(`값: ${v}`));
+// 로그:
+// 값: 1
 ```
 
-Note that `map` logically must be constructed on the fly, since it must be given the mapping function to. By contrast, `first` could be a constant, but is nonetheless constructed on the fly. As a general practice, all operators are constructed, whether they need arguments or not.
+논리적으로 생각해 보면, `map`은 매핑 기능을 제공해야 하므로 즉시 생성되어야 합니다.
+그러나 `first`는 상수가 될 수 있음에도 불구하고 똑같이 즉시 생성되죠.
+일반적으로 모든 연산자는 인수 필요 여부에 관계없이 구성되어 있습니다.
 
-## Piping
+## 파이핑
 
-Pipeable operators are functions, so they _could_ be used like ordinary functions: `op()(obs)` — but in practice, there tend to be many of them convolved together, and quickly become unreadable: `op4()(op3()(op2()(op1()(obs))))`. For that reason, Observables have a method called `.pipe()` that accomplishes the same thing while being much easier to read:
+파이프형 연산자들은 함수이기 때문에, 일반 함수들처럼 사용할 _수_ 있습니다.
+
+`op()(obs)`
+
+그러나, 많은 양의 함수들이 합성되면 가독성이 떨어지게 됩니다. 이렇게요.
+
+`op4()(op3()(op2()(op1()(obs))))`
+
+이러한 이유로 옵저버블은 `.pipe()` 메소드를 사용해 동일한 작업을 수행하되, 가독성까지 챙겼죠.
 
 ```ts
 obs.pipe(op1(), op2(), op3(), op4());
 ```
 
-As a stylistic matter, `op()(obs)` is never used, even if there is only one operator; `obs.pipe(op())` is universally preferred.
+하나의 연산자만 사용하더라도 `op()(obs)` 형태로는 사용되지 않고, `obs.pipe(op())` 형태가 주로 선호됩니다.
 
-## Creation Operators
+## 생성 연산자
 
-**What are creation operators?** Distinct from pipeable operators, creation operators are functions that can be used to create an Observable with some common predefined behavior or by joining other Observables.
+**생성 연산자**는 파이프형 연산자와 달리, 몇 가지 사전 정의된 동작을 이용하거나 다른 옵저버블과 결합함으로써 옵저버블을 생성할 수 있는 함수입니다.
 
-A typical example of a creation operator would be the `interval` function. It takes a number (not an Observable) as input argument, and produces an Observable as output:
+생성 연산자의 대표적인 예시는 `interval` 함수입니다.
+입력 인수로 (옵저버블이 아닌) 숫자를 받고, 출력으로 옵저버블을 생성합니다.
 
 ```ts
-import { interval } from 'rxjs';
-const observable = interval(1000 /* number of milliseconds */);
+import { interval } from "rxjs";
+const observable = interval(1000 /* 밀리초 */);
 ```
 
-See the list of all static creation operators [here](#creation-operators-list).
+[여기](#생성-연산자-리스트) 에 모든 정적 생성 연산자들을 참조해두었습니다.
 
-## Higher-order Observables
+## 고차원 옵저버블
 
-Observables most commonly emit ordinary values like strings and numbers, but surprisingly often, it is necessary to handle Observables _of_ Observables, so-called higher-order Observables. For example, imagine you had an Observable emitting strings that were the URLs of files you wanted to see. The code might look like this:
+옵저버블은 보통 문자열이나 숫자 같은 일반적인 값들을 방출하지만, 가끔 옵저버블 _의_ 옵저버블, 소위 고차원 옵저버블을 다뤄야 할 때가 있습니다.
+예를 들어, 파일의 URL로 구성된 문자열 옵저버블이 있다고 가정해 봅시다.
 
 ```ts
 const fileObservable = urlObservable.pipe(map((url) => http.get(url)));
 ```
 
-`http.get()` returns an Observable (of string or string arrays probably) for each individual URL. Now you have an Observable _of_ Observables, a higher-order Observable.
+`http.get()`은 개별 URL에 대해 (문자열 또는 문자열 배열) 옵저버블을 리턴합니다.
+이제 옵저버블 _의_ 옵저버블, 고차원 옵저버블이 준비되었습니다.
 
-But how do you work with a higher-order Observable? Typically, by _flattening_: by (somehow) converting a higher-order Observable into an ordinary Observable. For example:
+고차원 옵저버블을 다루려면 어떻게 해야 할까요?
+일반적으로는, _flattening(평탄화 작업)_ 을 거쳐 고차원 옵저버블을 일반 옵저버블로 변환합니다.
 
 ```ts
 const fileObservable = urlObservable.pipe(
   map((url) => http.get(url)),
-  concatAll()
+  concatAll(),
 );
 ```
 
-The [`concatAll()`](/api/operators/concatAll) operator subscribes to each "inner" Observable that comes out of the "outer" Observable, and copies all the emitted values until that Observable completes, and goes on to the next one. All of the values are in that way concatenated. Other useful flattening operators (called [_join operators_](#join-operators)) are
+[`concatAll()`](https://rxjs.dev/api/operators/concatAll) 연산자는 "외부" 옵저버블에서 방출되는 "내부" 옵저버블을 구독하고,
+해당 옵저버블이 완료될 때까지 방출된 모든 값을 복사해 다음 옵저버블로 이동합니다.
+모든 값이 그러한 방식으로 연결되어 있죠.
+유용한 평탄화 연산자([결합 연산자](#결합-연산자))에는, 
 
-- [`mergeAll()`](/api/operators/mergeAll) — subscribes to each inner Observable as it arrives, then emits each value as it arrives
-- [`switchAll()`](/api/operators/switchAll) — subscribes to the first inner Observable when it arrives, and emits each value as it arrives, but when the next inner Observable arrives, unsubscribes to the previous one, and subscribes to the new one.
-- [`exhaustAll()`](/api/operators/exhaustAll) — subscribes to the first inner Observable when it arrives, and emits each value as it arrives, discarding all newly arriving inner Observables until that first one completes, then waits for the next inner Observable.
+- [`mergeAll()`](https://rxjs.dev/api/operators/mergeAll) — 내부 옵저버블이 도착할 때 구독해서, 다음 값이 도착할 때 방출합니다.
+- [`switchAll()`](https://rxjs.dev/api/operators/switchAll) — 첫 번째 내부 옵저버블이 도착하면 첫 번째 내부 옵저버블을 구독하고, 값이 도착하면 방출합니다. 
+  하지만 다음 내부 옵저버블이 도착하면, 이전 내부 값을 구독 해제하고 새 값을 구독합니다.
+- [`exhaustAll()`](https://rxjs.dev/api/operators/exhaustAll) — 첫 번째 내부 옵저버블이 도착하면 첫 번째 내부 옵저버블을 구독하고, 값이 도착하면 방출합니다. 
+  첫 번째 내부 옵저버블이 완료될 때까지 새로 도착하는 모든 내부 옵저버블을 버리고 다음 내부 옵저버블을 기다립니다.
 
 Just as many array libraries combine [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) and [`flat()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) (or `flatten()`) into a single [`flatMap()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap), there are mapping equivalents of all the RxJS flattening operators [`concatMap()`](/api/operators/concatMap), [`mergeMap()`](/api/operators/mergeMap), [`switchMap()`](/api/operators/switchMap), and [`exhaustMap()`](/api/operators/exhaustMap).
 
@@ -129,7 +153,7 @@ There are operators for different purposes, and they may be categorized as: crea
 
 For a complete overview, see the [references page](/api).
 
-### <a id="creation-operators-list"></a>Creation Operators
+### <a id="생성-연산자-리스트"></a>생성 연산자 리스트
 
 - [`ajax`](/api/ajax/ajax)
 - [`bindCallback`](/api/index/function/bindCallback)
@@ -218,7 +242,7 @@ These are Observable creation operators that also have join functionality -- emi
 - [`throttle`](/api/operators/throttle)
 - [`throttleTime`](/api/operators/throttleTime)
 
-### <a id="join-operators"></a>Join Operators
+### <a id="결합-연산자"></a>결합 연산자
 
 Also see the [Join Creation Operators](#join-creation-operators) section above.
 
@@ -284,11 +308,11 @@ If there is a commonly used sequence of operators in your code, use the `pipe()`
 For example, you could make a function that discarded odd values and doubled even values like this:
 
 ```ts
-import { pipe, filter, map } from 'rxjs';
+import { pipe, filter, map } from "rxjs";
 function discardOddDoubleEven() {
   return pipe(
     filter((v) => !(v % 2)),
-    map((v) => v + v)
+    map((v) => v + v),
   );
 }
 ```
@@ -300,7 +324,7 @@ function discardOddDoubleEven() {
 It is more complicated, but if you have to write an operator that cannot be made from a combination of existing operators (a rare occurrance), you can write an operator from scratch using the Observable constructor, like this:
 
 ```ts
-import { Observable, of } from 'rxjs';
+import { Observable, of } from "rxjs";
 function delay<T>(delayInMillis: number) {
   return (observable: Observable<T>) =>
     new Observable<T>((subscriber) => {
