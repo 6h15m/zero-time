@@ -21,7 +21,7 @@ v6 이후로 업데이트되지 않아 deprecated 된 자료들이 꽤 많았습
 
 ## RxJS 소개
 
-RxJS는 [Observable(옵저버블)](https://rxjs.dev/guide/observable) 시퀀스를 이용해 비동기 및 이벤트 기반 프로그램을 구성하기 위한 라이브러리입니다.
+RxJS는 [Observable(옵저버블)](https://6h15m.github.io/rxjs-observable) 시퀀스를 이용해 비동기 및 이벤트 기반 프로그램을 구성하기 위한 라이브러리입니다.
 옵저버블, 옵저버블에 종속되는 타입들(Observer, Schedulers, Subjects),
 `Array` 메소드(`map`, `filter`, `reduce`, `every` 등)에서 영감받은 Operator(연산자)를 제공하여
 비동기 이벤트를 콜렉션처럼 다룰 수 있게 하죠.
