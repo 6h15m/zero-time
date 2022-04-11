@@ -256,7 +256,7 @@ _마블 다이어그램_ 은 연산자의 작동을 시각적으로 표현한 �
 
 ### <a id="결합-연산자"></a>결합 연산자
 
-위의 [결합 생성 연산자](https://rxjs.dev#join-creation-operators) 카테고리도 살펴보세요.
+위의 [결합 생성 연산자](#결합-생성-연산자) 카테고리도 살펴보세요.
 
 - [`combineLatestAll`](https://rxjs.dev/api/operators/combineLatestAll)
 - [`concatAll`](https://rxjs.dev/api/operators/concatAll)
