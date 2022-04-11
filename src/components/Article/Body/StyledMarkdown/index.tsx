@@ -135,13 +135,10 @@ export const StyledMarkdown = styled.div`
   & table code.language-text {
     padding: 1.6px 4.8px;
     font-size: 14.4px;
-    background-color: ${(props) => props.theme.colors.tertiary};
-    font-weight: bold;
-    color: ${(props) => props.theme.colors.background};
-  }
-
-  & tr:nth-child(even) code.language-text {
-    background-color: ${(props) => props.theme.colors.secondary};
+    background-color: ${(props) => props.theme.colors.quaternary};
+    font-weight: 500;
+    color: ${(props) => props.theme.colors.primary};
+    border: none;
   }
 
   & ul,

@@ -5,6 +5,7 @@ export type Theme = {
     primary: string;
     secondary: string;
     tertiary: string;
+    quaternary: string;
     scrollTrack: string;
     scrollHandle: string;
   };
@@ -17,6 +18,7 @@ export const light: Theme = {
     primary: "#000000",
     secondary: "#495057",
     tertiary: "#555559",
+    quaternary: "#dadada",
     scrollTrack: "#ced4da",
     scrollHandle: "#495057",
   },
@@ -29,6 +31,7 @@ export const dark: Theme = {
     primary: "#ffffff",
     secondary: "#ced4da",
     tertiary: "#bbbbbb",
+    quaternary: "#424242",
     scrollTrack: "#495057",
     scrollHandle: "#ced4da",
   },
