@@ -108,7 +108,7 @@ const BlogIndex = ({ data }: Props) => {
       </SearchWrapper>
       <SideTagList tags={tags} />
       {/*@TODO: as any 제거*/}
-      <PostList postList={filteredPosts as any} />
+      <PostList postList={filteredPosts as unknown as any} />
     </Layout>
   );
 };

@@ -67,7 +67,7 @@ const TagsPage = ({ data }: Props) => {
     Array<MarkDownRemarkGroupConnection>
   >([]);
 
-  let query: string = "";
+  let query = "";
   if (typeof document !== "undefined") {
     query = DashToSpace(document.location.search);
   }

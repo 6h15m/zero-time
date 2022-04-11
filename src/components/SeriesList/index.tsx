@@ -46,7 +46,7 @@ const checkIsScrollAtBottom = () => {
   );
 };
 
-type Post = {};
+type Post = unknown;
 
 type Series = {
   name: string;
