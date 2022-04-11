@@ -1,6 +1,6 @@
 ---
-title: "RxJS OVERVIEW 번역"
-description: "🇰🇷 공식 문서의 RxJS 개요를 번역해보자!"
+title: "[번역] RxJS 공식 문서 #OVERVIEW"
+description: "🇰🇷 RxJS가 뭐예요?"
 date: 2022-04-06
 update: 2022-04-06
 tags:

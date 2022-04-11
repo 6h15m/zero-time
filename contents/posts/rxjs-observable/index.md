@@ -1,6 +1,6 @@
 ---
-title: "RxJS Observable 번역"
-description: "🇰🇷 RxJS Observable 공식 문서를 번역해보자!"
+title: "[번역] RxJS 공식 문서 #Observable"
+description: "🇰🇷 Observable, 너는 누구냐-"
 date: 2022-04-11
 update: 2022-04-11
 tags:
