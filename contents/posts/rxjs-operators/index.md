@@ -98,7 +98,7 @@ import { interval } from "rxjs";
 const observable = interval(1000 /* 밀리초 */);
 ```
 
-[여기](#생성-연산자-리스트) 에 모든 정적 생성 연산자들을 참조해두었습니다.
+[여기](#생성-연산자) 에 모든 정적 생성 연산자들을 참조해두었습니다.
 
 ## 고차원 옵저버블
 
@@ -124,188 +124,204 @@ const fileObservable = urlObservable.pipe(
 
 [`concatAll()`](https://rxjs.dev/api/operators/concatAll) 연산자는 "외부" 옵저버블에서 방출되는 "내부" 옵저버블을 구독하고,
 해당 옵저버블이 완료될 때까지 방출된 모든 값을 복사해 다음 옵저버블로 이동합니다.
-모든 값이 그러한 방식으로 연결되어 있죠.
-유용한 평탄화 연산자([결합 연산자](#결합-연산자))에는, 
+모든 값이 이런 방식으로 연결되어 있죠.
+유용한 평탄화 연산자([결합 연산자](#결합-연산자))에는,
 
 - [`mergeAll()`](https://rxjs.dev/api/operators/mergeAll) — 내부 옵저버블이 도착할 때 구독해서, 다음 값이 도착할 때 방출합니다.
-- [`switchAll()`](https://rxjs.dev/api/operators/switchAll) — 첫 번째 내부 옵저버블이 도착하면 첫 번째 내부 옵저버블을 구독하고, 값이 도착하면 방출합니다. 
+- [`switchAll()`](https://rxjs.dev/api/operators/switchAll) — 첫 번째 내부 옵저버블이 도착하면 첫 번째 내부 옵저버블을 구독하고, 값이 도착하면 방출합니다.
   하지만 다음 내부 옵저버블이 도착하면, 이전 내부 값을 구독 해제하고 새 값을 구독합니다.
-- [`exhaustAll()`](https://rxjs.dev/api/operators/exhaustAll) — 첫 번째 내부 옵저버블이 도착하면 첫 번째 내부 옵저버블을 구독하고, 값이 도착하면 방출합니다. 
+- [`exhaustAll()`](https://rxjs.dev/api/operators/exhaustAll) — 첫 번째 내부 옵저버블이 도착하면 첫 번째 내부 옵저버블을 구독하고, 값이 도착하면 방출합니다.
   첫 번째 내부 옵저버블이 완료될 때까지 새로 도착하는 모든 내부 옵저버블을 버리고 다음 내부 옵저버블을 기다립니다.
 
-Just as many array libraries combine [`map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) and [`flat()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) (or `flatten()`) into a single [`flatMap()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap), there are mapping equivalents of all the RxJS flattening operators [`concatMap()`](/api/operators/concatMap), [`mergeMap()`](/api/operators/mergeMap), [`switchMap()`](/api/operators/switchMap), and [`exhaustMap()`](/api/operators/exhaustMap).
+대부분의 배열 라이브러리에서 [`map()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 과
+[`flat()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/flat) (또는 `flatten()`) 을 합쳐
+[`flatMap()`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/flatMap) 으로 제공하듯이,
+모든 RxJS의 평탄화 연산자에는 [`concatMap()`](https://rxjs.dev/api/operators/concatMap), [`mergeMap()`](https://rxjs.dev/api/operators/mergeMap), [`switchMap()`](https://rxjs.dev/api/operators/switchMap), [`exhaustMap()`](https://rxjs.dev/api/operators/exhaustMap)
+과 같이 매핑할 수 있는 연산자가 제공됩니다.
 
-## Marble diagrams
+## Marble diagrams(마블 다이어그램)
 
-To explain how operators work, textual descriptions are often not enough. Many operators are related to time, they may for instance delay, sample, throttle, or debounce value emissions in different ways. Diagrams are often a better tool for that. _Marble Diagrams_ are visual representations of how operators work, and include the input Observable(s), the operator and its parameters, and the output Observable.
+연산자의 작동 방식을 텍스트로만 설명하기는 어렵습니다.
+많은 연산자들의 동작은 시간과 관련되어 있는데 (예: delay, sample, throttle, debounce)
+이 동작들은 텍스트보단 다이어그램으로 표현하는 게 나은 방법입니다.
+_마블 다이어그램_ 은 연산자의 작동을 시각적으로 표현한 것으로,
+입력 옵저버블(들), 연산자와 연산자의 매개 변수, 출력 옵저버블을 포함하고 있습니다.
 
-<span class="informal">In a marble diagram, time flows to the right, and the diagram describes how values ("marbles") are emitted on the Observable execution.</span>
+> 마블 다이어그램에서 시간은 오른쪽으로 흐르며,
+> 옵저버블에서 값("마블")이 방출되는 방식을 설명합니다.
 
-Below you can see the anatomy of a marble diagram.
+아래는 마블 다이어그램의 설명도입니다.
 
-<img src="assets/images/guide/marble-diagram-anatomy.svg">
+![마블 다이어그램 설명도](https://raw.githubusercontent.com/ReactiveX/rxjs/467c4e89ce6f3fcedcf6127ea38d7ce79d32d0f6/docs_app/src/assets/images/guide/marble-diagram-anatomy.svg)
 
-Throughout this documentation site, we extensively use marble diagrams to explain how operators work. They may be really useful in other contexts too, like on a whiteboard or even in our unit tests (as ASCII diagrams).
+이 문서 사이트(역: RxJS 공식 문서)에서, 마블 다이어그램은 연산자의 작동 방식을 설명하기 위해 광범위하게 사용됩니다.
+물론 다른 컨텍스트(예: 화이트보드, 유닛 테스트)에서도 유용하게 사용될 수 있습니다.
 
-## Categories of operators
+## 연산자 카테고리
 
-There are operators for different purposes, and they may be categorized as: creation, transformation, filtering, joining, multicasting, error handling, utility, etc. In the following list you will find all the operators organized in categories.
+목적 단위로 연산자를 구분하면, 생성, 변환, 필터링, 결합, 멀티캐스팅, 에러 처리, 유틸리티 등으로 분류할 수 있습니다.
+아래의 목록에서 모든 연산자를 카테고리별로 구분해두었습니다.
 
-For a complete overview, see the [references page](/api).
+전체 목록은 [이 페이지](https://rxjs.dev/api) 에서 볼 수 있습니다.
 
-### <a id="생성-연산자-리스트"></a>생성 연산자 리스트
+### <a id="생성-연산자"></a>생성 연산자
 
-- [`ajax`](/api/ajax/ajax)
-- [`bindCallback`](/api/index/function/bindCallback)
-- [`bindNodeCallback`](/api/index/function/bindNodeCallback)
-- [`defer`](/api/index/function/defer)
-- [`empty`](/api/index/function/empty)
-- [`from`](/api/index/function/from)
-- [`fromEvent`](/api/index/function/fromEvent)
-- [`fromEventPattern`](/api/index/function/fromEventPattern)
-- [`generate`](/api/index/function/generate)
-- [`interval`](/api/index/function/interval)
-- [`of`](/api/index/function/of)
-- [`range`](/api/index/function/range)
-- [`throwError`](/api/index/function/throwError)
-- [`timer`](/api/index/function/timer)
-- [`iif`](/api/index/function/iif)
+- [`ajax`](https://rxjs.dev/api/ajax/ajax)
+- [`bindCallback`](https://rxjs.dev/api/index/function/bindCallback)
+- [`bindNodeCallback`](https://rxjs.dev/api/index/function/bindNodeCallback)
+- [`defer`](https://rxjs.dev/api/index/function/defer)
+- [`empty`](https://rxjs.dev/api/index/function/empty)
+- [`from`](https://rxjs.dev/api/index/function/from)
+- [`fromEvent`](https://rxjs.dev/api/index/function/fromEvent)
+- [`fromEventPattern`](https://rxjs.dev/api/index/function/fromEventPattern)
+- [`generate`](https://rxjs.dev/api/index/function/generate)
+- [`interval`](https://rxjs.dev/api/index/function/interval)
+- [`of`](https://rxjs.dev/api/index/function/of)
+- [`range`](https://rxjs.dev/api/index/function/range)
+- [`throwError`](https://rxjs.dev/api/index/function/throwError)
+- [`timer`](https://rxjs.dev/api/index/function/timer)
+- [`iif`](https://rxjs.dev/api/index/function/iif)
 
-### <a id="join-creation-operators"></a>Join Creation Operators
+### <a id="결합-생성-연산자"></a>결합 생성 연산자
 
-These are Observable creation operators that also have join functionality -- emitting values of multiple source Observables.
+결합 생성 연산자는 결합 기능을 갖고 있는 옵저버블 생성 연산자들입니다.
+여러 소스 옵저버블의 값들을 방출하죠.
 
-- [`combineLatest`](/api/index/function/combineLatest)
-- [`concat`](/api/index/function/concat)
-- [`forkJoin`](/api/index/function/forkJoin)
-- [`merge`](/api/index/function/merge)
-- [`partition`](/api/index/function/partition)
-- [`race`](/api/index/function/race)
-- [`zip`](/api/index/function/zip)
+- [`combineLatest`](https://rxjs.dev/api/index/function/combineLatest)
+- [`concat`](https://rxjs.dev/api/index/function/concat)
+- [`forkJoin`](https://rxjs.dev/api/index/function/forkJoin)
+- [`merge`](https://rxjs.dev/api/index/function/merge)
+- [`partition`](https://rxjs.dev/api/index/function/partition)
+- [`race`](https://rxjs.dev/api/index/function/race)
+- [`zip`](https://rxjs.dev/api/index/function/zip)
 
-### Transformation Operators
+### 변형 연산자
 
-- [`buffer`](/api/operators/buffer)
-- [`bufferCount`](/api/operators/bufferCount)
-- [`bufferTime`](/api/operators/bufferTime)
-- [`bufferToggle`](/api/operators/bufferToggle)
-- [`bufferWhen`](/api/operators/bufferWhen)
-- [`concatMap`](/api/operators/concatMap)
-- [`concatMapTo`](/api/operators/concatMapTo)
-- [`exhaust`](/api/operators/exhaust)
-- [`exhaustMap`](/api/operators/exhaustMap)
-- [`expand`](/api/operators/expand)
-- [`groupBy`](/api/operators/groupBy)
-- [`map`](/api/operators/map)
-- [`mapTo`](/api/operators/mapTo)
-- [`mergeMap`](/api/operators/mergeMap)
-- [`mergeMapTo`](/api/operators/mergeMapTo)
-- [`mergeScan`](/api/operators/mergeScan)
-- [`pairwise`](/api/operators/pairwise)
-- [`partition`](/api/operators/partition)
-- [`pluck`](/api/operators/pluck)
-- [`scan`](/api/operators/scan)
-- [`switchScan`](/api/operators/switchScan)
-- [`switchMap`](/api/operators/switchMap)
-- [`switchMapTo`](/api/operators/switchMapTo)
-- [`window`](/api/operators/window)
-- [`windowCount`](/api/operators/windowCount)
-- [`windowTime`](/api/operators/windowTime)
-- [`windowToggle`](/api/operators/windowToggle)
-- [`windowWhen`](/api/operators/windowWhen)
+- [`buffer`](https://rxjs.dev/api/operators/buffer)
+- [`bufferCount`](https://rxjs.dev/api/operators/bufferCount)
+- [`bufferTime`](https://rxjs.dev/api/operators/bufferTime)
+- [`bufferToggle`](https://rxjs.dev/api/operators/bufferToggle)
+- [`bufferWhen`](https://rxjs.dev/api/operators/bufferWhen)
+- [`concatMap`](https://rxjs.dev/api/operators/concatMap)
+- [`concatMapTo`](https://rxjs.dev/api/operators/concatMapTo)
+- [`exhaust`](https://rxjs.dev/api/operators/exhaust)
+- [`exhaustMap`](https://rxjs.dev/api/operators/exhaustMap)
+- [`expand`](https://rxjs.dev/api/operators/expand)
+- [`groupBy`](https://rxjs.dev/api/operators/groupBy)
+- [`map`](https://rxjs.dev/api/operators/map)
+- [`mapTo`](https://rxjs.dev/api/operators/mapTo)
+- [`mergeMap`](https://rxjs.dev/api/operators/mergeMap)
+- [`mergeMapTo`](https://rxjs.dev/api/operators/mergeMapTo)
+- [`mergeScan`](https://rxjs.dev/api/operators/mergeScan)
+- [`pairwise`](https://rxjs.dev/api/operators/pairwise)
+- [`partition`](https://rxjs.dev/api/operators/partition)
+- [`pluck`](https://rxjs.dev/api/operators/pluck)
+- [`scan`](https://rxjs.dev/api/operators/scan)
+- [`switchScan`](https://rxjs.dev/api/operators/switchScan)
+- [`switchMap`](https://rxjs.dev/api/operators/switchMap)
+- [`switchMapTo`](https://rxjs.dev/api/operators/switchMapTo)
+- [`window`](https://rxjs.dev/api/operators/window)
+- [`windowCount`](https://rxjs.dev/api/operators/windowCount)
+- [`windowTime`](https://rxjs.dev/api/operators/windowTime)
+- [`windowToggle`](https://rxjs.dev/api/operators/windowToggle)
+- [`windowWhen`](https://rxjs.dev/api/operators/windowWhen)
 
-### Filtering Operators
+### 필터링 연산자
 
-- [`audit`](/api/operators/audit)
-- [`auditTime`](/api/operators/auditTime)
-- [`debounce`](/api/operators/debounce)
-- [`debounceTime`](/api/operators/debounceTime)
-- [`distinct`](/api/operators/distinct)
-- [`distinctUntilChanged`](/api/operators/distinctUntilChanged)
-- [`distinctUntilKeyChanged`](/api/operators/distinctUntilKeyChanged)
-- [`elementAt`](/api/operators/elementAt)
-- [`filter`](/api/operators/filter)
-- [`first`](/api/operators/first)
-- [`ignoreElements`](/api/operators/ignoreElements)
-- [`last`](/api/operators/last)
-- [`sample`](/api/operators/sample)
-- [`sampleTime`](/api/operators/sampleTime)
-- [`single`](/api/operators/single)
-- [`skip`](/api/operators/skip)
-- [`skipLast`](/api/operators/skipLast)
-- [`skipUntil`](/api/operators/skipUntil)
-- [`skipWhile`](/api/operators/skipWhile)
-- [`take`](/api/operators/take)
-- [`takeLast`](/api/operators/takeLast)
-- [`takeUntil`](/api/operators/takeUntil)
-- [`takeWhile`](/api/operators/takeWhile)
-- [`throttle`](/api/operators/throttle)
-- [`throttleTime`](/api/operators/throttleTime)
+- [`audit`](https://rxjs.dev/api/operators/audit)
+- [`auditTime`](https://rxjs.dev/api/operators/auditTime)
+- [`debounce`](https://rxjs.dev/api/operators/debounce)
+- [`debounceTime`](https://rxjs.dev/api/operators/debounceTime)
+- [`distinct`](https://rxjs.dev/api/operators/distinct)
+- [`distinctUntilChanged`](https://rxjs.dev/api/operators/distinctUntilChanged)
+- [`distinctUntilKeyChanged`](https://rxjs.dev/api/operators/distinctUntilKeyChanged)
+- [`elementAt`](https://rxjs.dev/api/operators/elementAt)
+- [`filter`](https://rxjs.dev/api/operators/filter)
+- [`first`](https://rxjs.dev/api/operators/first)
+- [`ignoreElements`](https://rxjs.dev/api/operators/ignoreElements)
+- [`last`](https://rxjs.dev/api/operators/last)
+- [`sample`](https://rxjs.dev/api/operators/sample)
+- [`sampleTime`](https://rxjs.dev/api/operators/sampleTime)
+- [`single`](https://rxjs.dev/api/operators/single)
+- [`skip`](https://rxjs.dev/api/operators/skip)
+- [`skipLast`](https://rxjs.dev/api/operators/skipLast)
+- [`skipUntil`](https://rxjs.dev/api/operators/skipUntil)
+- [`skipWhile`](https://rxjs.dev/api/operators/skipWhile)
+- [`take`](https://rxjs.dev/api/operators/take)
+- [`takeLast`](https://rxjs.dev/api/operators/takeLast)
+- [`takeUntil`](https://rxjs.dev/api/operators/takeUntil)
+- [`takeWhile`](https://rxjs.dev/api/operators/takeWhile)
+- [`throttle`](https://rxjs.dev/api/operators/throttle)
+- [`throttleTime`](https://rxjs.dev/api/operators/throttleTime)
 
 ### <a id="결합-연산자"></a>결합 연산자
 
-Also see the [Join Creation Operators](#join-creation-operators) section above.
+위의 [결합 생성 연산자](https://rxjs.dev#join-creation-operators) 카테고리도 살펴보세요.
 
-- [`combineLatestAll`](/api/operators/combineLatestAll)
-- [`concatAll`](/api/operators/concatAll)
-- [`exhaustAll`](/api/operators/exhaustAll)
-- [`mergeAll`](/api/operators/mergeAll)
-- [`switchAll`](/api/operators/switchAll)
-- [`startWith`](/api/operators/startWith)
-- [`withLatestFrom`](/api/operators/withLatestFrom)
+- [`combineLatestAll`](https://rxjs.dev/api/operators/combineLatestAll)
+- [`concatAll`](https://rxjs.dev/api/operators/concatAll)
+- [`exhaustAll`](https://rxjs.dev/api/operators/exhaustAll)
+- [`mergeAll`](https://rxjs.dev/api/operators/mergeAll)
+- [`switchAll`](https://rxjs.dev/api/operators/switchAll)
+- [`startWith`](https://rxjs.dev/api/operators/startWith)
+- [`withLatestFrom`](https://rxjs.dev/api/operators/withLatestFrom)
 
-### Multicasting Operators
+### 멀티캐스팅 연산자
 
-- [`multicast`](/api/operators/multicast)
-- [`publish`](/api/operators/publish)
-- [`publishBehavior`](/api/operators/publishBehavior)
-- [`publishLast`](/api/operators/publishLast)
-- [`publishReplay`](/api/operators/publishReplay)
-- [`share`](/api/operators/share)
+- [`multicast`](https://rxjs.dev/api/operators/multicast)
+- [`publish`](https://rxjs.dev/api/operators/publish)
+- [`publishBehavior`](https://rxjs.dev/api/operators/publishBehavior)
+- [`publishLast`](https://rxjs.dev/api/operators/publishLast)
+- [`publishReplay`](https://rxjs.dev/api/operators/publishReplay)
+- [`share`](https://rxjs.dev/api/operators/share)
 
-### Error Handling Operators
+### 에러 처리 연산자
 
-- [`catchError`](/api/operators/catchError)
-- [`retry`](/api/operators/retry)
-- [`retryWhen`](/api/operators/retryWhen)
+- [`catchError`](https://rxjs.dev/api/operators/catchError)
+- [`retry`](https://rxjs.dev/api/operators/retry)
+- [`retryWhen`](https://rxjs.dev/api/operators/retryWhen)
 
-### Utility Operators
+### 유틸리티 연산자
 
-- [`tap`](/api/operators/tap)
-- [`delay`](/api/operators/delay)
-- [`delayWhen`](/api/operators/delayWhen)
-- [`dematerialize`](/api/operators/dematerialize)
-- [`materialize`](/api/operators/materialize)
-- [`observeOn`](/api/operators/observeOn)
-- [`subscribeOn`](/api/operators/subscribeOn)
-- [`timeInterval`](/api/operators/timeInterval)
-- [`timestamp`](/api/operators/timestamp)
-- [`timeout`](/api/operators/timeout)
-- [`timeoutWith`](/api/operators/timeoutWith)
-- [`toArray`](/api/operators/toArray)
+- [`tap`](https://rxjs.dev/api/operators/tap)
+- [`delay`](https://rxjs.dev/api/operators/delay)
+- [`delayWhen`](https://rxjs.dev/api/operators/delayWhen)
+- [`dematerialize`](https://rxjs.dev/api/operators/dematerialize)
+- [`materialize`](https://rxjs.dev/api/operators/materialize)
+- [`observeOn`](https://rxjs.dev/api/operators/observeOn)
+- [`subscribeOn`](https://rxjs.dev/api/operators/subscribeOn)
+- [`timeInterval`](https://rxjs.dev/api/operators/timeInterval)
+- [`timestamp`](https://rxjs.dev/api/operators/timestamp)
+- [`timeout`](https://rxjs.dev/api/operators/timeout)
+- [`timeoutWith`](https://rxjs.dev/api/operators/timeoutWith)
+- [`toArray`](https://rxjs.dev/api/operators/toArray)
 
-### Conditional and Boolean Operators
+### 조건부 연산자
 
-- [`defaultIfEmpty`](/api/operators/defaultIfEmpty)
-- [`every`](/api/operators/every)
-- [`find`](/api/operators/find)
-- [`findIndex`](/api/operators/findIndex)
-- [`isEmpty`](/api/operators/isEmpty)
+- [`defaultIfEmpty`](https://rxjs.dev/api/operators/defaultIfEmpty)
+- [`every`](https://rxjs.dev/api/operators/every)
+- [`find`](https://rxjs.dev/api/operators/find)
+- [`findIndex`](https://rxjs.dev/api/operators/findIndex)
+- [`isEmpty`](https://rxjs.dev/api/operators/isEmpty)
 
-### Mathematical and Aggregate Operators
+### 수학 연산자
 
-- [`count`](/api/operators/count)
-- [`max`](/api/operators/max)
-- [`min`](/api/operators/min)
-- [`reduce`](/api/operators/reduce)
+- [`count`](https://rxjs.dev/api/operators/count)
+- [`max`](https://rxjs.dev/api/operators/max)
+- [`min`](https://rxjs.dev/api/operators/min)
+- [`reduce`](https://rxjs.dev/api/operators/reduce)
 
-## Creating custom operators
+## 커스텀 연산자 생성하기
 
-### Use the `pipe()` function to make new operators
+### 새 연산자를 생성하려면...
 
-If there is a commonly used sequence of operators in your code, use the `pipe()` function to extract the sequence into a new operator. Even if a sequence is not that common, breaking it out into a single operator can improve readability.
+`pipe()` 함수를 사용하세요.
 
-For example, you could make a function that discarded odd values and doubled even values like this:
+코드에 일반적으로 사용되는 연산자 시퀀스가 있는 경우,
+`pipe()` 함수를 이용해 시퀀스를 새 연산자로 추출하세요.
+흔하지 않은 시퀀스여도 단일 연산자로 나누면 가독성이 향상될 수 있습니다.
+
+예를 들어, 홀수 값을 삭제하고 짝수 값을 두 배로 하는 함수를 만들어봅시다.
 
 ```ts
 import { pipe, filter, map } from "rxjs";
@@ -317,31 +333,30 @@ function discardOddDoubleEven() {
 }
 ```
 
-(The `pipe()` function is analogous to, but not the same thing as, the `.pipe()` method on an Observable.)
+(`pipe()` 함수는 옵저버블의 `.pipe()` 메서드와 유사하지만 같지는 않습니다.)
 
-### Creating new operators from scratch
+### 처음부터 새 연산자 생성하기
 
-It is more complicated, but if you have to write an operator that cannot be made from a combination of existing operators (a rare occurrance), you can write an operator from scratch using the Observable constructor, like this:
+더 복잡하지만, 기존 연산자의 조합으로 만들 수 없는 연산자가 필요한 경우에는
+다음과 같이 옵저버블 생성자를 사용해 처음부터 연산자를 작성할 수 있습니다.
 
 ```ts
 import { Observable, of } from "rxjs";
 function delay<T>(delayInMillis: number) {
   return (observable: Observable<T>) =>
     new Observable<T>((subscriber) => {
-      // this function will be called each time this
-      // Observable is subscribed to.
+      // 이 함수는 옵저버블이 구독될 때마다 호출됩니다.
       const allTimerIDs = new Set();
       let hasCompleted = false;
       const subscription = observable.subscribe({
         next(value) {
-          // Start a timer to delay the next value
-          // from being pushed.
+          // 타이머를 시작하여 다음 값을 지연합니다.
           const timerID = setTimeout(() => {
             subscriber.next(value);
-            // after we push the value, we need to clean up the timer timerID
+            // 값을 push한 후 타이머를 정리합니다.
             allTimerIDs.delete(timerID);
-            // If the source has completed, and there are no more timers running,
-            // we can complete the resulting observable.
+            // 소스가 완료되고, 실행 중인 타이머가 더 이상 없으면
+            // 결과 옵저버블을 완료할 수 있습니다.
             if (hasCompleted && allTimerIDs.size === 0) {
               subscriber.complete();
             }
@@ -349,36 +364,36 @@ function delay<T>(delayInMillis: number) {
           allTimerIDs.add(timerID);
         },
         error(err) {
-          // We need to make sure we're propagating our errors through.
+          // 에러를 전파하고 있는지 확인해야 합니다.
           subscriber.error(err);
         },
         complete() {
           hasCompleted = true;
-          // If we still have timers running, we don't want to complete yet.
+          // 타이머가 아직 작동 중이라면, 이 코드는 작동되지 않겠죠!
           if (allTimerIDs.size === 0) {
             subscriber.complete();
           }
         },
       });
-      // Return the finalization logic. This will be invoked when
-      // the result errors, completes, or is unsubscribed.
+      // 해제 로직을 반환합니다. 
+      // 결과 오류, 완료, 또는 구독 취소 시에 호출됩니다.
       return () => {
         subscription.unsubscribe();
-        // Clean up our timers.
+        // 타이머를 정리합니다.
         for (const timerID of allTimerIDs) {
           clearTimeout(timerID);
         }
       };
     });
 }
-// Try it out!
+// 한 번 실행해보세요!
 of(1, 2, 3).pipe(delay(1000)).subscribe(console.log);
 ```
 
-Note that you must
+다음 사항들을 주의하세요.
 
-1. implement all three Observer functions, `next()`, `error()`, and `complete()` when subscribing to the input Observable.
-2. implement a "finalization" function that cleans up when the Observable completes (in this case by unsubscribing and clearing any pending timeouts).
-3. return that finalization function from the function passed to the Observable constructor.
+1. `next()`, `error()`, `complete()`의 세 가지 옵저버 기능을 모두 구현하세요.
+2. 옵저버블이 완료되었을 때 정리하는 "해제" 기능을 구현하세요(보류 중인 timeout을 구독 취소하고 지울 수 있게요!).
+3. 옵저버블 생성자에 전달된 함수에서 해당 함수를 반환하세요.
 
-Of course, this is only an example; the [`delay()`](/api/operators/delay) operator already exists.
+위의 예제는 당연히 예시일 뿐이고, [`delay()`](https://rxjs.dev/api/operators/delay) 연산자가 이미 준비되어 있습니다.
