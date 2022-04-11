@@ -1,8 +1,8 @@
 ---
 title: "RxJS Observable 번역"
 description: "🇰🇷 RxJS Observable 공식 문서를 번역해보자!"
-date: 2022-04-09
-update: 2022-04-09
+date: 2022-04-11
+update: 2022-04-11
 tags:
   - RxJS
   - Reactive Programming
@@ -87,43 +87,46 @@ console.log("구독 직후입니다!");
 
 _Pull_ 과 _Push_ 는 데이터 _생산자_ 가 데이터 _소비자_ 와 통신하는 방법에 해당하는 두 가지 프로토콜입니다.
 
-**Pull이란?** Pull 시스템에서는, 소비자가 데이터 생산자로부터 데이터를 받을 시기를 결정합니다.
-생산자는 데이터가 소비자에게 언제 전달되는지 알지 못하죠.
+**Pull이란?** Pull 시스템에서는, 소비자가 데이터 생산자로부터 데이터를 받을 타이밍을 결정합니다.
+즉, 생산자는 데이터가 소비자에게 언제 전달되는지 알지 못하죠.
 
 모든 JavaScript 함수는 Pull 시스템입니다.
-함수는 데이터 생산자이며, 함수를 호출하는 코드는 호출 시에 _하나의_ 리턴 값을 "pull"합니다.
+함수는 데이터 생산자이며, 함수를 호출하는 코드는 호출 시 _하나의_ 리턴 값을 "pull"합니다.
 
 ES2015에서는 Pull 시스템의 또 다른 형태인
-[제너레이터 함수와 이터레이터](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/function*) (`function*`)가 등장했는데,
-`iterator.next()`를 호출하는 코드는 소비자가 되어, 이터레이터(생산자)에서 _여러 개의_ 값을 "pull"하죠.
+[제너레이터 함수와 이터레이터](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/function*) (`function*`)가 등장했습니다.
+이 개념에서는 `iterator.next()`를 호출하는 코드(소비자)가 이터레이터(생산자)에서 _여러 개_ 의 값을 "pull"합니다.
 
-|          | 생산자                                  | 소비자                                  |
-| -------- | --------------------------------------- | --------------------------------------- |
-| **Pull** | **수동적:** 요청 시 데이터 생산         | **능동적:** 데이터가 요청되었을 때 결정 |
-| **Push** | **능동적:** 자체적인 속도로 데이터 생산 | **수동적:** 수신된 데이터에 반응        |
+|          | 생산자                             | 소비자                                      |
+| -------- | ---------------------------------- | ------------------------------------------- |
+| **Pull** | **수동적:** 요청 시 데이터 생산    | **능동적:** 데이터를 요청하는 타이밍을 결정 |
+| **Push** | **능동적:** 자체적으로 데이터 생산 | **수동적:** 전달받은 데이터에 반응          |
 
 **Push란?** Push 시스템에서는, 소비자에게 데이터를 보내는 타이밍을 생산자가 결정합니다.
-소비자는 언제 데이터를 수신할지 알 수 없죠.
+즉, 소비자는 언제 데이터를 전달받을지 알 수 없죠.
 
 JavaScript에서 가장 흔하게 볼 수 있는 Push 시스템에는 Promise가 있습니다.
 Promise(생산자)는 resolve된 값을 등록된 콜백 함수(소비자)에 전달합니다.
-함수와는 달리, Promise가 값이 콜백에 "push"되는 시기를 결정하죠.
+함수와는 달리, Promise 자체적으로 값이 콜백에 "push"되는 시기를 결정하죠.
 
-RxJS는 JavaScript를 위한 새로운 Push 시스템, 옵저버블을 도입했습니다. 옵저버블은 여러 값의 생산자이면서, 그 값들을 옵저버(소비자)에게 "push"합니다.
+RxJS는 JavaScript를 위한 새로운 Push 시스템, 옵저버블을 도입했습니다.
+옵저버블은 여러 값들을 생산해, 그 값들을 옵저버(소비자)에게 "push"합니다.
 
-- **함수**는 호출 시 동기적으로 단일 값을 리턴하는 지연 평가 계산입니다.
-- **제너레이터**는 호출 시 동기적으로 0부터 (잠재적으로) 무한대까지의 값들을 리턴하는 지연 평가 계산입니다.
+- **함수**는 호출 시 단일 값을 동기적으로 리턴하는 지연 평가 계산입니다.
+- **제너레이터**는 호출 시 0부터 (잠재적으로) 무한대까지의 값들을 동기적으로 리턴하는 지연 평가 계산입니다.
 - **Promise**는 단일 값을 리턴할 수도 있고 리턴하지 않을 수도 있는 계산입니다.
-- **옵저버블**은 호출 시 동기적으로, 또는 비동기적으로 0부터 (잠재적으로) 무한대까지의 값들을 리턴하는 지연 평가 계산입니다.
+- **옵저버블**은 호출 시 0부터 (잠재적으로) 무한대까지의 값들을 동기적으로, 또는 비동기적으로 리턴하는 지연 평가 계산입니다.
 
 > 옵저버블을 Promise로 변환하는 것에 대한 자세한 정보가 알고 싶으시다면, [이 가이드 문서](https://rxjs.dev/deprecations/to-promise) 를 참조해 주세요.
 
-## 일반화된 함수로서의 옵저버블
+## 함수와 옵저버블
 
-일반적인 주장들과는 달리, 옵저버블은 EventEmitter나 여러 값을 다루기 위한 Promise와 같지 않습니다.
+옵저버블은 EventEmitter나 여러 값을 다루는 Promise와 같지 않습니다.
 옵저버블은 때에 따라 EventEmitter _같은_ 역할을 수행할 수도 있지만, 일반적으로 EventEmitter처럼 작동하지는 않습니다.
 
-> 옵저버블은 인수가 없는 함수와 같지만, 여러 값을 허용하도록 일반화합니다.
+> 옵저버블은 인수 없는 함수이지만, 여러 값을 허용하도록 인수들을 일반화합니다.
+>
+> ~~역: 무슨 말인지 저도 이해 못 함~~
 
 밑의 예제를 살펴봅시다.
 
@@ -179,8 +182,11 @@ foo.subscribe((y) => {
 함수를 호출하지 않았다면, `console.log('안녕!')`은 발생하지 않았겠죠?
 옵저버블에서도 마찬가지로 `subscribe`로 "호출"하지 않았다면 `console.log('안녕!')`은 발생하지 않았을 것입니다.
 
-추가로, "호출"과 "구독"은 분리되어 있는 연산입니다. 두 개의 함수 호출은 두 개의 개별 사이트 이펙트를 유발하고, 두 개의 옵저버블 구독은 두 개의 개별 사이드 이펙트를 유발합니다.
-사이드 이펙트를 공유하고 구독자의 존재와 관계없이 실행하는 EventEmitter와 달리, 옵저버블은 공유 실행 작업이 없으며 지연됩니다.
+추가적으로, "호출"과 "구독"은 분리되어 있는 연산입니다.
+두 개의 함수 호출은 두 개의 개별 사이트 이펙트를 유발하고,
+두 개의 옵저버블 구독은 두 개의 개별 사이드 이펙트를 유발합니다.
+사이드 이펙트를 공유하며 구독자의 존재와 관계없이 실행하는 EventEmitter와 달리,
+옵저버블은 실행을 공유하지 않으며 지연적으로 동작합니다.
 
 > 옵저버블을 구독하는 것은 함수를 호출하는 것과 유사합니다.
 
@@ -235,7 +241,7 @@ function foo() {
 }
 ```
 
-Functions can only return one value. Observables, however, can do this:
+함수는 오직 하나의 값만 리턴할 수 있지요. 하지만 옵저버블은, 이렇게 할 수 있습니다.
 
 ```ts
 import { Observable } from "rxjs";
@@ -301,8 +307,8 @@ console.log("이후");
 
 정리:
 
-- `func.call()`은 "_동기적으로 하나의 값을 주세요_"를 의미합니다.
-- `observable.subscribe()`는 "_동기적으로든 비동기적으로든 개수 상관없이 값을 주세요_"를 의미합니다.
+- `func.call()`은 _동기적으로 하나의 값을 주는 것_ 을 의미합니다.
+- `observable.subscribe()`는 _동기적으로든 비동기적으로든 개수 상관없이 값을 주는 것_ 을 의미합니다.
 
 ## 옵저버블의 구석구석
 
@@ -324,7 +330,7 @@ console.log("이후");
 
 `Observable` 생성자는 하나의 인수, `subscribe` 함수만을 취합니다.
 
-예제로, 초당 한 번씩 구독자에게 `'안녕!'`문자열을 내보내는 옵저버블을 구현해 보겠습니다.
+초당 한 번씩 구독자에게 `'안녕!'`문자열을 내보내는 옵저버블을 구현해 보겠습니다.
 
 ```ts
 import { Observable } from "rxjs";
@@ -336,7 +342,8 @@ const observable = new Observable(function subscribe(subscriber) {
 });
 ```
 
-> `new Observable`을 이용해 옵저버블을 생성할 수 있습니다. 일반적으로는, 생성 함수(예: `of`, `from`, `interval` 등)를 이용합니다.
+> 일반적으로는 생성 함수(예: `of`, `from`, `interval` 등)를 이용하지만,
+> `new Observable`을 이용해서도 옵저버블을 생성할 수 있습니다.
 
 위의 예제에서, `subscribe` 함수는 옵저버블을 설명하는 데 있어 가장 중요한 부분입니다. 이 "구독"이 무엇을 의미하는지 살펴봅시다.
 
@@ -349,11 +356,11 @@ observable.subscribe((x) => console.log(x));
 ```
 
 `observable.subscribe`와 `new Observable(function subscribe(subscriber) {...})`의 `subscribe`가 같은 이름을 가진 건 우연이 아닙니다.
-라이브러리 내부에서 이 둘은 다르지만, 실용적 목적을 위해 개념적으로 동일하다고 생각할 수 있습니다.
+이 둘은 라이브러리 내부에서는 다르지만, 개념적으로 동일하다고 생각할 수 있습니다.
 
 이는 동일한 옵저버블에 대한 여러 개의 옵저버들 사이에서 `subscribe` 호출이 공유되지 않는다는 것을 보여줍니다.
 옵저버를 통해 `observable.subscribe`를 호출할 때, 해당 구독자에 대해 `new Observable(function subscribe(subscriber) {...})`의 `subscribe` 함수가 실행됩니다.
-`observable.subscribe`에 대한 각 호출은 해당 구독자에 대해 자체적으로 독립된 설정을 발생시킵니다.
+`observable.subscribe`에 대한 각 호출은 해당 구독자에 대해 자체적으로 독립된 기반을 발생시킵니다.
 
 > 옵저버블을 구독하는 것은 함수를 호출하여, 데이터가 전달될 콜백을 제공하는 것과 같습니다.
 
@@ -365,7 +372,7 @@ observable.subscribe((x) => console.log(x));
 
 ### 옵저버블 실행
 
-`new Observable(function subscribe(subscriber) {...})` 내부의 코드는 "옵저버블의 실행", 구독한 각 옵저버에서만 발생하는 지연 평가를 나타냅니다.
+`new Observable(function subscribe(subscriber) {...})` 내부의 코드는 "옵저버블의 실행", 즉 구독한 각 옵저버에서만 발생하는 지연 평가를 나타냅니다.
 이 실행은 시간에 지남에 따라 동기적으로, 또는 비동기적으로 여러 값들을 생산합니다.
 
 옵저버블의 실행이 전달할 수 있는 3가지 타입의 값이 있습니다.
@@ -382,7 +389,7 @@ observable.subscribe((x) => console.log(x));
 next*(error|complete)?
 ```
 
-> 옵저버블 실행에서, 0에서 무한대의 Next 알림이 전달될 수 있습니다. Error 또는 Complete 알림이 전달되면, 이후에는 아무것도 전달할 수 없습니다.
+> 옵저버블 실행에서, 0에서 무한대 개수의 Next 알림이 전달될 수 있습니다. Error 또는 Complete 알림이 전달되면, 이후에는 아무것도 전달할 수 없습니다.
 
 3개의 Next 알림을 전달하고, 완료되는 옵저버블 실행 예제를 보겠습니다.
 
@@ -411,7 +418,7 @@ const observable = new Observable(function subscribe(subscriber) {
 });
 ```
 
-예외 발생 시 Error 알림이 전달되게끔 `subscribe` 내부의 코드를 `try`/`catch` 블록으로 감싸는 것도 좋은 방법입니다.
+`subscribe` 내부의 코드에서 예외 발생 시 Error 알림이 전달되게끔 `try`/`catch` 블록으로 감싸는 것도 좋은 방법입니다.
 
 ```ts
 import { Observable } from "rxjs";
@@ -428,18 +435,21 @@ const observable = new Observable(function subscribe(subscriber) {
 });
 ```
 
-### 옵저버블 실행 해제
+### 옵저버블 해제
 
-옵저버블 실행은 무한할 수 있으며, 옵저버는 일반적으로 제한된 시간 내에 실행을 중단하길 원하기 때문에 실행을 취소하기 위한 API가 필요합니다.
+옵저버블은 무한하게 실행될 수 있으며, 옵저버는 일반적으로 제한된 시간 내에 실행을 중단하길 원하기 때문에, 실행을 취소하기 위한 API가 필요합니다.
 각 실행은 하나의 옵저버에만 독점적이므로, 옵저버가 값 수신을 완료하면 연산 또는 메모리 리소스를 낭비하지 않도록 실행을 중지할 수 있는 방법이 있어야 하죠.
 
-`observable.subscribe`가 호출되면, 옵저버는 새로 생성된 옵저버블 실행과 연결됩니다. 이 호출은 `Subscription`이라는 객체도 리턴하죠.
+`observable.subscribe`가 호출되면, 옵저버는 새로 생성된 옵저버블 실행과 연결됩니다.
+이 호출은 `Subscription`이라는 객체도 리턴하죠.
 
 ```ts
 const subscription = observable.subscribe((x) => console.log(x));
 ```
 
-`Subscription`은 진행 중인 실행을 나타내며, 실행을 취소할 수 있는 API를 가지고 있습니다.`Subscription` 타입에 대한 자세한 내용은 [여기](https://rxjs.dev/guide/subscription) 를 참조하세요. `subscription.unsubscribe()`로 진행 중인 실행을 취소할 수 있습니다.
+`Subscription`은 진행 중인 실행을 나타내며, 실행을 취소할 수 있는 API를 가지고 있습니다.
+`Subscription` 타입에 대한 자세한 내용은 [여기](https://rxjs.dev/guide/subscription) 를 참조하세요.
+`subscription.unsubscribe()`로 진행 중인 실행을 취소할 수 있습니다.
 
 ```ts
 import { from } from "rxjs";
