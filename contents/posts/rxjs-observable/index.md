@@ -22,7 +22,7 @@ series: "RxJS 공식 문서 번역"
 |          | Single                                                                                             | Multiple                                                                                         |
 | -------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | **Pull** | [`함수`](https://developer.mozilla.org/ko/docs/Glossary/Function)                                  | [`Iterator`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Iteration_protocols) |
-| **Push** | [`Promise`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise) | [`옵저버블`](/api/index/class/Observable)                                                        |
+| **Push** | [`Promise`](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Promise) | [`옵저버블`](https://rxjs.dev/api/index/class/Observable)                                        |
 
 **예제.** 아래의 코드는 구독 즉시(동기적으로) `1`, `2`, `3`을 push하고,
 구독 후 1초가 지났을 때 `4`를 push해 완료되는 옵저버블입니다.
@@ -225,7 +225,7 @@ console.log("이후");
 
 > 옵저버블은 값을 동기적으로, 또는 비동기적으로 전달할 수 있습니다.
 
-옵저버블과 함수의 차이점은 무엇일까요? **옵저버블은 시간이 지남에 따라 여러 개의 값을 "리턴"할 수 있습니다.** 함수에선 불가능한 작업이죠. 
+옵저버블과 함수의 차이점은 무엇일까요? **옵저버블은 시간이 지남에 따라 여러 개의 값을 "리턴"할 수 있습니다.** 함수에선 불가능한 작업이죠.
 
 ```js
 function foo() {
@@ -304,76 +304,87 @@ console.log("이후");
 - `func.call()`은 "_동기적으로 하나의 값을 주세요_"를 의미합니다.
 - `observable.subscribe()`는 "_동기적으로든 비동기적으로든 개수 상관없이 값을 주세요_"를 의미합니다.
 
-## Anatomy of an Observable
+## 옵저버블의 구석구석
 
-Observables are **created** using `new Observable` or a creation operator, are **subscribed** to with an Observer, **execute** to deliver `next` / `error` / `complete` notifications to the Observer, and their execution may be **disposed**. These four aspects are all encoded in an Observable instance, but some of these aspects are related to other types, like Observer and Subscription.
+옵저버블은 `new Observable`이나 생성 연산자를 통해 **생성**되며,
+옵저버를 통해 **구독**되며,
+옵저버에게 `next` / `error` / `complete` 알림을 전달하기 위해 **실행**되며,
+이 실행은 **해제**될 수 있습니다.
+이 4가지 동작들은 모두 옵저버블 인스턴스로 인코딩되지만,
+일부는 옵저버 또는 구독과 같은 다른 타입과 관련되어 있습니다.
 
-Core Observable concerns:
+아래는 옵저버블의 핵심 기능들입니다.
 
-- **Creating** Observables
-- **Subscribing** to Observables
-- **Executing** the Observable
-- **Disposing** Observables
+- 옵저버블 **생성**
+- 옵저버블 **구독**
+- 옵저버블 **실행**
+- 옵저버블 **해제**
 
-### Creating Observables
+### 옵저버블 생성
 
-The `Observable` constructor takes one argument: the `subscribe` function.
+`Observable` 생성자는 하나의 인수, `subscribe` 함수만을 취합니다.
 
-The following example creates an Observable to emit the string `'hi'` every second to a subscriber.
+예제로, 초당 한 번씩 구독자에게 `'안녕!'`문자열을 내보내는 옵저버블을 구현해 보겠습니다.
 
 ```ts
 import { Observable } from "rxjs";
 
 const observable = new Observable(function subscribe(subscriber) {
   const id = setInterval(() => {
-    subscriber.next("hi");
+    subscriber.next("안녕!");
   }, 1000);
 });
 ```
 
-<span class="informal">Observables can be created with `new Observable`. Most commonly, observables are created using creation functions, like `of`, `from`, `interval`, etc.</span>
+> `new Observable`을 이용해 옵저버블을 생성할 수 있습니다. 일반적으로는, 생성 함수(예: `of`, `from`, `interval` 등)를 이용합니다.
 
-In the example above, the `subscribe` function is the most important piece to describe the Observable. Let's look at what subscribing means.
+위의 예제에서, `subscribe` 함수는 옵저버블을 설명하는 데 있어 가장 중요한 부분입니다. 이 "구독"이 무엇을 의미하는지 살펴봅시다.
 
-### Subscribing to Observables
+### 옵저버블 구독
 
-The Observable `observable` in the example can be _subscribed_ to, like this:
+예제의 `observable` 옵저버블은 이렇게 _구독_ 될 수 있습니다.
 
 ```ts
 observable.subscribe((x) => console.log(x));
 ```
 
-It is not a coincidence that `observable.subscribe` and `subscribe` in `new Observable(function subscribe(subscriber) {...})` have the same name. In the library, they are different, but for practical purposes you can consider them conceptually equal.
+`observable.subscribe`와 `new Observable(function subscribe(subscriber) {...})`의 `subscribe`가 같은 이름을 가진 건 우연이 아닙니다.
+라이브러리 내부에서 이 둘은 다르지만, 실용적 목적을 위해 개념적으로 동일하다고 생각할 수 있습니다.
 
-This shows how `subscribe` calls are not shared among multiple Observers of the same Observable. When calling `observable.subscribe` with an Observer, the function `subscribe` in `new Observable(function subscribe(subscriber) {...})` is run for that given subscriber. Each call to `observable.subscribe` triggers its own independent setup for that given subscriber.
+이는 동일한 옵저버블에 대한 여러 개의 옵저버들 사이에서 `subscribe` 호출이 공유되지 않는다는 것을 보여줍니다.
+옵저버를 통해 `observable.subscribe`를 호출할 때, 해당 구독자에 대해 `new Observable(function subscribe(subscriber) {...})`의 `subscribe` 함수가 실행됩니다.
+`observable.subscribe`에 대한 각 호출은 해당 구독자에 대해 자체적으로 독립된 설정을 발생시킵니다.
 
-<span class="informal">Subscribing to an Observable is like calling a function, providing callbacks where the data will be delivered to.</span>
+> 옵저버블을 구독하는 것은 함수를 호출하여, 데이터가 전달될 콜백을 제공하는 것과 같습니다.
 
-This is drastically different to event handler APIs like `addEventListener` / `removeEventListener`. With `observable.subscribe`, the given Observer is not registered as a listener in the Observable. The Observable does not even maintain a list of attached Observers.
+이는 `addEventListener` / `removeEventListener`와 같은 이벤트 핸들러 API와 확연히 차이가 있습니다.
+`observable.subscribe`에서, 주어진 옵저버는 옵저버블의 리스너로 등록되지 았습니다.
+옵저버블은 등록된 옵저버들의 목록도 갖고 있지 않죠.
 
-A `subscribe` call is simply a way to start an "Observable execution" and deliver values or events to an Observer of that execution.
+`subscribe` 호출은 단순히 "옵저버블의 실행"을 시작하고 이 실행의 옵저버에게 값이나 이벤트를 전달할 뿐입니다.
 
-### Executing Observables
+### 옵저버블 실행
 
-The code inside `new Observable(function subscribe(subscriber) {...})` represents an "Observable execution", a lazy computation that only happens for each Observer that subscribes. The execution produces multiple values over time, either synchronously or asynchronously.
+`new Observable(function subscribe(subscriber) {...})` 내부의 코드는 "옵저버블의 실행", 구독한 각 옵저버에서만 발생하는 지연 평가를 나타냅니다.
+이 실행은 시간에 지남에 따라 동기적으로, 또는 비동기적으로 여러 값들을 생산합니다.
 
-There are three types of values an Observable Execution can deliver:
+옵저버블의 실행이 전달할 수 있는 3가지 타입의 값이 있습니다.
 
-- "Next" notification: sends a value such as a Number, a String, an Object, etc.
-- "Error" notification: sends a JavaScript Error or exception.
-- "Complete" notification: does not send a value.
+- "Next" 알림: 숫자, 문자열, 객체 등의 값들을 전송합니다.
+- "Error" 알림: JavaScript Error 또는 예외를 전송합니다.
+- "Complete" 알림: 값을 내보내지 않습니다.
 
-"Next" notifications are the most important and most common type: they represent actual data being delivered to a subscriber. "Error" and "Complete" notifications may happen only once during the Observable Execution, and there can only be either one of them.
+"Next" 알림은 가장 중요하고 자주 쓰이는 타입으로, 구독자에게 전달되는 실제 데이터를 나타냅니다. "Error"와 "Complete" 알림은 옵저버블 실행 중 한 번만 발생할 수 있으며, 둘 중 하나만 발생할 수 있습니다.
 
-These constraints are expressed best in the so-called _Observable Grammar_ or _Contract_, written as a regular expression:
+이러한 제약 조건은 정규 표현식으로 작성된 _옵저버블 문법_ 또는 _약속_ 으로 가장 잘 표현할 수 있습니다.
 
 ```none
 next*(error|complete)?
 ```
 
-<span class="informal">In an Observable Execution, zero to infinite Next notifications may be delivered. If either an Error or Complete notification is delivered, then nothing else can be delivered afterwards.</span>
+> 옵저버블 실행에서, 0에서 무한대의 Next 알림이 전달될 수 있습니다. Error 또는 Complete 알림이 전달되면, 이후에는 아무것도 전달할 수 없습니다.
 
-The following is an example of an Observable execution that delivers three Next notifications, then completes:
+3개의 Next 알림을 전달하고, 완료되는 옵저버블 실행 예제를 보겠습니다.
 
 ```ts
 import { Observable } from "rxjs";
@@ -386,7 +397,7 @@ const observable = new Observable(function subscribe(subscriber) {
 });
 ```
 
-Observables strictly adhere to the Observable Contract, so the following code would not deliver the Next notification `4`:
+옵저버블 약속은 엄격히 준수되므로, 다음 코드는 Next 알림 `4`를 전달하지 않습니다.
 
 ```ts
 import { Observable } from "rxjs";
@@ -396,11 +407,11 @@ const observable = new Observable(function subscribe(subscriber) {
   subscriber.next(2);
   subscriber.next(3);
   subscriber.complete();
-  subscriber.next(4); // Is not delivered because it would violate the contract
+  subscriber.next(4); // 약속에 위반되므로 전달되지 않습니다.
 });
 ```
 
-It is a good idea to wrap any code in `subscribe` with `try`/`catch` block that will deliver an Error notification if it catches an exception:
+예외 발생 시 Error 알림이 전달되게끔 `subscribe` 내부의 코드를 `try`/`catch` 블록으로 감싸는 것도 좋은 방법입니다.
 
 ```ts
 import { Observable } from "rxjs";
@@ -412,58 +423,62 @@ const observable = new Observable(function subscribe(subscriber) {
     subscriber.next(3);
     subscriber.complete();
   } catch (err) {
-    subscriber.error(err); // delivers an error if it caught one
+    subscriber.error(err); // 예외가 발생되면 에러 전달
   }
 });
 ```
 
-### Disposing Observable Executions
+### 옵저버블 실행 해제
 
-Because Observable Executions may be infinite, and it's common for an Observer to want to abort execution in finite time, we need an API for canceling an execution. Since each execution is exclusive to one Observer only, once the Observer is done receiving values, it has to have a way to stop the execution, in order to avoid wasting computation power or memory resources.
+옵저버블 실행은 무한할 수 있으며, 옵저버는 일반적으로 제한된 시간 내에 실행을 중단하길 원하기 때문에 실행을 취소하기 위한 API가 필요합니다.
+각 실행은 하나의 옵저버에만 독점적이므로, 옵저버가 값 수신을 완료하면 연산 또는 메모리 리소스를 낭비하지 않도록 실행을 중지할 수 있는 방법이 있어야 하죠.
 
-When `observable.subscribe` is called, the Observer gets attached to the newly created Observable execution. This call also returns an object, the `Subscription`:
+`observable.subscribe`가 호출되면, 옵저버는 새로 생성된 옵저버블 실행과 연결됩니다. 이 호출은 `Subscription`이라는 객체도 리턴하죠.
 
 ```ts
 const subscription = observable.subscribe((x) => console.log(x));
 ```
 
-The Subscription represents the ongoing execution, and has a minimal API which allows you to cancel that execution. Read more about the [`Subscription` type here](./guide/subscription). With `subscription.unsubscribe()` you can cancel the ongoing execution:
+`Subscription`은 진행 중인 실행을 나타내며, 실행을 취소할 수 있는 API를 가지고 있습니다.`Subscription` 타입에 대한 자세한 내용은 [여기](https://rxjs.dev/guide/subscription) 를 참조하세요. `subscription.unsubscribe()`로 진행 중인 실행을 취소할 수 있습니다.
 
 ```ts
 import { from } from "rxjs";
 
 const observable = from([10, 20, 30]);
 const subscription = observable.subscribe((x) => console.log(x));
-// Later:
+// 나중에는-
 subscription.unsubscribe();
 ```
 
-<span class="informal">When you subscribe, you get back a Subscription, which represents the ongoing execution. Just call `unsubscribe()` to cancel the execution.</span>
+> 구독하면 현재 진행 중인 실행을 나타내는 Subscription을 반환하며, 이 객체의 `unsubscribe()`를 호출해 실행을 취소할 수 있습니다.
 
-Each Observable must define how to dispose resources of that execution when we create the Observable using `create()`. You can do that by returning a custom `unsubscribe` function from within `function subscribe()`.
+`create()`를 이용해 옵저버블을 생성할 때, 각 옵저버블은 해당 실행의 리소스를 해제하는 방법을 정의해야 합니다.
+`function subscribe()` 내부의 커스텀 `unsubscribe` 함수를 리턴하는 방식으로 이를 정의할 수 있죠.
 
-For instance, this is how we clear an interval execution set with `setInterval`:
+`setInterval`을 이용한 예제를 보겠습니다.
 
 ```js
 const observable = new Observable(function subscribe(subscriber) {
-  // Keep track of the interval resource
+  // 인터벌 리소스에 대한 추적
   const intervalId = setInterval(() => {
-    subscriber.next("hi");
+    subscriber.next("안녕!");
   }, 1000);
 
-  // Provide a way of canceling and disposing the interval resource
+  // 인터벌 리소스를 취소하고 해제하는 방법 정의
   return function unsubscribe() {
     clearInterval(intervalId);
   };
 });
 ```
 
-Just like `observable.subscribe` resembles `new Observable(function subscribe() {...})`, the `unsubscribe` we return from `subscribe` is conceptually equal to `subscription.unsubscribe`. In fact, if we remove the ReactiveX types surrounding these concepts, we're left with rather straightforward JavaScript.
+`observable.subscribe`가 `new Observable(function subscribe() {...})`과 유사하듯이,
+`subscribe`에서 리턴한 `unsubscribe`는 개념적으로 `subscription.unsubscribe`와 유사합니다.
+사실, 이러한 개념들을 둘러싼 ReactiveX 타입들을 제거하면 매우 간단한 JavaScript 코드만이 남습니다.
 
 ```js
 function subscribe(subscriber) {
   const intervalId = setInterval(() => {
-    subscriber.next("hi");
+    subscriber.next("안녕!");
   }, 1000);
 
   return function unsubscribe() {
@@ -473,8 +488,8 @@ function subscribe(subscriber) {
 
 const unsubscribe = subscribe({ next: (x) => console.log(x) });
 
-// Later:
-unsubscribe(); // dispose the resources
+// 나중에는-
+unsubscribe(); // 리소스 해제
 ```
 
-The reason why we use Rx types like Observable, Observer, and Subscription is to get safety (such as the Observable Contract) and composability with Operators.
+옵저버블, 옵저버, 구독과 같은 Rx 타입들을 사용하는 이유는 안정성(예: 옵저버블 약속)과 연산자와의 결합성을 얻기 위해서입니다.
