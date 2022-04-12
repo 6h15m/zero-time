@@ -375,7 +375,7 @@ function delay<T>(delayInMillis: number) {
           }
         },
       });
-      // 해제 로직을 반환합니다. 
+      // 해제 로직을 반환합니다.
       // 결과 오류, 완료, 또는 구독 취소 시에 호출됩니다.
       return () => {
         subscription.unsubscribe();
