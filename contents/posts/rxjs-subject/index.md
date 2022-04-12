@@ -1,8 +1,8 @@
 ---
 title: "[번역] RxJS 공식 문서 #Subject"
 description: "🇰🇷 옵저버블 동생 Subject에 대해 알아보자-"
-date: 2022-04-15
-update: 2022-04-15
+date: 2022-04-12 18:00:00
+update: 2022-04-12 18:00:00
 tags:
   - RxJS
   - Reactive Programming

@@ -1,8 +1,8 @@
 ---
 title: "[번역] RxJS 공식 문서 #Observer"
 description: "🇰🇷 Observer, 너는 또 누구냐-"
-date: 2022-04-12
-update: 2022-04-12
+date: 2022-04-11 20:00:00
+update: 2022-04-11 20:00:00
 tags:
   - RxJS
   - Reactive Programming

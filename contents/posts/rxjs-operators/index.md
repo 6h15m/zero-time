@@ -1,8 +1,8 @@
 ---
 title: "[번역] RxJS 공식 문서 #Operators"
 description: "🇰🇷 Operator, 너는 진짜 누구냐-"
-date: 2022-04-13
-update: 2022-04-13
+date: 2022-04-12 04:00:00
+update: 2022-04-12 04:00:00
 tags:
   - RxJS
   - Reactive Programming

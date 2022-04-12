@@ -1,8 +1,8 @@
 ---
 title: "[번역] RxJS 공식 문서 #Subscription"
 description: "🇰🇷 구독과 좋아요, 알림 설정까지-"
-date: 2022-04-14
-update: 2022-04-14
+date: 2022-04-12 15:00:00
+update: 2022-04-12 15:00:00
 tags:
   - RxJS
   - Reactive Programming

@@ -1,8 +1,8 @@
 ---
 title: "[번역] RxJS 공식 문서 #Observable"
 description: "🇰🇷 Observable, 너는 누구냐-"
-date: 2022-04-11
-update: 2022-04-11
+date: 2022-04-11 04:00:00
+update: 2022-04-11 04:00:00
 tags:
   - RxJS
   - Reactive Programming
