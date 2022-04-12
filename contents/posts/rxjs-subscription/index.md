@@ -8,11 +8,11 @@ tags:
   - Reactive Programming
 series: "RxJS 공식 문서 번역"
 ---
-  
+
 ## 프롤로그
 
 안녕하세요! 제로입니다.
-이번에 번역해본 문서는 [Subscription](https://rxjs.dev/guide/subscription) 입니다. 
+이번에 번역해본 문서는 [Subscription](https://rxjs.dev/guide/subscription) 입니다.
 옵저버블과 연산자 등에 대해서 공부해보았으니, 직접적으로 실행하는 부분인 구독도 자세히 알아볼까요?
 
 ## Subscription(구독) 소개
