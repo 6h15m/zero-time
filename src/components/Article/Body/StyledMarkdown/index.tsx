@@ -16,6 +16,11 @@ export const StyledMarkdown = styled.div`
     margin-top: 0;
   }
 
+  & table {
+    text-align: center;
+    word-break: keep-all;
+  }
+
   & > p,
   & > ul,
   & > ol,
@@ -130,21 +135,20 @@ export const StyledMarkdown = styled.div`
     word-break: break-all;
   }
 
-  & p > code.language-text,
-  & li > code.language-text,
-  & a > code.language-text,
-  & table code.language-text {
+  & code.language-text {
     padding: 1.6px 4.8px;
     font-size: 14.4px;
     background-color: ${(props) => props.theme.colors.quaternary};
     font-weight: 500;
     color: ${(props) => props.theme.colors.primary};
     border: none;
+    border-radius: 1.5px;
   }
 
   & a > code.language-text:hover {
     background-color: ${(props) => props.theme.colors.primary};
     color: ${(props) => props.theme.colors.quaternary};
+    border-radius: 1.5px;
   }
 
   & ul,
@@ -214,12 +218,13 @@ export const StyledMarkdown = styled.div`
   }
 
   & a {
-    padding: 1.6px 0;
+    padding: 0;
     color: ${(props) => props.theme.colors.primary};
   }
 
   & a:hover {
     background-color: ${(props) => props.theme.colors.primary};
     color: ${(props) => props.theme.colors.background};
+    border-radius: 1.5px;
   }
 `;
