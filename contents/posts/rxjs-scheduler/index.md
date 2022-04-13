@@ -191,21 +191,3 @@ RxJS는 동시성 scheduler를 최소 용도로만 사용하기 때문에, 성�
 `cache`와 `publishReplay`는 모두 ReplaySubject를 사용하기 때문에 Scheduler를 인수로 받습니다.
 ReplaySubject가 시간을 다룰 수 있기 때문에 ReplaySubject의 생성자는 (optional)Scheduler를 마지막 인수로 사용합니다.
 기본적으로 ReplaySubject는 `queue` Scheduler를 통해 시간을 제공합니다.
-
-```javascript
-const pluckDeep = (key) => (obj) =>
-  key.split(".").reduce((accum, key) => accum[key], obj);
-
-const compose =
-  (...fns) =>
-  (res) =>
-    fns.reduce((accum, next) => next(accum), res);
-
-const unfold = (f, seed) => {
-  const go = (f, seed, acc) => {
-    const res = f(seed);
-    return res ? go(f, res[1], acc.concat([res[0]])) : acc;
-  };
-  return go(f, seed, []);
-};
-```
