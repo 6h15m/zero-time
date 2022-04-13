@@ -24,16 +24,16 @@ pre[class*="language-"] {
 
 /* Code blocks */
 pre[class*="language-"] {
-  padding: 18px;
+  padding: 40px 18px 18px 18px;
   margin: 56px;
   overflow: auto;
 }
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
+  background: top 20px left 20px url("https://6h15m.github.io/upper-code-icon.png") no-repeat #151718;
   border-radius: 5px;
-  background: #151718;
-  box-shadow: 5px 20px 32px rgb(0 0 0 / 24%)
+  box-shadow: 5px 20px 32px rgb(0 0 0 / 24%);
 }
 
 /* Inline code */

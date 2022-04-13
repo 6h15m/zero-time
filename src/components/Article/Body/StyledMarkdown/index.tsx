@@ -138,6 +138,7 @@ export const StyledMarkdown = styled.div`
   & code.language-text {
     padding: 1.6px 4.8px;
     font-size: 14.4px;
+    background-image: none;
     background-color: ${(props) => props.theme.colors.quaternary};
     font-weight: 500;
     color: ${(props) => props.theme.colors.primary};
