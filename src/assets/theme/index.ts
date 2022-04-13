@@ -19,8 +19,8 @@ export const light: Theme = {
     secondary: "#495057",
     tertiary: "#555559",
     quaternary: "#dadada",
-    scrollTrack: "#ced4da",
-    scrollHandle: "#495057",
+    scrollTrack: "#171717",
+    scrollHandle: "rgba(255,255,255,0.41)",
   },
 };
 

@@ -1,9 +1,3 @@
-/**
- * prism.js tomorrow night eighties for JavaScript, CoffeeScript, CSS and HTML
- * Based on https://github.com/chriskempson/tomorrow-theme
- * @author Rose Pritchard
- */
-
 code[class*="language-"],
 pre[class*="language-"] {
   color: #ccc;
@@ -30,20 +24,21 @@ pre[class*="language-"] {
 
 /* Code blocks */
 pre[class*="language-"] {
-  padding: 1em;
-  margin: 0.5em 0;
+  padding: 18px;
+  margin: 56px;
   overflow: auto;
 }
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-  border: 1px solid #ffffff;
-  background: #000000;
+  border-radius: 5px;
+  background: #151718;
+  box-shadow: 5px 20px 32px rgb(0 0 0 / 24%)
 }
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-  padding: 0.1em;
+  padding: 56px;
   border-radius: 0.3em;
   white-space: normal;
 }
@@ -89,7 +84,7 @@ pre[class*="language-"] {
 .token.atrule,
 .token.keyword,
 .token.builtin {
-  color: #526eda;
+  color: #e6cd69;
 }
 
 .token.string,

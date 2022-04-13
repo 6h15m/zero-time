@@ -143,6 +143,7 @@ export const StyledMarkdown = styled.div`
     color: ${(props) => props.theme.colors.primary};
     border: none;
     border-radius: 1.5px;
+    box-shadow: none;
   }
 
   & a > code.language-text:hover {
@@ -182,7 +183,7 @@ export const StyledMarkdown = styled.div`
 
   & pre {
     ::-webkit-scrollbar {
-      height: 12px;
+      height: 8px;
     }
     ::-webkit-scrollbar-track {
       background: ${(props) => props.theme.colors.scrollTrack};
