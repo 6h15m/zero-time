@@ -1,0 +1,23 @@
+name: "🔫 Bug Report"
+description: "버그를 수정할 수 있게 도와주세요!"
+body:
+  - type: textarea
+    attributes:
+      label:  🔍 버그 설명
+      description: |
+        어떻게 발생한 버그였는지 설명해주세요.
+
+  - type: textarea
+    attributes:
+      label:  🖥 실행 환경
+      description: |
+        버그가 발생한 환경에 대해 알려주세요.
+      placeholder: |
+        - OS: [예시: iOS]
+        - Browser [예시: chrome, safari]
+        - Version [예시: 22]
+        - Device: [예시: 아이폰 XR]
+
+  - type: textarea
+    attributes:
+      label: 🎸 기타 사항
