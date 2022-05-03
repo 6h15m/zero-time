@@ -1,5 +1,9 @@
-name: "🔫 Bug Report"
-description: "버그를 수정할 수 있게 도와주세요!"
+name: 🔫 Bug Report
+description: 버그를 수정할 수 있게 도와주세요!
+title: "fix: "
+labels: ["bug"]
+assignees:
+  - 6h15m
 body:
   - type: textarea
     attributes:

@@ -1,5 +1,8 @@
-name: "🙌 Feature Request"
-description: "프로젝트에 대한 새로운 아이디어를 공유해주세요!"
+name: 🙌 Feature Request
+description: 프로젝트에 대한 새로운 아이디어를 공유해주세요!
+title: "feat: "
+assignees:
+  - 6h15m
 body:
   - type: textarea
     attributes:
