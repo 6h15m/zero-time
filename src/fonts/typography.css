@@ -1,0 +1,85 @@
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 100;
+  src: url("Pretendard-Thin.woff2");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 200;
+  src: url("Pretendard-ExtraLight.woff2");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 300;
+  src: url("Pretendard-Light.woff2");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 400;
+  src: url("Pretendard-Regular.woff2");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 500;
+  src: url("Pretendard-Medium.woff2");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 600;
+  src: url("Pretendard-SemiBold.woff2");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 700;
+  src: url("Pretendard-Bold.woff2");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 800;
+  src: url("Pretendard-ExtraBold.woff2");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 900;
+  src: url("Pretendard-Black.woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-weight: 100;
+  src: url("JetBrainsMono-Thin.woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-weight: 200;
+  src: url("JetBrainsMono-ExtraLight.woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-weight: 300;
+  src: url("JetBrainsMono-Light.woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-weight: 400;
+  src: url("JetBrainsMono-Regular.woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-weight: 500;
+  src: url("JetBrainsMono-Medium.woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-weight: 600;
+  src: url("JetBrainsMono-SemiBold.woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-weight: 700;
+  src: url("JetBrainsMono-Bold.woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-weight: 800;
+  src: url("JetBrainsMono-ExtraBold.woff2");
+}
