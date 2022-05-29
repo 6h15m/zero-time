@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-templates-series-tsx",
+    "path": "/series/코어-자바스크립트",
+    "result": {"data":{"posts":{"nodes":[{"excerpt":"프롤로그 안녕하세요! 제로입니다. 주말에 읽어볼 책을 고르던 중, 문득 첫 면접의 기억이 떠올랐습니다. 제로 님은 자바스크립트를 몇 퍼센트 정도 알고 있다고 생각하시나요? ㄴ 10%요!(당당) 웹 프론트엔드 개발자로 일하게 된 지 0.5년차가 된 지금도 제 답변이 진실되게 느껴지네요.\n자바스크립트의 동작 원리를 상세하게 알지 못하니, 실무에서 직관적이지 …","fields":{"slug":"/core-javascript-1/"},"frontmatter":{"date":"May 30, 2022","update":"May 30, 2022","title":"[도서] 코어 자바스크립트 - #1 데이터 타입","tags":["JavaScript"],"series":"코어 자바스크립트"}}]}},"pageContext":{"series":"코어 자바스크립트"}},
+    "staticQueryHashes": ["869547123"]}
