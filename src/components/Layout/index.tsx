@@ -3,7 +3,6 @@ import { ThemeProvider } from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { setLight, setDark } from "../../reducers/theme";
 import { light, dark } from "../../assets/theme";
-import { GlobalStyles } from "../GlobalStyles";
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
@@ -43,7 +42,6 @@ export const Layout = ({ children }: Props) => {
 
   return (
     <ThemeProvider theme={theme === "light" ? light : dark}>
-      <GlobalStyles />
       <Header toggleTheme={toggleTheme} />
       <Body>{children}</Body>
       <Footer />

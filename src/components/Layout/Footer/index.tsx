@@ -1,29 +1,19 @@
 import React from "react";
-import styled from "styled-components";
 import BlogConfig from "../../../../blog-config";
-
-const FooterWrapper = styled.footer`
-  margin-top: 32px;
-  padding: 40px 0;
-  text-align: center;
-  font-size: 9pt;
-  font-weight: lighter;
-  color: ${(props) => props.theme.colors.secondary};
-
-  & > a {
-    color: ${(props) => props.theme.colors.primary};
-  }
-`;
 
 const Footer = () => {
   return (
-    <FooterWrapper>
+    <div className="text-zinc-700 text-center text-sm">
       © {BlogConfig.title}, Inspired by{" "}
-      <a href="https://github.com/devHudi/gatsby-starter-hoodie" target="blank">
+      <a
+        href="https://github.com/devHudi/gatsby-starter-hoodie"
+        target="blank"
+        className="underline"
+      >
         gatsby-starter-hoodie
       </a>
       .
-    </FooterWrapper>
+    </div>
   );
 };
 
