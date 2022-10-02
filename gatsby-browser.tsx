@@ -1,3 +1,4 @@
+import "./src/styles/tailwind.css";
 import * as React from "react";
 import type { GatsbyBrowser } from "gatsby";
 

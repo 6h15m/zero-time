@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 import "katex/dist/katex.min.css";
-import "../../../prism.css";
+import "../../styles/prism.css";
 import "../../fonts/typography.css";
 import type { Theme } from "../../assets/theme";
 

@@ -1,3 +1,4 @@
+// @ts-ignore
 import path from "path";
 import BlogConfig from "./blog-config";
 
@@ -13,6 +14,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-catch-links`,
+    "gatsby-plugin-postcss",
     {
       resolve: `gatsby-plugin-react-redux`,
       options: {
