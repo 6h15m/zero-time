@@ -1,7 +1,6 @@
 export * as Article from "./Article";
 export { Bio } from "./Bio";
 export { Divider } from "./Divider";
-export { Header } from "./Header";
 export { Image } from "./Image";
 export { Layout } from "./Layout";
 export { NoContent } from "./NoContent";

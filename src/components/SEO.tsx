@@ -1,6 +1,4 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import BlogConfig from "../../../blog-config";
+import BlogConfig from "../../blog-config";
 
 type Props = {
   title: string;
@@ -10,7 +8,7 @@ type Props = {
 
 export const SEO = ({ title, description, url }: Props) => {
   return (
-    <Helmet>
+    <>
       <title>{title}</title>
       <meta property="og:url" content={url} />
       <meta property="og:title" content={title} />
@@ -27,6 +25,6 @@ export const SEO = ({ title, description, url }: Props) => {
         content={`${BlogConfig.siteUrl}/og-image.png`}
       />
       {description && <meta name="twitter:description" content={description} />}
-    </Helmet>
+    </>
   );
 };

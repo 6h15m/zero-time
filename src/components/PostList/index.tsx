@@ -95,9 +95,7 @@ export const PostList = ({ postList }: Props) => {
         return (
           <>
             <PostWrapper>
-              <Title size="md">
-                <Link to={slug}>{title}</Link>
-              </Title>
+              <Title size="md" to={slug} title={title} />
               <Date>{date}</Date>
               <Excerpt>{description}</Excerpt>
               <TagList tagList={tags} />

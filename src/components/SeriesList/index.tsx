@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import _ from "lodash";
-import { Link } from "gatsby";
 import { Title } from "../Title";
 
 const SeriesListWrapper = styled.div`
@@ -85,11 +84,11 @@ export const SeriesList = ({ seriesList }: Props) => {
         return (
           <>
             <SeriesWrapper>
-              <Title size="md">
-                <Link to={`/series/${_.replace(series.name, /\s/g, "-")}`}>
-                  {series.name}
-                </Link>
-              </Title>
+              <Title
+                size="md"
+                to={`/series/${_.replace(series.name, /\s/g, "-")}`}
+                title={series.name}
+              />
               <SeriesInform>
                 <PostCount>{series.posts.length} Posts</PostCount>
                 <span>·</span>

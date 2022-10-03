@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { FiGithub, FiLinkedin, FiMail, FiUser } from "react-icons/fi";
-import BlogConfig from "../../../blog-config";
+import BlogConfig from "../../blog-config";
 
 type LinkProps = {
   link: string;
@@ -16,12 +16,16 @@ const Link = ({ link, children }: LinkProps) => {
 };
 
 export const Bio = () => {
-  const { github, linkedIn, email } = BlogConfig.links;
+  const {
+    author,
+    description,
+    links: { github, linkedIn, email },
+  } = BlogConfig;
 
   return (
     <div className="gap-y-2 flex flex-col">
-      <div className="text-2xl font-bold mb-2.5">{BlogConfig.author}</div>
-      <div className="leading-6 text-zinc-800">{BlogConfig.description}</div>
+      <div className="text-2xl font-bold mb-2.5">{author}</div>
+      <div className="leading-6 text-zinc-800">{description}</div>
       <div className="flex gap-x-2">
         <Link link={github}>
           <FiGithub className="w-6 h-6 stroke-1" />

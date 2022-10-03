@@ -49,11 +49,7 @@ const ResumePage = () => (
     />
     <Resume>
       <div>
-        <Title size="md">
-          이예서
-          <br />
-          Yeseo Lee
-        </Title>
+        <Title size="md" title="이예서" />
         <Description>
           누군가의 용기가 될 그날을 위해 끊임없이 발전을 추구합니다. 커리어
           목표는 UI/UX 전문성을 갖춘 Web Front-end 엔지니어가 되는 것입니다.
