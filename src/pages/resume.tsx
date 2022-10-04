@@ -13,7 +13,7 @@ const Resume = styled.div`
     justify-content: space-between;
   }
 
-  color: ${(props) => props.theme.colors.primary};
+  color: black;
   @media (max-width: 768px) {
     padding: 0 20px;
   }
@@ -24,16 +24,16 @@ const SmallTitle = styled.h2`
   font-size: 16px;
   font-weight: 700;
   line-height: 1.3;
-  color: ${(props) => props.theme.colors.primary};
+  color: black;
   word-break: break-all;
   a {
-    color: ${(props) => props.theme.colors.primary};
+    color: black;
   }
 `;
 
 const Description = styled.p`
   width: 40%;
-  color: ${(props) => props.theme.colors.secondary};
+  color: darkgray;
   word-break: keep-all;
   @media (max-width: 768px) {
     width: 60%;

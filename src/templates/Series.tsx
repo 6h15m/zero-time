@@ -16,7 +16,7 @@ const Title = styled.h1`
   line-height: 1.2;
   font-size: 44.8px;
   font-weight: bold;
-  color: ${(props) => props.theme.colors.primary};
+  color: black;
   word-break: break-all;
 `;
 
@@ -27,8 +27,7 @@ const Subtitle = styled.h3`
   margin-bottom: 8px;
   font-size: 20px;
   font-weight: bold;
-  background-color: ${(props) => props.theme.colors.background};
-  color: ${(props) => props.theme.colors.primary};
+  color: black;
   letter-spacing: -1px;
 `;
 
@@ -36,7 +35,7 @@ const SeriesInform = styled.div`
   display: flex;
   align-items: center;
   font-size: 16px;
-  color: ${(props) => props.theme.colors.primary};
+  color: black;
 
   & > span {
     margin: 0 3px;
@@ -44,7 +43,7 @@ const SeriesInform = styled.div`
 `;
 
 const Date = styled.span`
-  color: ${(props) => props.theme.colors.tertiary};
+  color: lightgray;
   font-weight: lighter;
 `;
 

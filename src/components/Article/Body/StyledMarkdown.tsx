@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledMarkdown = styled.div`
   & {
     font-size: 17.6px;
-    color: ${(props) => props.theme.colors.primary};
+    color: black;
     line-height: 2;
     overflow: hidden;
   }
@@ -87,8 +87,7 @@ export const StyledMarkdown = styled.div`
 
   & blockquote {
     padding: 18px 24px;
-    border-left: 4px solid ${(props) => props.theme.colors.primary};
-    background-color: ${(props) => props.theme.colors.background};
+    border-left: 4px solid black;
 
     & *:last-child {
       margin-bottom: 0;
@@ -100,18 +99,18 @@ export const StyledMarkdown = styled.div`
   }
 
   & table {
-    border: 1px solid ${(props) => props.theme.colors.primary};
+    border: 1px solid black;
     border-collapse: collapse;
   }
 
   & th {
-    border-bottom: 2px solid ${(props) => props.theme.colors.primary};
+    border-bottom: 2px solid black;
     font-weight: 700;
   }
 
   & td {
-    border-top: 1px solid ${(props) => props.theme.colors.primary};
-    border-bottom: 1px solid ${(props) => props.theme.colors.primary};
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
   }
 
   & td,
@@ -124,7 +123,7 @@ export const StyledMarkdown = styled.div`
   }
 
   & tr:nth-child(even) {
-    background-color: ${(props) => props.theme.colors.background};
+    background-color: white;
   }
 
   & tr:last-child td {
@@ -139,17 +138,17 @@ export const StyledMarkdown = styled.div`
     padding: 1.6px 4.8px;
     font-size: 14.4px;
     background-image: none;
-    background-color: ${(props) => props.theme.colors.quaternary};
+    background-color: lightgray;
     font-weight: 500;
-    color: ${(props) => props.theme.colors.primary};
+    color: black;
     border: none;
     border-radius: 1.5px;
     box-shadow: none;
   }
 
   & a > code.language-text:hover {
-    background-color: ${(props) => props.theme.colors.primary};
-    color: ${(props) => props.theme.colors.quaternary};
+    background-color: black;
+    color: darkgray;
     border-radius: 1.5px;
   }
 
@@ -182,19 +181,6 @@ export const StyledMarkdown = styled.div`
     margin-top: 8px;
   }
 
-  & pre {
-    ::-webkit-scrollbar {
-      height: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: ${(props) => props.theme.colors.scrollTrack};
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: ${(props) => props.theme.colors.scrollHandle};
-    }
-  }
-
   & pre > code {
     font-size: 14.4px;
   }
@@ -216,17 +202,17 @@ export const StyledMarkdown = styled.div`
 
   & hr {
     border: none;
-    border-bottom: 1px solid ${(props) => props.theme.colors.primary};
+    border-bottom: 1px solid black;
   }
 
   & a {
     padding: 0;
-    color: ${(props) => props.theme.colors.primary};
+    color: black;
   }
 
   & a:hover {
-    background-color: ${(props) => props.theme.colors.primary};
-    color: ${(props) => props.theme.colors.background};
+    background-color: black;
+    color: white;
     border-radius: 1.5px;
   }
 `;

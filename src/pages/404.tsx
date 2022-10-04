@@ -9,7 +9,7 @@ const NotFound = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: ${(props) => props.theme.colors.tertiaryText};
+  color: lightgray;
 
   & > h2 {
     margin-bottom: 16px;

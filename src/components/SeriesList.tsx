@@ -47,7 +47,10 @@ export const SeriesList = ({ seriesList }: Props) => {
     <div className="flex flex-col gap-y-4">
       {seriesList.slice(0, seriesCount).map((series) => {
         return (
-          <div className="border border-zinc-200 rounded bg-zinc-50 p-5">
+          <div
+            key={series.name}
+            className="border border-zinc-200 rounded bg-zinc-50 p-5"
+          >
             <Title
               size="sm"
               to={`/series/${series.name.replace(/\s/g, "-")}`}
