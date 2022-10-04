@@ -1,17 +1,7 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import { useEffect, useState } from "react";
 import { useOffsetTop } from "../../../hooks";
 import { Toc } from "./Toc";
 import { StyledMarkdown } from "./StyledMarkdown";
-
-const Wrapper = styled.div`
-  position: relative;
-  margin-bottom: 20px;
-
-  @media (max-width: 768px) {
-    padding: 0 15px;
-  }
-`;
 
 type Props = {
   html: string;
@@ -19,7 +9,6 @@ type Props = {
 
 export const Body = ({ html }: Props) => {
   const [toc, setToc] = useState([]);
-
   const [offsetTop, ref] = useOffsetTop();
 
   useEffect(() => {
@@ -31,16 +20,15 @@ export const Body = ({ html }: Props) => {
   }, []);
 
   return (
-    <Wrapper>
+    <div>
       <Toc items={toc} articleOffset={offsetTop} />
-
       <StyledMarkdown
         id="article-body"
         dangerouslySetInnerHTML={{ __html: html }}
         itemProp="articleBody"
         ref={ref}
       />
-    </Wrapper>
+    </div>
   );
 };
 

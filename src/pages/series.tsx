@@ -84,13 +84,9 @@ const SeriesPage = ({ data }: Props) => {
         description={BlogConfig.description}
         url={BlogConfig.siteUrl}
       />
-
       <Title>{series.length} Series</Title>
-
       {series.length === 0 && <NoContent name="series" />}
-
       <VerticalSpace size={14} />
-
       <SeriesList seriesList={series} />
     </Layout>
   );

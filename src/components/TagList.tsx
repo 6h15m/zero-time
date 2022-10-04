@@ -11,9 +11,9 @@ type TagLinkProps = {
 const TagLink = ({ selected, to, name, amount }: TagLinkProps) => (
   <Link
     to={to}
-    className={`border border-black text-xs px-2 py-1 ${
+    className={`border border-black px-2 py-1 ${
       selected
-        ? "bg-black text-white hover:bg-white hover:text-black"
+        ? "bg-black text-white"
         : "bg-white text-black hover:bg-black hover:text-white"
     }`}
   >
@@ -33,11 +33,12 @@ type Props = {
   tagList: Array<Tag>;
   count?: boolean;
   selected?: string;
+  className?: string;
 };
 
-export const TagList = ({ tagList, count, selected }: Props) => {
+export const TagList = ({ tagList, count, selected, className }: Props) => {
   return tagList.length > 0 ? (
-    <div className="flex gap-2 flex-wrap">
+    <div className={`flex gap-2 flex-wrap ${className}`}>
       {tagList.map((tag, index) => {
         const name = typeof tag === "object" ? tag.fieldValue : tag;
         return (

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { map, pipe, toArray } from "@fxts/core";
 import styled, { css } from "styled-components";
 import { animateScroll } from "react-scroll";
-import { useScroll } from "../../../../hooks";
-import { getElementOffset } from "../../../../utils";
-import { RevealOnScroll } from "../../../RevealOnScroll";
+import { useScroll } from "../../../hooks";
+import { getElementOffset } from "../../../utils";
+import { RevealOnScroll } from "../../RevealOnScroll";
 
 const STICK_OFFSET = 100;
 
@@ -109,7 +109,7 @@ export const Toc = ({ items, articleOffset }: Props) => {
       pipe(
         document.querySelectorAll(
           "#article-body > h2, #article-body > h3",
-        ) as unknown as Array<HTMLElement>, // @TODO: 해결책 찾기
+        ) as unknown as Array<HTMLElement>,
         map((element) => getElementOffset(element).top),
         toArray,
       ),

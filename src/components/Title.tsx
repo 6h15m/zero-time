@@ -14,7 +14,7 @@ export const Title = ({ size, title, to }: Props) => {
   };
 
   return (
-    <h1 className={`font-bold text-black mb-3 ${sizes[size]}`}>
+    <h1 className={`font-bold text-black ${sizes[size]}`}>
       {to ? (
         <Link to={to} className="transition-all hover:text-zinc-800">
           {title}

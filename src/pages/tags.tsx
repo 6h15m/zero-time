@@ -105,6 +105,7 @@ const TagsPage = ({ data }: Props) => {
 
       <TagListWrapper>
         <TagList
+          className="text-xs"
           count
           tagList={tags}
           selected={selected}

@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
-import { useScroll } from "../../hooks";
+import type { ReactNode } from "react";
+import { useScroll } from "../hooks";
 
 type Props = {
   revealAt: number;
