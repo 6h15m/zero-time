@@ -101,7 +101,7 @@ const BlogIndex = ({ data }: Props) => {
       <Bio />
       <SearchWrapper>
         <TextField
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setQuery(e.target.value)
           }
         />

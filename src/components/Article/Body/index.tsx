@@ -20,7 +20,7 @@ export const Body = ({ html }: Props) => {
   }, []);
 
   return (
-    <div>
+    <>
       <Toc items={toc} articleOffset={offsetTop} />
       <StyledMarkdown
         id="article-body"
@@ -28,7 +28,7 @@ export const Body = ({ html }: Props) => {
         itemProp="articleBody"
         ref={ref}
       />
-    </div>
+    </>
   );
 };
 

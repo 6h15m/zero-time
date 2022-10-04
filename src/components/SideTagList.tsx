@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "gatsby";
 import { FiTag } from "react-icons/fi";
 import { spaceToDash } from "../utils";
@@ -28,7 +27,7 @@ export const SideTagList = ({ tags }: Props) => {
           {tags.map((tag) => {
             const tagName = typeof tag === "object" ? tag.fieldValue : tag;
             return (
-              <li>
+              <li key={tagName}>
                 <Link to={`/tags?q=${spaceToDash(tagName)}`}># {tagName}</Link>
               </li>
             );

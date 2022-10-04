@@ -1,80 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { map, pipe, toArray } from "@fxts/core";
-import styled, { css } from "styled-components";
 import { animateScroll } from "react-scroll";
 import { useScroll } from "../../../hooks";
 import { getElementOffset } from "../../../utils";
 import { RevealOnScroll } from "../../RevealOnScroll";
 
-const STICK_OFFSET = 100;
-
-type TocWrapperProps = {
-  stick: boolean;
-};
-
-const TocWrapper = styled.div<TocWrapperProps>`
-  position: absolute;
-  opacity: 1;
-  left: 100%;
-
-  & > div {
-    padding-right: 20px;
-    padding-left: 16px;
-    margin-left: 60px;
-    position: relative;
-    width: 240px;
-    max-height: calc(100% - 185px);
-    overflow-y: auto;
-
-    ::-webkit-scrollbar {
-      width: 3px;
-    }
-    ::-webkit-scrollbar-track {
-      background: ${(props) => props.theme.colors.scrollTrack};
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: ${(props) => props.theme.colors.scrollHandle};
-    }
-
-    ${(props) =>
-      props.stick &&
-      css`
-        position: fixed;
-        top: ${STICK_OFFSET}px;
-      `}
-  }
-
-  @media (max-width: 1300px) {
-    display: None;
-  }
-`;
-
-type ParagraphTitleProps = {
-  subtitle: boolean;
-  active: boolean;
-};
-
-const ParagraphTitle = styled.div<ParagraphTitleProps>`
-  margin-bottom: 8px;
-  padding-left: ${(props) => (props.subtitle ? 19.2 : 0)}px;
-  font-size: 14px;
-  color: ${(props) => props.theme.colors.tertiary};
-  line-height: 1.3;
-  transition: all 0.2s;
-
-  ${(props) =>
-    props.active &&
-    css`
-      transform: translate(-11.2px, 0);
-      color: ${(props) => props.theme.colors.secondary};
-    `}
-
-  &:hover {
-    color: ${(props) => props.theme.colors.primary};
-    cursor: pointer;
-  }
-`;
+const STICK_OFFSET = 80;
 
 type Item = {
   tagName: string;
@@ -98,7 +29,7 @@ export const Toc = ({ items, articleOffset }: Props) => {
 
     bioElm &&
       setRevealAt(
-        getElementOffset(bioElm).top -
+        getElementOffset(bioElm).top +
           bioElm.getBoundingClientRect().height -
           400,
       );
@@ -129,22 +60,35 @@ export const Toc = ({ items, articleOffset }: Props) => {
     animateScroll.scrollTo(headers[index] - 100);
   };
 
+  const stick = useMemo(
+    () => y > articleOffset - STICK_OFFSET,
+    [y, articleOffset],
+  );
+
   return (
     <RevealOnScroll revealAt={revealAt} reverse>
-      <TocWrapper stick={y > articleOffset - STICK_OFFSET}>
-        <div>
+      <div className="absolute left-[100%] text-sm xl:block hidden w-full">
+        <ul
+          className={`${
+            stick ? "fixed" : "relative"
+          }  h-[30rem] w-full overflow-y-auto shrink-0 flex flex-col gap-y-3 pl-10`}
+          style={{ top: stick ? STICK_OFFSET + "px" : undefined }}
+        >
           {items.map((item, i) => (
-            <ParagraphTitle
-              key={i}
-              subtitle={item.tagName === "H3"}
-              active={i === active}
+            <button
+              key={"toc-" + i}
+              className={`w-fit hover:text-black transition-all ${
+                i === active
+                  ? "text-zinc-800 font-semibold"
+                  : "translate-x-1 text-zinc-600"
+              } ${item.tagName === "H3" ? "pl-4" : ""}`}
               onClick={() => handleClickTitle(i)}
             >
               {item.innerText}
-            </ParagraphTitle>
+            </button>
           ))}
-        </div>
-      </TocWrapper>
+        </ul>
+      </div>
     </RevealOnScroll>
   );
 };

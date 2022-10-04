@@ -1,4 +1,4 @@
-export * as Article from "./Article";
+export { Article } from "./Article";
 export { Bio } from "./Bio";
 export { Divider } from "./Divider";
 export { Image } from "./Image";

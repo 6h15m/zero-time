@@ -8,7 +8,7 @@ type Tag = {
   totalCount: number;
 };
 
-type Article = {
+type TArticle = {
   fields: {
     slug: string;
   };
@@ -59,8 +59,8 @@ type PageQueryResult = {
       slug: string;
     };
   };
-  previous: Article;
-  next: Article;
+  previous: TArticle;
+  next: TArticle;
   seriesList: {
     edges: Array<SeriesPost>;
   };
@@ -101,19 +101,20 @@ const Post = ({ data }: Props) => {
         description={description}
         url={`${BlogConfig.siteUrl}${slug}`}
       />
-      <Article.Wrapper>
+      <div>
         <Article.Header
           title={title}
           date={date}
           tags={tags}
           minToRead={Math.round(readingTime.minutes)}
+          hasSeries={filteredSeries.length > 0}
         />
         {filteredSeries.length > 0 && (
           <Article.Series header={series} series={filteredSeries} />
         )}
         <Article.Body html={post.html} />
         <Article.Footer previous={previous} next={next} />
-      </Article.Wrapper>
+      </div>
     </Layout>
   );
 };

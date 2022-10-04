@@ -60,7 +60,7 @@ export const PostList = ({ postList }: Props) => {
         const { slug } = post.fields;
 
         return (
-          <div className="py-7 flex flex-col gap-y-2">
+          <div key={title} className="py-7 flex flex-col gap-y-2">
             <Title size="sm" to={slug} title={title} />
             <span>{date}</span>
             <p className="text-sm mb-2 text-zinc-700">{description}</p>

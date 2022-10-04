@@ -23,7 +23,7 @@ export const Bio = () => {
   } = BlogConfig;
 
   return (
-    <div className="gap-y-2 flex flex-col">
+    <div className="gap-y-2 flex flex-col" id="bio">
       <div className="text-2xl font-bold mb-2.5">{author}</div>
       <div className="leading-6 text-zinc-800">{description}</div>
       <div className="flex gap-x-2">

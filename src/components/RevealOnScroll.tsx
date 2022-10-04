@@ -1,18 +1,23 @@
 import type { ReactNode } from "react";
+import { useMemo } from "react";
 import { useScroll } from "../hooks";
 
 type Props = {
   revealAt: number;
-  reverse: boolean;
+  reverse?: boolean;
   children: ReactNode;
 };
 
-export const RevealOnScroll = ({ revealAt, reverse, children }: Props) => {
+export const RevealOnScroll = ({
+  revealAt,
+  reverse = false,
+  children,
+}: Props) => {
   const { y } = useScroll();
-
-  let reveal: boolean;
-  if (!reverse) reveal = y > revealAt;
-  else reveal = y < revealAt;
+  const reveal = useMemo(
+    () => (reverse ? y < revealAt : y > revealAt),
+    [revealAt, y],
+  );
 
   return (
     <div

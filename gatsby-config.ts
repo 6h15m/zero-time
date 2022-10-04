@@ -15,20 +15,6 @@ module.exports = {
   plugins: [
     `gatsby-plugin-catch-links`,
     "gatsby-plugin-postcss",
-    {
-      resolve: `gatsby-plugin-react-redux`,
-      options: {
-        pathToCreateStoreModule: "./src/reducers/createStore",
-        serialize: {
-          space: 0,
-          isJSON: true,
-          unsafe: false,
-          ignoreFunction: true,
-        },
-        cleanupOnClient: true,
-        windowKey: "__PRELOADED_STATE__",
-      },
-    },
     "gatsby-plugin-styled-components",
     "gatsby-remark-reading-time",
     `gatsby-transformer-sharp`,
