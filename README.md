@@ -1,11 +1,8 @@
-<p align="center">
-  <a href="https://6h15m.github.io">
-    <img alt="ZeroLog" src="https://6h15m.github.io/favicon.png" width="60" />
-  </a>
-</p>
 <h1 align="center">
   영의 시간: ZeroLog
 </h1>
+
+블로그가 이전되었습니다. ([Zero.log](https://zerolog.vercel.app))
 
 ## 💡 Inspired by....
 
